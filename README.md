@@ -2,7 +2,7 @@
 Repositorio do exercicio 12 da disciplina de Matematica Discreta da Escola Politecnica de Pernambuco - UPE
 
 #Autores
-Hugo de Albuquerque Fonseca <hugoalbuquerque0@gmail.com>
+Hugo de Albuquerque Fonseca <hugoalbuquerque0@gmail.com> <br />
 Otacilio Saraiva Maia Neto <otacilio.n97@gmail.com>
 
 #Objetivo
