@@ -1,10 +1,12 @@
 /* ************************************************************************ *
- *    ex3.c, v1.0                                                           *
+ *    ex3.c, v0.1                                                           *
  *    Programa feito para simular uma rede de petri dado um arquivo de      *
- *    texto como entrada                                                    *
+ *    texto como entrada, utilizando paralelismo com threads e gerando uma  *
+ *    imagem descritiva da rede                                             *
  *                                                                          *
  *    Copyright (C) 2015                                                    *
  *    Hugo Albuquerque de Fonseca                                           *
+ *    Otacilio Saraiva Maia Neto                                            *
  *                                                                          *
  *    This program is free software; you can redistribute it and/or modify  *
  *    it under the terms of the GNU General Public License as published by  *
@@ -25,6 +27,9 @@
  *                                                                          *
  *    Hugo Albuquerque de Fonseca <hugoalbuquerque0@gmail.com>              *
  *    Phone: 55 (819) 9875-6561                                             *
+ *                                                                          *
+ *    Otacilio Saraiva Maia Neto                                            *
+ *    Phone: 55 (819) 9959-7078                                             *                       
  *                                                                          *
  *                                                                          *       
  ************************************************************************** *
