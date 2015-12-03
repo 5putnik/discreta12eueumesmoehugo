@@ -1,8 +1,9 @@
 ## Matematica Discreta - Exercicio 12
 Repositorio do exercicio 12 da disciplina de Matematica Discreta da Escola Politecnica de Pernambuco - UPE
 
-#Autor
+#Autores
 Hugo de Albuquerque Fonseca <hugoalbuquerque0@gmail.com>
+Otacilio Saraiva Maia Neto <otacilio.n97@gmail.com>
 
 #Objetivo
 Este exercicio tem como objetivo simular uma rede de Petri com paralelismo e imprimi-la utilizando a biblioteca grafica Allegro.
