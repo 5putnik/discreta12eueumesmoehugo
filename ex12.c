@@ -102,7 +102,7 @@ struct passaTrans
 void rlist(unsigned v[VMAX], unsigned n);
 void printv(unsigned v[VMAX], unsigned n);
 void printm(unsigned x[VMAX][VMAX], unsigned n, unsigned m);
-
+void transicao(void *arg);
 
 int main(void)
 {
@@ -339,3 +339,14 @@ void printm(unsigned x[VMAX][VMAX], unsigned n, unsigned m)
     return;
 }
 
+/* 
+ * Funcao transicao;
+ * Que devera checkar as flechas de entrada;
+ * Checkar os lugares para ver se existe quantidade de tokens suficientes para disparar indicadas pelas flechas;
+ * Checkar as flechas de saida;
+ * Depositar nos lugares a quantidade de tokens indidicados pelas flechas
+ * */
+void transicao(void *arg)
+{
+    break;
+}
