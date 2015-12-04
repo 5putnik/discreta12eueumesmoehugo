@@ -84,8 +84,16 @@ typedef struct lugar_st
     struct lugar_st * prox;
 }lugar;
 
+/* Descricao da rede de Petri sem as transicoes */ 
+typedef struct petri_st
+{
+    lugar l;
+    flecha lt;
+    flecha tl;
+}petri_t;
+
 /* Parametros a serem passados para a funcao de transicao */
-struct passatrans
+struct passaTrans
 {
     preti_t rede;
     int pos;
