@@ -68,12 +68,7 @@
 #define DEBUG 0 /**< Ativa modo de debug */
 #endif
 
-struct passatrans
-{
-    preti_t rede;
-    int pos;
-}x;
-
+/* Tipo que descreve as caracteristicas da Flecha */
 typedef struct flecha_st
 {
     int de;
@@ -82,7 +77,19 @@ typedef struct flecha_st
     struct flecha_st * prox;
 }flecha;
 
+/* Tipo que descreve as caracteristicas dos Lugares */
+typedef struct lugar_st
+{
+    int qtd;
+    struct lugar_st * prox;
+}lugar;
 
+/* Parametros a serem passados para a funcao de transicao */
+struct passatrans
+{
+    preti_t rede;
+    int pos;
+}x;
 
 void rlist(unsigned v[VMAX], unsigned n);
 void printv(unsigned v[VMAX], unsigned n);
