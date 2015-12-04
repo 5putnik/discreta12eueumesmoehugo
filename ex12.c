@@ -68,6 +68,12 @@
 #define DEBUG 0 /**< Ativa modo de debug */
 #endif
 
+struct passatrans
+{
+    preti_t rede;
+    int pos;
+}x;
+
 void rlist(unsigned v[VMAX], unsigned n);
 void printv(unsigned v[VMAX], unsigned n);
 void printm(unsigned x[VMAX][VMAX], unsigned n, unsigned m);
