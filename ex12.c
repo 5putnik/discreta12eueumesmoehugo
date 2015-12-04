@@ -74,6 +74,16 @@ struct passatrans
     int pos;
 }x;
 
+typedef struct flecha_st
+{
+    int de;
+    int para;
+    int tk;
+    struct flecha_st * prox;
+}flecha;
+
+
+
 void rlist(unsigned v[VMAX], unsigned n);
 void printv(unsigned v[VMAX], unsigned n);
 void printm(unsigned x[VMAX][VMAX], unsigned n, unsigned m);
