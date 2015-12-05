@@ -1,10 +1,11 @@
 /* ************************************************************************ *
- *    ex3.c, v1.0                                                           *
+ *    ex3.c, v0.2                                                           *
  *    Programa feito para simular uma rede de petri dado um arquivo de      *
  *    texto como entrada                                                    *
  *                                                                          *
  *    Copyright (C) 2015                                                    *
  *    Hugo Albuquerque de Fonseca                                           *
+ *    Otacilio Saraiva Maia Neto                                            *
  *                                                                          *
  *    This program is free software; you can redistribute it and/or modify  *
  *    it under the terms of the GNU General Public License as published by  *
@@ -24,7 +25,8 @@
  *    To contact the author, please write to:                               *
  *                                                                          *
  *    Hugo Albuquerque de Fonseca <hugoalbuquerque0@gmail.com>              *
- *    Phone: 55 (819) 9875-6561                                             *
+ *    Phone: 55 (081) 99292-0944                                            *
+ *    Otacilio Saraiva maia Neto <otacilio.n97@gmail.com>                   *
  *                                                                          *
  *                                                                          *       
  ************************************************************************** *
@@ -36,6 +38,7 @@
  * \file ex12.c
  * \brief programa que simula rede de petri. 
  * \author Hugo Albuquerque de Fonsêca <<hugoalbuquerque0@gmail.com>>
+ * \author Otacilio Saraiva Maia Neto <<otacilio.n97@gmail.com>>
  * \version 0.0
  * \date 2015-12-02
  */
