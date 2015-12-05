@@ -103,6 +103,7 @@ void rlist(unsigned v[VMAX], unsigned n);
 void printv(unsigned v[VMAX], unsigned n);
 void printm(unsigned x[VMAX][VMAX], unsigned n, unsigned m);
 void transicao(void *arg);
+void desenhaPetri(petri_t p, const char*c);
 
 int main(void)
 {
@@ -347,6 +348,11 @@ void printm(unsigned x[VMAX][VMAX], unsigned n, unsigned m)
  * Depositar nos lugares a quantidade de tokens indidicados pelas flechas
  * */
 void transicao(void *arg)
+{
+    break;
+}
+
+void desenhaPetri(petri_t p, const char*c)
 {
     break;
 }
