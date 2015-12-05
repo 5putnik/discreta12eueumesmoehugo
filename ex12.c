@@ -26,9 +26,9 @@
  *    To contact the author, please write to:                               *
  *                                                                          *
  *    Hugo Albuquerque de Fonseca <hugoalbuquerque0@gmail.com>              *
- *    Phone: 55 (819) 9875-6561                                             *
+ *    Phone: 55 (081) 9292-0944                                             *
  *                                                                          *
- *    Otacilio Saraiva Maia Neto                                            *
+ *    Otacilio Saraiva Maia Neto <otacilio.n97@gmail.com>                   *
  *    Phone: 55 (819) 9959-7078                                             *                       
  *                                                                          *
  *                                                                          *       
@@ -41,7 +41,8 @@
  * \file ex12.c
  * \brief programa que simula rede de petri. 
  * \author Hugo Albuquerque de Fonsêca <<hugoalbuquerque0@gmail.com>>
- * \version 0.0
+ * \author Otacilio Saraiva Maia Neto <<otacilio.n97@gmail.com>>
+ * \version 0.2
  * \date 2015-12-02
  */
 /**
@@ -95,7 +96,7 @@ typedef struct petri_st
 /* Parametros a serem passados para a funcao de transicao */
 struct passaTrans
 {
-    preti_t rede;
+    petri_t rede;
     int pos;
 }x;
 
@@ -123,6 +124,11 @@ int main(void)
              lctk, 
              alt, 
              atl;
+    struct passa_dados_st
+    {
+        petri_t rede;
+        int pos;
+    }dados;
     srand(time(NULL));
     scanf("%u",&ql);
     scanf("%u",&qt); 
@@ -348,5 +354,5 @@ void printm(unsigned x[VMAX][VMAX], unsigned n, unsigned m)
  * */
 void transicao(void *arg)
 {
-    break;
+    return;
 }
