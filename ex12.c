@@ -93,17 +93,12 @@ typedef struct petri_st
     flecha tl;
 }petri_t;
 
-/* Parametros a serem passados para a funcao de transicao */
-struct passaTrans
-{
-    petri_t rede;
-    int pos;
-}x;
 
 void rlist(unsigned v[VMAX], unsigned n);
 void printv(unsigned v[VMAX], unsigned n);
 void printm(unsigned x[VMAX][VMAX], unsigned n, unsigned m);
 void transicao(void *arg);
+void desenha_rede(petri_t rede, const char *fname);
 
 int main(void)
 {
@@ -124,6 +119,7 @@ int main(void)
              lctk, 
              alt, 
              atl;
+    /* Parametros a serem passados para a funcao de transicao */
     struct passa_dados_st
     {
         petri_t rede;
@@ -345,14 +341,38 @@ void printm(unsigned x[VMAX][VMAX], unsigned n, unsigned m)
     return;
 }
 
-/* 
- * Funcao transicao;
- * Que devera checkar as flechas de entrada;
- * Checkar os lugares para ver se existe quantidade de tokens suficientes para disparar indicadas pelas flechas;
- * Checkar as flechas de saida;
- * Depositar nos lugares a quantidade de tokens indidicados pelas flechas
- * */
+/**
+ * \ingroup GroupUnique
+ *
+ * \brief Funcao que executa a transicao da rede.
+ *
+ * \details Esta funcao deve checar as flechas de entrada, checar os lugares para ver se existe quantidade de tokens suficientes para disparar indicadas pelas flechas, checar as flechas de saida e depositar nos lugares a quantidade de token indicados pelas flechas
+ *
+ * \param[in] arg A variavel \a arg seria na realidade uma struct que recebeu um cast para ser passada atraves de uma pthread. Ela deve conter a rede de petri e o indice da transicao.
+ *
+ * \retval void a funcao retorna nada.
+ *
+ */
 void transicao(void *arg)
+{
+    return;
+}
+
+/**
+ * \ingroup GroupUnique
+ *
+ * \brief Desenha uma rede no Allegro e imprime num arquivo de imagem.
+ *
+ * \details Esta funcao utiliza a biblioteca grafica Allegro para imprimir uma rede de Petri. 
+ *
+ * \param[in] rede A variavel \a rede seria a rede de Petri.
+ *
+ * \param[in] fname A variavel \a fname representa o nome do arquivo que sera gerado.
+ *
+ * \retval void a funcao retorna nada.
+ *
+ */
+void desenha_rede(petri_t rede, const char *fname)
 {
     return;
 }
