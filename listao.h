@@ -23,3 +23,4 @@ typedef struct petri_st
 }petri_t;
 
 lugar *buscarLugar(lugar *cabeca, int x);
+void inserirLugar(lugar **cabeca, int x);
