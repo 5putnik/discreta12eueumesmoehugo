@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 /* Tipo que descreve as caracteristicas da Flecha */
 typedef struct flecha_st
 {
