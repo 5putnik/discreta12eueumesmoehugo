@@ -30,3 +30,28 @@ void inserirLugar(lugar **cabeca, int x)
     else
         *cabeca = pl;
 }
+
+void removerLugar(lugar **cabeca, lugar *r)
+{
+    lugar *pl = *cabeca;
+    lugar *plant = NULL;
+
+    if(r == NULL)
+        return;
+    
+    while(pl != NULL && pl != r)
+    {
+        plant = pl;
+        pl = pl -> prox;
+    }
+
+    if(pl == NULL)
+        return;
+    if(plant != NULL)
+        plant -> prox = pl -> prox;
+    else 
+        *cabeca = pl -> prox;
+    
+    free(pl);
+    return;
+}
