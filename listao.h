@@ -29,3 +29,4 @@ void inserirLugar(lugar **cabeca, int x);
 void removerLugar(lugar **cabeca, lugar *r);
 flecha *buscarFlechaAnd(flecha *cabeca, int xde, int xpara, int xtk);
 flecha *buscarFlechaOr(flecha *cabeca, int xde, int xpara, int xtk);
+void inserirFlecha(flecha **cabeca, int xde, int xpara, int xtk);
