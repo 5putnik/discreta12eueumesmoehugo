@@ -52,6 +52,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "listao.h"
 
 #ifndef VMAX
 #define VMAX 1000 /**< Tamanho maximo dos vetores */
@@ -68,31 +69,6 @@
 #ifndef DEBUG
 #define DEBUG 0 /**< Ativa modo de debug */
 #endif
-
-/* Tipo que descreve as caracteristicas da Flecha */
-typedef struct flecha_st
-{
-    int de;
-    int para;
-    int tk;
-    struct flecha_st * prox;
-}flecha;
-
-/* Tipo que descreve as caracteristicas dos Lugares */
-typedef struct lugar_st
-{
-    int qtd;
-    struct lugar_st * prox;
-}lugar;
-
-/* Descricao da rede de Petri sem as transicoes */ 
-typedef struct petri_st
-{
-    lugar l;
-    flecha lt;
-    flecha tl;
-}petri_t;
-
 
 void rlist(unsigned v[VMAX], unsigned n);
 void printv(unsigned v[VMAX], unsigned n);

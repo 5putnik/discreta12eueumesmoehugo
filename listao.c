@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "listao.h"
 
 lugar *buscarLugar(lugar *cabeca, int x)
@@ -16,7 +15,7 @@ lugar *buscarLugar(lugar *cabeca, int x)
 
 void inserirLugar(lugar **cabeca, int x)
 {
-    lugar *pl = cabeca;
+    lugar *pl = *cabeca;
     lugar *plant = NULL;
     
     while(pl != NULL)
