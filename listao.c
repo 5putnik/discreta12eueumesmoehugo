@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "listao.h"
 
 lugar *buscarLugar(lugar *cabeca, int x)
