@@ -68,3 +68,15 @@ flecha *buscarLugar(flecha *cabeca, int xde, intxpara, int xtk)
     return NULL;
 }
 
+flecha *buscarLugar(flecha *cabeca, int xde, intxpara, int xtk)
+{
+    flecha *pl = cabeca;
+    while(pl != NULL)
+    {
+        if((pl -> de == xde) || (pl -> para == xpara) || (pl -> tk == xtk))
+            return pl;
+        pl = pl -> prox;
+    }
+    return NULL;
+}
+
