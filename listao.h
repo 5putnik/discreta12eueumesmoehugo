@@ -27,3 +27,4 @@ typedef struct petri_st
 lugar *buscarLugar(lugar *cabeca, int x);
 void inserirLugar(lugar **cabeca, int x);
 void removerLugar(lugar **cabeca, lugar *r);
+flecha *buscarFlechaAnd(flecha *cabeca, int xde, int xpara, int xtk);
