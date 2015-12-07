@@ -55,3 +55,16 @@ void removerLugar(lugar **cabeca, lugar *r)
     free(pl);
     return;
 }
+
+flecha *buscarLugar(flecha *cabeca, int xde, intxpara, int xtk)
+{
+    flecha *pl = cabeca;
+    while(pl != NULL)
+    {
+        if((pl -> de == xde) && (pl -> para == xpara) && (pl -> tk == xtk))
+            return pl;
+        pl = pl -> prox;
+    }
+    return NULL;
+}
+
