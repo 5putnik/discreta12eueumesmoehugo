@@ -52,6 +52,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "listao.h"
 
 #ifndef VMAX
 #define VMAX 1000 /**< Tamanho maximo dos vetores */
@@ -68,31 +69,6 @@
 #ifndef DEBUG
 #define DEBUG 0 /**< Ativa modo de debug */
 #endif
-
-/* Tipo que descreve as caracteristicas da Flecha */
-typedef struct flecha_st
-{
-    int de;
-    int para;
-    int tk;
-    struct flecha_st * prox;
-}flecha;
-
-/* Tipo que descreve as caracteristicas dos Lugares */
-typedef struct lugar_st
-{
-    int qtd;
-    struct lugar_st * prox;
-}lugar;
-
-/* Descricao da rede de Petri sem as transicoes */ 
-typedef struct petri_st
-{
-    lugar l;
-    flecha lt;
-    flecha tl;
-}petri_t;
-
 
 void rlist(unsigned v[VMAX], unsigned n);
 void printv(unsigned v[VMAX], unsigned n);
@@ -125,24 +101,31 @@ int main(void)
         petri_t rede;
         int pos;
     }dados;
+
     srand(time(NULL));
+    /* Escaneando a quantidade de lugares */
     scanf("%u",&ql);
+    /* Escaneando a quantidade de transicoes */
     scanf("%u",&qt); 
     if(DEBUG>1) printf("Quantidade de lugares: %u\n",ql);
-    if(ql>VMAX)
+    /*if(ql>VMAX)
     {
         printf("Erro linha 1: quantidade de lugares acima do maximo. \n");
         return -1;
-    }
+    }*/
     if(DEBUG>1) printf("Quantidade de transicoes: %u\n",qt);
-    if(qt>VMAX)
+    /*if(qt>VMAX)
     {
         printf("Erro linha 2: quantidade de transicoes acima do maximo. \n");
         return -1;
-    }
+    }*/
+    /* Escaneando total de lugares com pelo menos um token */
     scanf("%u",&lctk);
+    /* Escaneando total de arcos lugar -> transicao */
     scanf("%u",&alt);
+    /* Escaneando total de arcos transicao -> lugar */
     scanf("%u",&atl);
+
     for(k=0;k<lctk;k++)
     {
         scanf("%u %u", &i, &j);
@@ -151,7 +134,7 @@ int main(void)
             printf("Erro linha %u: lugar maior que o definido. \n", 6+k);
             return -1;
         }
-        l[i]=j;
+        /* l[i]=j; <<<<< SUBSTITUIR */
     }
     for(k=0;k<alt;k++)
     {
@@ -161,7 +144,7 @@ int main(void)
             printf("Erro linha %u: lugar ou transicao acima do definido. \n", 6+lctk+k);
             return -1;
         }
-        lt[i][j]= lctk;
+        /* lt[i][j]= lctk; <<<<< SUBSTITUIR */
     }
     for(k=0;k<atl;k++)
     {
@@ -171,15 +154,15 @@ int main(void)
             printf("Erro linha %u: lugar ou transicao acima do definido. \n", 6+lctk+k+alt);
             return -1;
         }
-        tl[i][j] = lctk;
+        /* tl[i][j] = lctk; <<<<<< SUBSTITUIR */
     }
     if(DEBUG>1) printf("Token em cada lugar:[");
-    if(DEBUG>1) printv(l,ql);
+    /* if(DEBUG>1) printv(l,ql); <<<<<< SUBSTITUIR */
     if(DEBUG>1) printf(" ]\n");
     if(DEBUG>1) printf("Matriz lt:");
-    if(DEBUG>1) printm(lt,ql,qt);
+    /* if(DEBUG>1) printm(lt,ql,qt); <<<<<< SUBSTITUIR */
     if(DEBUG>1) printf("\nMatriz tl:");
-    if(DEBUG>1) printm(tl,qt,ql);
+    /* if(DEBUG>1) printm(tl,qt,ql);<<<<<< SUBSTITUIR */
     if(DEBUG>1) printf("\n");
     printf("======= INICIO DA SIMULACAO =======\n");
     for(k=0;k<ITER;k++)

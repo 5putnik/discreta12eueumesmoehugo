@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include "listao.h"
+
 lugar *buscarLugar(lugar *cabeca, int x)
 {
     lugar *pl = cabeca;
@@ -12,12 +15,12 @@ lugar *buscarLugar(lugar *cabeca, int x)
 
 void inserirLugar(lugar **cabeca, int x)
 {
-    lugar *pl = cabeca;
+    lugar *pl = *cabeca;
     lugar *plant = NULL;
     
     while(pl != NULL)
     {
-        plant -> pl;
+        plant = pl;
         pl = pl -> prox;
     }
     
