@@ -58,7 +58,7 @@ void removerLugar(lugar **cabeca, lugar *r)
     return;
 }
 
-flecha *buscarLugar(flecha *cabeca, int xde, intxpara, int xtk)
+flecha *buscarFlechaAnd(flecha *cabeca, int xde, intxpara, int xtk)
 {
     flecha *pl = cabeca;
     while(pl != NULL)
@@ -70,7 +70,7 @@ flecha *buscarLugar(flecha *cabeca, int xde, intxpara, int xtk)
     return NULL;
 }
 
-flecha *buscarLugar(flecha *cabeca, int xde, intxpara, int xtk)
+flecha *buscarFlechaOr(flecha *cabeca, int xde, intxpara, int xtk)
 {
     flecha *pl = cabeca;
     while(pl != NULL)
@@ -82,3 +82,25 @@ flecha *buscarLugar(flecha *cabeca, int xde, intxpara, int xtk)
     return NULL;
 }
 
+void inserirFlecha(flecha **cabeca, int xde, int xpara, int xtk)
+{
+    flecha *pl = *cabeca;
+    flecha *plant = NULL;
+    
+    while(pl != NULL)
+    {
+        plant = pl;
+        pl = pl -> prox;
+    }
+    
+    pl = malloc(sizeof(lugar));
+    pl -> de = xde;
+    pl -> para = xpara;
+    pl -> tk = xtk;
+    pl -> prox = NULL;
+    
+    if(plant != NULL)
+        plant -> prox = pl;
+    else
+        *cabeca = pl;
+}
