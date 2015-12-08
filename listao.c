@@ -118,7 +118,7 @@ void inserirFlecha(flecha **cabeca, int xde, int xpara, int xtk)
         pl = pl -> prox;
     }
     
-    pl = malloc(sizeof(lugar));
+    pl = malloc(sizeof(flecha));
     pl -> de = xde;
     pl -> para = xpara;
     pl -> tk = xtk;

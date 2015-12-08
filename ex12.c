@@ -95,9 +95,10 @@ int main(void)
              lctk, 
              alt, 
              atl;
-    petri_t *rede;
-    lugar *v_lugar = NULL;
-    flecha *v_flecha = NULL;
+    petri_t *rede = malloc(sizeof(petri_t));
+    rede -> l = NULL;
+    rede -> tl = NULL;
+    rede -> lt = NULL;
     /* Parametros a serem passados para a funcao de transicao */
     struct passa_dados_st
     {
@@ -110,13 +111,13 @@ int main(void)
     scanf("%u",&ql);
     /* Escaneando a quantidade de transicoes */
     scanf("%u",&qt); 
-    if(DEBUG>1) printf("Quantidade de lugares: %u\n",ql);
+    if(DEBUG) printf("Quantidade de lugares: %u\n",ql);
     /*if(ql>VMAX)
     {
         printf("Erro linha 1: quantidade de lugares acima do maximo. \n");
         return -1;
     }*/
-    if(DEBUG>1) printf("Quantidade de transicoes: %u\n",qt);
+    if(DEBUG) printf("Quantidade de transicoes: %u\n",qt);
     /*if(qt>VMAX)
     {
         printf("Erro linha 2: quantidade de transicoes acima do maximo. \n");
@@ -138,6 +139,7 @@ int main(void)
             return -1;
         }
         inserirLugar(&(rede->l), i, j);
+        if(DEBUG) printf("li lugar L%u = %u tokens\n",i, j);
     }
     for(k=0;k<alt;k++)
     {
@@ -147,6 +149,7 @@ int main(void)
             printf("Erro linha %u: lugar ou transicao acima do definido. \n", 6+lctk+k);
             return -1;
         }
+        if(DEBUG) printf("li flecha L%u---(%u)--->T%u\n",i, lctk, j);
         inserirFlecha(&(rede->lt), i, j, lctk);
         /* lt[i][j]= lctk; <<<<< SUBSTITUIR */
     }
@@ -158,30 +161,45 @@ int main(void)
             printf("Erro linha %u: lugar ou transicao acima do definido. \n", 6+lctk+k+alt);
             return -1;
         }
+        if(DEBUG) printf("li flecha T%u---(%u)--->L%u\n",i, lctk, j);
         inserirFlecha(&(rede->tl), i, j, lctk);
         /* tl[i][j] = lctk; <<<<<< SUBSTITUIR */
     }
-    if(DEBUG>1) printf("Token em cada lugar:[");
-    /* if(DEBUG>1) printv(l,ql); <<<<<< SUBSTITUIR */
-    if(DEBUG>1) printf(" ]\n");
-    if(DEBUG>1) printf("Matriz lt:");
-    /* if(DEBUG>1) printm(lt,ql,qt); <<<<<< SUBSTITUIR */
-    if(DEBUG>1) printf("\nMatriz tl:");
-    /* if(DEBUG>1) printm(tl,qt,ql);<<<<<< SUBSTITUIR */
-    if(DEBUG>1) printf("\n");
+    lugar *pl = rede->l;
+    if(DEBUG) while(pl != NULL)
+    {
+        printf("inseri lugar L[%u] = %u tokens\n",pl->pos, pl->qtd);
+        pl = pl->prox;
+    }
+    flecha *pt = rede->tl;
+    if(DEBUG) while(pt != NULL)
+    {
+        printf("inseri flecha T[%u]---(%u)--->L[%u]\n",pt->de, pt->tk, pt->para);
+        pt = (pt->prox);
+    }
+    pt = rede->lt;
+    if(DEBUG) while(pt != NULL)
+    {
+        printf("inseri flecha L[%u]---(%u)--->T[%u]\n",pt->de, pt->tk, pt->para);
+        pt = (pt->prox);
+    }
     printf("======= INICIO DA SIMULACAO =======\n");
+    /* Este trecho sera retirado quanto a simulacao estiver pronta */
+    printf("Under construction. WE APOLOGISE FOR THE INCONVENIENCE\n");
+    return 0;
+    /* Fim do trecho temporario */
     for(k=0;k<ITER;k++)
     {
-        if(DEBUG>1) printf("\nInteracao %u:\n",k+1);
+        if(DEBUG) printf("\nInteracao %u:\n",k+1);
         rlist(chosen,qt);
         it_escape = 0;
-        if(DEBUG>1) printf("Ordem de tentativa:");
-        if(DEBUG>1) printv(chosen,qt);
-        if(DEBUG>1) printf("\n");
+        if(DEBUG) printf("Ordem de tentativa:");
+        if(DEBUG) printv(chosen,qt);
+        if(DEBUG) printf("\n");
         for(m=0;m<qt;m++)
         {
             i = chosen[m]; //sorteio i
-            if(DEBUG>0) printf("Tentativa %u: numero sorteado: [%u]\n",m+1,i);
+            if(DEBUG) printf("Tentativa %u: numero sorteado: [%u]\n",m+1,i);
             flag = 1;
             for(j=0;j<ql;j++)
                 if(lt[j][i] != 0)
@@ -195,26 +213,26 @@ int main(void)
                 it_escape = 1; //alguma transicao ativou
                 if((rand()%100 + 1) <= PCT)
                 {
-                    if(DEBUG>0) printf("Transicao %u ativou!\n",i);
+                    if(DEBUG) printf("Transicao %u ativou!\n",i);
                     for(j=0;j<ql;j++)
                         if(lt[j][i] != 0)
                         {
                             l[j] -= lt[j][i];
-                            if(DEBUG>1) printf("Transicao %u consumiu %u token(s) do lugar %u \n", i, lt[j][i], j);
+                            if(DEBUG) printf("Transicao %u consumiu %u token(s) do lugar %u \n", i, lt[j][i], j);
                         }
                     for(j=0;j<ql;j++)
                         if(tl[i][j] != 0)
                         {
                             l[j] += tl[i][j];
                             v[i]++;     
-                            if(DEBUG>1) printf("Transicao %u produziu %u token(s) \n", i, tl[i][j]);   
+                            if(DEBUG) printf("Transicao %u produziu %u token(s) \n", i, tl[i][j]);   
                         }
-                    if(DEBUG>0) printf("Token em cada lugar:[");
-                    if(DEBUG>0) printv(l,ql);
-                    if(DEBUG>0) printf(" ]\n");
+                    if(DEBUG) printf("Token em cada lugar:[");
+                    if(DEBUG) printv(l,ql);
+                    if(DEBUG) printf(" ]\n");
                 }
                 else
-                    if(DEBUG>0) printf("Transicao %u decidiu nao ativar.\n",i);               
+                    if(DEBUG) printf("Transicao %u decidiu nao ativar.\n",i);               
             }
         }
         if(it_escape == 0) //se nada aconteceu com nenhuma transicao
@@ -260,22 +278,22 @@ void rlist(unsigned v[VMAX], unsigned n)
     while(i)
     {
         v[n-i] = rand()%n;
-        if(DEBUG>4) printf("Vetor[%u]: %u (",n-i,v[n-i]);
+        if(DEBUG>1) printf("Vetor[%u]: %u (",n-i,v[n-i]);
         f = 1;
         for(j=0;j<(n-i);j++)
             if(v[j] == v[n-i])
                 f = 0;
         if(f)
         {
-            if(DEBUG>4) printf("OK)\n");
+            if(DEBUG>1) printf("OK)\n");
             i--;
         }
         else
-            if(DEBUG>4) printf("Falhou)\n");
+            if(DEBUG>1) printf("Falhou)\n");
     }
-    if(DEBUG>4) printf("retorno do rlist: [");
-    if(DEBUG>4) printv(v,n);
-    if(DEBUG>4) printf(" ]\n");
+    if(DEBUG>1) printf("retorno do rlist: [");
+    if(DEBUG>1) printv(v,n);
+    if(DEBUG>1) printf(" ]\n");
     return;
 }
 
