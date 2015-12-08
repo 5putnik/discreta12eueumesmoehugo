@@ -78,24 +78,17 @@ void desenha_rede(petri_t rede, const char *fname);
 
 int main(void)
 {
-    unsigned t = time(NULL);
-    unsigned l[VMAX] = {0}, 
-             lt[VMAX][VMAX] = {0}, 
-             tl[VMAX][VMAX] = {0}, 
-             qt, 
-             ql, 
-             chosen[VMAX], 
-             v[VMAX] = {0};
-    unsigned i, 
-             j, 
-             k, 
-             m, 
-             flag, 
-             it_escape, 
-             lctk, 
-             alt, 
-             atl;
-    petri_t *rede = malloc(sizeof(petri_t));
+    unsigned t = time(NULL);                    /* Temporizador da simulacao */
+    unsigned qt,                                /* Quantidade de transicoes */
+             ql;                                /* Quantidade de lugares */
+    unsigned i,                                 /* Variavel geral de laco */
+             j,                                 /* Variavel geral de laco */
+             k,                                 /* Variavel geral de laco */
+             it_escape,                         /* Flag condicional da iteracao */
+             lctk,                              /* Variavel temporaria de insercao */
+             alt,                               /* Total de arcos lugar -> transicao */
+             atl;                               /* Total de arcos transicao -> lugar */
+    petri_t *rede = malloc(sizeof(petri_t));    /* Rede de petri propriamente dita */
     rede -> l = NULL;
     rede -> tl = NULL;
     rede -> lt = NULL;
@@ -188,7 +181,20 @@ int main(void)
     printf("Under construction. WE APOLOGISE FOR THE INCONVENIENCE\n");
     return 0;
     /* Fim do trecho temporario */
-    for(k=0;k<ITER;k++)
+    k = 0;
+    do
+    {
+        k++;
+        it_escape = 0;
+        it_escape = 1;
+        if(k>ITER)
+        {
+            printf("Atencao! Apos %u iteracoes, a rede de petri nao estabilizou! Finalizando a simulacao. \nPara aumentar a quantidade maxima de iteracoes, verifique o manual de utilizacao do programa.\n",ITER);
+            break;
+        }
+    }while(it_escape);
+    /* Esta parte do codigo servira apenas para auxiliar no desenvolvimento do codigo */
+    /* for(k=0;k<ITER;k++)
     {
         if(DEBUG) printf("\nInteracao %u:\n",k+1);
         rlist(chosen,qt);
@@ -237,7 +243,7 @@ int main(void)
         }
         if(it_escape == 0) //se nada aconteceu com nenhuma transicao
             break;
-    }
+    }*/
     printf("======= FIM DA SIMULACAO ==========\n");
     t = time(NULL) - t;
     printf("Tempo de reprodução do programa: %u segundo(s).\n",t);
@@ -245,14 +251,16 @@ int main(void)
         printf("Aviso: nenhuma transicao foi disparada! \n");
     printf("Numero de iteracoes: %u.\n",k);
     printf("Lugares com token: \n");
-    for(j=0;j<ql;j++)
+    /* Imprimir "LX = Y" se Y > 0 */
+    /* for(j=0;j<ql;j++)
         if(l[j] != 0)
-            printf("Lugar %u: %u tokens \n",j,l[j]);
+            printf("Lugar %u: %u tokens \n",j,l[j]); */
 
     printf("Transicoes disparadas: \n");
-    for(j=0;j<ql;j++)
+    /* Imprimir "TX: Y vezes" se Y > 0 */
+    /* for(j=0;j<ql;j++)
         if(v[j] != 0)
-            printf("Transicao %u: disparada %u vezes \n",j,v[j]);
+            printf("Transicao %u: disparada %u vezes \n",j,v[j]); */
 
 
     return EXIT_SUCCESS;
