@@ -95,13 +95,13 @@ int main(void)
              lctk, 
              alt, 
              atl;
-    petri_t rede;
+    petri_t *rede;
     lugar *v_lugar = NULL;
     flecha *v_flecha = NULL;
     /* Parametros a serem passados para a funcao de transicao */
     struct passa_dados_st
     {
-        petri_t rede;
+        petri_t net;
         int pos;
     }dados;
 
@@ -137,7 +137,7 @@ int main(void)
             printf("Erro linha %u: lugar maior que o definido. \n", 6+k);
             return -1;
         }
-        /* l[i]=j; <<<<< SUBSTITUIR */
+        inserirLugar(&(rede->l), i, j);
     }
     for(k=0;k<alt;k++)
     {
@@ -147,6 +147,7 @@ int main(void)
             printf("Erro linha %u: lugar ou transicao acima do definido. \n", 6+lctk+k);
             return -1;
         }
+        inserirFlecha(&(rede->lt), i, j, lctk);
         /* lt[i][j]= lctk; <<<<< SUBSTITUIR */
     }
     for(k=0;k<atl;k++)
@@ -157,6 +158,7 @@ int main(void)
             printf("Erro linha %u: lugar ou transicao acima do definido. \n", 6+lctk+k+alt);
             return -1;
         }
+        inserirFlecha(&(rede->tl), i, j, lctk);
         /* tl[i][j] = lctk; <<<<<< SUBSTITUIR */
     }
     if(DEBUG>1) printf("Token em cada lugar:[");

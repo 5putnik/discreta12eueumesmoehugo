@@ -20,9 +20,9 @@ typedef struct lugar_st
 /* Descricao da rede de Petri sem as transicoes */ 
 typedef struct petri_st
 {
-    lugar l;
-    flecha lt;
-    flecha tl;
+    lugar *l;
+    flecha *lt;
+    flecha *tl;
 }petri_t;
 
 lugar *buscarLugar(lugar *cabeca, int x);
