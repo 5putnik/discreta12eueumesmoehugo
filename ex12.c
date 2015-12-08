@@ -73,7 +73,7 @@ unsigned it_escape;                             /* Flag condicional da iteracao 
 typedef struct passa_dados_st
 {
     petri_t *net;
-    int pos;
+    unsigned pos;
 }dados;
 
 int main(void)
@@ -189,7 +189,6 @@ int main(void)
         pt = (pt->prox);
     }
     printf("======= INICIO DA SIMULACAO =======\n");
-    return 0;
     k = 0;
     do
     {
@@ -200,9 +199,10 @@ int main(void)
         for(i=0;i<qt;i++)
         {
             d->pos = i;
+            printf("Passando %u\n",d->pos);
             if(pthread_create(&temp_thr, NULL, transicao, (void *)d))
             {
-                printf("Erro criando thread %d!\n",i);
+                printf("Erro criando thread %u!\n",i);
                 exit(1);
             }
             inserirThread(&lthr, temp_thr);
@@ -319,8 +319,8 @@ void *transicao(void *arg)
 {
     dados *n = (dados *)(arg);
     petri_t *r = n->net;
-    int i = n->pos;
-    printf("[transicao] Me passou a variavel net de endereco %p\n[transicao] Processando transicao %d\n", r, i);
+    unsigned i = n->pos;
+    printf("[transicao] Me passou a variavel net de endereco %p\n[transicao] Processando transicao %u\n", r, i);
     return NULL;
 }
 
