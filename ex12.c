@@ -52,6 +52,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <pthread.h>
 #include "listao.h"
 
 #ifndef VMAX
@@ -76,6 +77,14 @@ void printm(unsigned x[VMAX][VMAX], unsigned n, unsigned m);
 void transicao(void *arg);
 void desenha_rede(petri_t rede, const char *fname);
 
+unsigned it_escape;                             /* Flag condicional da iteracao */
+
+typedef struct passa_dados_st
+{
+    petri_t *net;
+    int pos;
+}dados;
+
 int main(void)
 {
     unsigned t = time(NULL);                    /* Temporizador da simulacao */
@@ -84,20 +93,17 @@ int main(void)
     unsigned i,                                 /* Variavel geral de laco */
              j,                                 /* Variavel geral de laco */
              k,                                 /* Variavel geral de laco */
-             it_escape,                         /* Flag condicional da iteracao */
              lctk,                              /* Variavel temporaria de insercao */
              alt,                               /* Total de arcos lugar -> transicao */
              atl;                               /* Total de arcos transicao -> lugar */
     petri_t *rede = malloc(sizeof(petri_t));    /* Rede de petri propriamente dita */
+    dados *d;
+    l_thread *lthr = NULL;
+    pthread_t temp_thr;
     rede -> l = NULL;
     rede -> tl = NULL;
     rede -> lt = NULL;
     /* Parametros a serem passados para a funcao de transicao */
-    struct passa_dados_st
-    {
-        petri_t net;
-        int pos;
-    }dados;
 
     srand(time(NULL));
     /* Escaneando a quantidade de lugares */
@@ -192,15 +198,32 @@ int main(void)
         pt = (pt->prox);
     }
     printf("======= INICIO DA SIMULACAO =======\n");
-    /* Este trecho sera retirado quanto a simulacao estiver pronta */
-    printf("Under construction. WE APOLOGISE FOR THE INCONVENIENCE\n");
-    return 0;
-    /* Fim do trecho temporario */
     k = 0;
     do
     {
         k++;
         it_escape = 0;
+        d->net = rede;
+        for(i=0;i<qt;i++)
+        {
+            d->pos = i;
+            if(pthread_create(temp_thr, NULL, transicao, (void *)d))
+            {
+                printf("Erro criando thread %d!\n",i);
+                exit(1);
+            }
+            inserirThread(&lthr, temp_thr);
+        }
+        while(lthr != NULL)
+        {
+            temp_thr = lthr->thr;
+            if(pthread_join(temp_thr, NULL))
+            {
+                printf("Erro juntando thread!\n");
+                exit(1);
+            }
+            lthr = lthr->prox;
+        }
         it_escape = 1;
         if(k>ITER)
         {
@@ -208,6 +231,11 @@ int main(void)
             break;
         }
     }while(it_escape);
+    /* Este trecho sera retirado quanto a simulacao estiver pronta */
+    printf("Under construction. WE APOLOGISE FOR THE INCONVENIENCE\n");
+    return 0;
+    /* Fim do trecho temporario */
+
     /* Esta parte do codigo servira apenas para auxiliar no desenvolvimento do codigo */
     /* for(k=0;k<ITER;k++)
     {
@@ -384,6 +412,9 @@ void printm(unsigned x[VMAX][VMAX], unsigned n, unsigned m)
  */
 void transicao(void *arg)
 {
+    dados *n = (dados *)(arg);
+    petri_t *r = n->net;
+    int i = n->pos;
     return;
 }
 

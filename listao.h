@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <pthread.h>
 
 /* Tipo que descreve as caracteristicas da Flecha */
 typedef struct flecha_st
@@ -25,6 +26,13 @@ typedef struct petri_st
     flecha *tl;
 }petri_t;
 
+/* Lista de threads */
+typedef struct thread_st
+{
+    pthread_t thr;
+    struct thread_st *prox;
+}l_thread;
+
 lugar *buscarLugarQtd(lugar *cabeca, int x);
 lugar *buscarLugarPos(lugar *cabeca, int x);
 void inserirLugar(lugar **cabeca, int i, int x);
@@ -34,3 +42,4 @@ flecha *buscarFlechaOr(flecha *cabeca, int xde, int xpara, int xtk);
 flecha *buscarFlechaDe(flecha *cabeca, int x);
 void inserirFlecha(flecha **cabeca, int xde, int xpara, int xtk);
 void removerFlecha(flecha **cabeca, flecha *r);
+void inserirThread(l_thread **cabeca, pthread_t p);

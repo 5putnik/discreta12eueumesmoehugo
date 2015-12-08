@@ -154,3 +154,24 @@ void removerFlecha(flecha **cabeca, flecha *r)
     free(pl);
     return;
 }
+
+void inserirThread(l_thread **cabeca, pthread_t p)
+{
+    l_thread *pl = *cabeca;
+    l_thread *plant = NULL;
+    
+    while(pl != NULL)
+    {
+        plant = pl;
+        pl = pl -> prox;
+    }
+    
+    pl = malloc(sizeof(l_thread));
+    pl -> thr = p;
+    pl -> prox = NULL;
+    
+    if(plant != NULL)
+        plant -> prox = pl;
+    else
+        *cabeca = pl;
+}
