@@ -55,26 +55,17 @@
 #include <pthread.h>
 #include "listao.h"
 
-#ifndef VMAX
-#define VMAX 1000 /**< Tamanho maximo dos vetores */
-#endif
-
 #ifndef ITER
 #define ITER 1000 /**< Total de iteracoes */
 #endif
 
-#ifndef PCT
-#define PCT 50 /**< Porcentagem de chance de ativacao de cada transicao */
-#endif
-
 #ifndef DEBUG
-#define DEBUG 0 /**< Ativa modo de debug */
+#define DEBUG 1 /**< Ativa modo de debug */
 #endif
 
-void rlist(unsigned v[VMAX], unsigned n);
-void printv(unsigned v[VMAX], unsigned n);
-void printm(unsigned x[VMAX][VMAX], unsigned n, unsigned m);
-void transicao(void *arg);
+#define M_LIN printf("-------------------------------------------------------\n")
+
+void *transicao(void *arg);
 void desenha_rede(petri_t rede, const char *fname);
 
 unsigned it_escape;                             /* Flag condicional da iteracao */
@@ -97,7 +88,7 @@ int main(void)
              alt,                               /* Total de arcos lugar -> transicao */
              atl;                               /* Total de arcos transicao -> lugar */
     petri_t *rede = malloc(sizeof(petri_t));    /* Rede de petri propriamente dita */
-    dados *d;
+    dados *d = malloc(sizeof(dados));
     l_thread *lthr = NULL;
     pthread_t temp_thr;
     rede -> l = NULL;
@@ -198,16 +189,18 @@ int main(void)
         pt = (pt->prox);
     }
     printf("======= INICIO DA SIMULACAO =======\n");
+    return 0;
     k = 0;
     do
     {
         k++;
         it_escape = 0;
         d->net = rede;
+        M_LIN;
         for(i=0;i<qt;i++)
         {
             d->pos = i;
-            if(pthread_create(temp_thr, NULL, transicao, (void *)d))
+            if(pthread_create(&temp_thr, NULL, transicao, (void *)d))
             {
                 printf("Erro criando thread %d!\n",i);
                 exit(1);
@@ -224,6 +217,7 @@ int main(void)
             }
             lthr = lthr->prox;
         }
+        M_LIN;
         it_escape = 1;
         if(k>ITER)
         {
@@ -312,95 +306,6 @@ int main(void)
 /**
  * \ingroup GroupUnique
  *
- * \brief Gera uma lista aleatoria.
- *
- * \details Esta funcao faz uma lista de 0 a n, porem numa ordem aleatoria. 
- *
- * \param[out] v A variavel \a v sera a lista numa ordem aleatoria.
- *
- * \param[in] n A variavel \a n representa o tamanho do vetor \a v.
- *
- * \retval void a funcao retorna nada.
- *
- */
-void rlist(unsigned v[VMAX], unsigned n)
-{
-    unsigned i = n, j, f;
-    while(i)
-    {
-        v[n-i] = rand()%n;
-        if(DEBUG>1) printf("Vetor[%u]: %u (",n-i,v[n-i]);
-        f = 1;
-        for(j=0;j<(n-i);j++)
-            if(v[j] == v[n-i])
-                f = 0;
-        if(f)
-        {
-            if(DEBUG>1) printf("OK)\n");
-            i--;
-        }
-        else
-            if(DEBUG>1) printf("Falhou)\n");
-    }
-    if(DEBUG>1) printf("retorno do rlist: [");
-    if(DEBUG>1) printv(v,n);
-    if(DEBUG>1) printf(" ]\n");
-    return;
-}
-
-/**
- * \ingroup GroupUnique
- *
- * \brief Imprime os valores de um vetor.
- *
- * \details Esta funcao imprime valores de um vetor, em uma ordem crescente. 
- *
- * \param[in] v A variavel \a v e um vetor que sera impresso.
- *
- * \param[in] n A variavel \a n representa o numero de impressoes \a v.
- *
- * \retval void a funcao retorna nada.
- *
- */
-void printv(unsigned v[VMAX], unsigned n)
-{
-    unsigned i;
-    for(i=0;i<n;i++)
-        printf(" %u",v[i]);
-    return;
-}
-
-/**
- * \ingroup GroupUnique
- *
- * \brief Imprime os valores de uma matriz.
- *
- * \details Esta funcao imprime valores de uma matriz,em numa ordem crescente. 
- *
- * \param[in] x A variavel \a x e uma matriz que sera impressa.
- *
- * \param[in] n A variavel \a n representa a linha da matriz a ser impressa \a x.
- *
- * \param[in] m A variavel \a m representa a coluna da matriz a ser impressa \a x.
- *
- * \retval void a funcao retorna nada.
- *
- */
-void printm(unsigned x[VMAX][VMAX], unsigned n, unsigned m)
-{
-    unsigned i, j;
-    for(i=0;i<n;i++)
-    {
-        printf("\n");
-        for(j=0;j<m;j++)
-            printf("%u ",x[i][j]);
-    }
-    return;
-}
-
-/**
- * \ingroup GroupUnique
- *
  * \brief Funcao que executa a transicao da rede.
  *
  * \details Esta funcao deve checar as flechas de entrada, checar os lugares para ver se existe quantidade de tokens suficientes para disparar indicadas pelas flechas, checar as flechas de saida e depositar nos lugares a quantidade de token indicados pelas flechas
@@ -410,12 +315,13 @@ void printm(unsigned x[VMAX][VMAX], unsigned n, unsigned m)
  * \retval void a funcao retorna nada.
  *
  */
-void transicao(void *arg)
+void *transicao(void *arg)
 {
     dados *n = (dados *)(arg);
     petri_t *r = n->net;
     int i = n->pos;
-    return;
+    printf("[transicao] Me passou a variavel net de endereco %p\n[transicao] Processando transicao %d\n", r, i);
+    return NULL;
 }
 
 /**
@@ -434,5 +340,6 @@ void transicao(void *arg)
  */
 void desenha_rede(petri_t rede, const char *fname)
 {
+    printf("[desenha_rede] Me passou a variavel rede de endereco %p\n[desenha_rede] Me passou a variavel fname de nome %s\n", &rede, fname);
     return;
 }
