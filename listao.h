@@ -12,6 +12,7 @@ typedef struct flecha_st
 /* Tipo que descreve as caracteristicas dos Lugares */
 typedef struct lugar_st
 {
+    int pos;
     int qtd;
     struct lugar_st * prox;
 }lugar;
@@ -25,7 +26,7 @@ typedef struct petri_st
 }petri_t;
 
 lugar *buscarLugar(lugar *cabeca, int x);
-void inserirLugar(lugar **cabeca, int x);
+void inserirLugar(lugar **cabeca, int i, int x);
 void removerLugar(lugar **cabeca, lugar *r);
 flecha *buscarFlechaAnd(flecha *cabeca, int xde, int xpara, int xtk);
 flecha *buscarFlechaOr(flecha *cabeca, int xde, int xpara, int xtk);
