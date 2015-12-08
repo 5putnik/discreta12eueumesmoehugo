@@ -1,11 +1,23 @@
 #include "listao.h"
 
-lugar *buscarLugar(lugar *cabeca, int x)
+lugar *buscarLugarQtd(lugar *cabeca, int x)
 {
     lugar *pl = cabeca;
     while(pl != NULL)
     {
         if(pl -> qtd == x)
+            return pl;
+        pl = pl -> prox;
+    }
+    return NULL;
+}
+
+lugar *buscarLugarPos(lugar *cabeca, int x)
+{
+    lugar *pl = cabeca;
+    while(pl != NULL)
+    {
+        if(pl -> pos == x)
             return pl;
         pl = pl -> prox;
     }
