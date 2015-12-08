@@ -134,6 +134,11 @@ int main(void)
         inserirLugar(&(rede->l), i, j);
         if(DEBUG) printf("li lugar L%u = %u tokens\n",i, j);
     }
+    if(rede->l == NULL)
+    {
+        printf("Erro: lugar nao pode ser lido no documento de texto.\n");
+        return -1;
+    }
     for(k=0;k<alt;k++)
     {
         scanf("%u %u %u", &i, &lctk, &j);
@@ -146,6 +151,11 @@ int main(void)
         inserirFlecha(&(rede->lt), i, j, lctk);
         /* lt[i][j]= lctk; <<<<< SUBSTITUIR */
     }
+    if(rede->lt == NULL)
+    {
+        printf("Erro: flecha lugar->transicao nao pode ser lido no documento de texto.\n");
+        return -1;
+    }
     for(k=0;k<atl;k++)
     {
         scanf("%u %u %u", &i, &lctk, &j);
@@ -157,6 +167,11 @@ int main(void)
         if(DEBUG) printf("li flecha T%u---(%u)--->L%u\n",i, lctk, j);
         inserirFlecha(&(rede->tl), i, j, lctk);
         /* tl[i][j] = lctk; <<<<<< SUBSTITUIR */
+    }
+    if(rede->tl == NULL)
+    {
+        printf("Erro: flecha transicao->lugar nao pode ser lido no documento de texto.\n");
+        return -1;
     }
     lugar *pl = rede->l;
     if(DEBUG) while(pl != NULL)
