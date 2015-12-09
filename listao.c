@@ -119,6 +119,18 @@ flecha *buscarFlechaPara(flecha *cabeca, int x)
     return NULL;
 }
 
+flecha *buscarFlechaTk(flecha *cabeca, int x)
+{
+    flecha *pl = cabeca;
+    while(pl != NULL)
+    {
+        if(pl -> tk == x)
+            return pl;
+        pl = pl -> prox;
+    }
+    return NULL;
+}
+
 void inserirFlecha(flecha **cabeca, int xde, int xpara, int xtk)
 {
     flecha *pl = *cabeca;
