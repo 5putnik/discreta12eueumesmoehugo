@@ -24,6 +24,20 @@ lugar *buscarLugarPos(lugar *cabeca, int x)
     return NULL;
 }
 
+lugar *anteriorLugar(lugar *cabeca, lugar *r)
+{
+    lugar *pl=cabeca, *plant=NULL;    
+    if(r==NULL)
+        return NULL;
+    while(pl!=NULL && pl!=r)
+    {
+        plant=pl;
+        pl=pl->prox;
+    }
+
+    return plant;
+}
+
 void inserirLugar(lugar **cabeca, int i, int x)
 {
     lugar *pl = *cabeca;
