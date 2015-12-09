@@ -35,8 +35,10 @@ typedef struct thread_st
 
 lugar *buscarLugarQtd(lugar *cabeca, int x);
 lugar *buscarLugarPos(lugar *cabeca, int x);
+lugar *anteriorLugar(lugar *cabeca, lugar *r);
 void inserirLugar(lugar **cabeca, int i, int x);
 void removerLugar(lugar **cabeca, lugar *r);
+
 flecha *buscarFlechaAnd(flecha *cabeca, int xde, int xpara, int xtk);
 flecha *buscarFlechaOr(flecha *cabeca, int xde, int xpara, int xtk);
 flecha *buscarFlechaDe(flecha *cabeca, int x);
