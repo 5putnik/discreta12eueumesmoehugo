@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include <pthread.h>
 
 /* Tipo que descreve as caracteristicas da Flecha */
@@ -38,6 +39,7 @@ lugar *buscarLugarPos(lugar *cabeca, int x);
 lugar *anteriorLugar(lugar *cabeca, lugar *r);
 void inserirLugar(lugar **cabeca, int i, int x);
 void removerLugar(lugar **cabeca, lugar *r);
+void imprimirLugar(lugar *cabeca);
 
 flecha *buscarFlechaAnd(flecha *cabeca, int xde, int xpara, int xtk);
 flecha *buscarFlechaOr(flecha *cabeca, int xde, int xpara, int xtk);
@@ -46,4 +48,6 @@ flecha *buscarFlechaPara(flecha *cabeca, int x);
 flecha *buscarFlechaTk(flecha *cabeca, int x);
 void inserirFlecha(flecha **cabeca, int xde, int xpara, int xtk);
 void removerFlecha(flecha **cabeca, flecha *r);
+void imprimirFlecha(flecha *cabeca);
 void inserirThread(l_thread **cabeca, pthread_t p);
+void imprimirThread(l_thread *cabeca);
