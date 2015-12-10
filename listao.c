@@ -145,6 +145,24 @@ flecha *buscarFlechaTk(flecha *cabeca, int x)
     return NULL;
 }
 
+
+flecha *anteriorFlecha(flecha *cabeca, flecha *r)
+{
+    flecha *pl=cabeca, *plant=NULL;    
+    if(r==NULL)
+        return NULL;
+    while(pl!=NULL && pl!=r)
+    {
+        plant=pl;
+        pl=pl->prox;
+    }
+
+    return plant;
+}
+
+void inserirLugar(lugar **cabeca, int i, int x)
+{
+
 void inserirFlecha(flecha **cabeca, int xde, int xpara, int xtk)
 {
     flecha *pl = *cabeca;
