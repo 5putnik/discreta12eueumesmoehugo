@@ -53,10 +53,12 @@
 #include <stdlib.h>
 #include <time.h>
 #include <pthread.h>
+#include <allegro.h>
+#include <unistd.h>
 #include "listao.h"
 
 #ifndef ITER
-    #define ITER 1000 /**< Total de iteracoes */
+    #define ITER 5 /**< Total de iteracoes */
 #endif
 
 #ifndef DEBUG
@@ -169,7 +171,6 @@ int main(void)
     if(DEBUG) imprimirFlecha(rede->tl);
     if(DEBUG) imprimirFlecha(rede->lt);
     printf("======= INICIO DA SIMULACAO =======\n");
-    return 0;
     k = 0;
     do
     {
@@ -179,8 +180,8 @@ int main(void)
         M_LIN;
         for(i=0;i<qt;i++)
         {
+            printf("Passando %u\n",i);
             d->pos = i;
-            printf("Passando %u\n",d->pos);
             if(pthread_create(&temp_thr, NULL, transicao, (void *)d))
             {
                 printf("Erro criando thread %u!\n",i);
@@ -300,8 +301,14 @@ void *transicao(void *arg)
 {
     dados *n = (dados *)(arg);
     petri_t *r = n->net;
-    unsigned i = n->pos;
-    printf("[transicao] Me passou a variavel net de endereco %p\n[transicao] Processando transicao %u\n", r, i);
+    unsigned i = n->pos,
+             j;
+    printf("[transicao, thread %u] Me passou a variavel net de endereco %p\n", i, r);
+    for(j=0;j<5;j++)
+    {
+        printf("[transicao, thread %u] Rodei %u vezes.\n", i, j);
+        sleep(1);
+    }
     return NULL;
 }
 
