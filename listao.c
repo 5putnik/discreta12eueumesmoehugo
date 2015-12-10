@@ -231,3 +231,36 @@ void inserirThread(l_thread **cabeca, pthread_t p)
     else
         *cabeca = pl;
 }
+
+void imprimirFlecha(flecha *cabeca)
+{
+    flecha *p = cabeca;
+    while(p != NULL)
+    {
+        printf("T%u ---(%u)---> L%u\n",p->de, p->tk, p->para);
+        p = (p->prox);
+    }
+    return;
+}
+
+void imprimirThread(l_thread *cabeca)
+{
+    l_thread *p = cabeca;
+    while(p != NULL)
+    {
+        printf("Thread: %p\n",&(p->thr));
+        p = (p->prox);
+    }
+    return;
+}
+
+void imprimirLugar(lugar *cabeca)
+{
+    lugar *p = cabeca;
+    while(p != NULL)
+    {
+        printf("L%u(%u)\n",p->pos, p->qtd);
+        p = (p->prox);
+    }
+    return;
+}

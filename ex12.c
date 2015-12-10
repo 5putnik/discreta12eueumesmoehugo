@@ -53,14 +53,16 @@
 #include <stdlib.h>
 #include <time.h>
 #include <pthread.h>
+#include <allegro.h>
+#include <unistd.h>
 #include "listao.h"
 
 #ifndef ITER
-#define ITER 1000 /**< Total de iteracoes */
+    #define ITER 5 /**< Total de iteracoes */
 #endif
 
 #ifndef DEBUG
-#define DEBUG 1 /**< Ativa modo de debug */
+    #define DEBUG 0 /**< Ativa modo de debug */
 #endif
 
 #define M_LIN printf("-------------------------------------------------------\n")
@@ -103,16 +105,16 @@ int main(void)
     scanf("%u",&qt); 
     if(DEBUG) printf("Quantidade de lugares: %u\n",ql);
     /*if(ql>VMAX)
-    {
-        printf("Erro linha 1: quantidade de lugares acima do maximo. \n");
-        return -1;
-    }*/
+      {
+      printf("Erro linha 1: quantidade de lugares acima do maximo. \n");
+      return -1;
+      }*/
     if(DEBUG) printf("Quantidade de transicoes: %u\n",qt);
     /*if(qt>VMAX)
-    {
-        printf("Erro linha 2: quantidade de transicoes acima do maximo. \n");
-        return -1;
-    }*/
+      {
+      printf("Erro linha 2: quantidade de transicoes acima do maximo. \n");
+      return -1;
+      }*/
     /* Escaneando total de lugares com pelo menos um token */
     scanf("%u",&lctk);
     /* Escaneando total de arcos lugar -> transicao */
@@ -129,7 +131,6 @@ int main(void)
             return -1;
         }
         inserirLugar(&(rede->l), i, j);
-        if(DEBUG) printf("li lugar L%u = %u tokens\n",i, j);
     }
     if(rede->l == NULL)
     {
@@ -144,9 +145,7 @@ int main(void)
             printf("Erro linha %u: lugar ou transicao acima do definido. \n", 6+lctk+k);
             return -1;
         }
-        if(DEBUG) printf("li flecha L%u---(%u)--->T%u\n",i, lctk, j);
         inserirFlecha(&(rede->lt), i, j, lctk);
-        /* lt[i][j]= lctk; <<<<< SUBSTITUIR */
     }
     if(rede->lt == NULL)
     {
@@ -161,33 +160,16 @@ int main(void)
             printf("Erro linha %u: lugar ou transicao acima do definido. \n", 6+lctk+k+alt);
             return -1;
         }
-        if(DEBUG) printf("li flecha T%u---(%u)--->L%u\n",i, lctk, j);
         inserirFlecha(&(rede->tl), i, j, lctk);
-        /* tl[i][j] = lctk; <<<<<< SUBSTITUIR */
     }
     if(rede->tl == NULL)
     {
         printf("Erro: flecha transicao->lugar nao pode ser lido no documento de texto.\n");
         return -1;
     }
-    lugar *pl = rede->l;
-    if(DEBUG) while(pl != NULL)
-    {
-        printf("inseri lugar L[%u] = %u tokens\n",pl->pos, pl->qtd);
-        pl = pl->prox;
-    }
-    flecha *pt = rede->tl;
-    if(DEBUG) while(pt != NULL)
-    {
-        printf("inseri flecha T[%u]---(%u)--->L[%u]\n",pt->de, pt->tk, pt->para);
-        pt = (pt->prox);
-    }
-    pt = rede->lt;
-    if(DEBUG) while(pt != NULL)
-    {
-        printf("inseri flecha L[%u]---(%u)--->T[%u]\n",pt->de, pt->tk, pt->para);
-        pt = (pt->prox);
-    }
+    if(DEBUG) imprimirLugar(rede->l);
+    if(DEBUG) imprimirFlecha(rede->tl);
+    if(DEBUG) imprimirFlecha(rede->lt);
     printf("======= INICIO DA SIMULACAO =======\n");
     k = 0;
     do
@@ -198,8 +180,8 @@ int main(void)
         M_LIN;
         for(i=0;i<qt;i++)
         {
+            printf("Passando %u\n",i);
             d->pos = i;
-            printf("Passando %u\n",d->pos);
             if(pthread_create(&temp_thr, NULL, transicao, (void *)d))
             {
                 printf("Erro criando thread %u!\n",i);
@@ -232,55 +214,55 @@ int main(void)
 
     /* Esta parte do codigo servira apenas para auxiliar no desenvolvimento do codigo */
     /* for(k=0;k<ITER;k++)
-    {
-        if(DEBUG) printf("\nInteracao %u:\n",k+1);
-        rlist(chosen,qt);
-        it_escape = 0;
-        if(DEBUG) printf("Ordem de tentativa:");
-        if(DEBUG) printv(chosen,qt);
-        if(DEBUG) printf("\n");
-        for(m=0;m<qt;m++)
-        {
-            i = chosen[m]; //sorteio i
-            if(DEBUG) printf("Tentativa %u: numero sorteado: [%u]\n",m+1,i);
-            flag = 1;
-            for(j=0;j<ql;j++)
-                if(lt[j][i] != 0)
-                    if(l[j] < lt[j][i])
-                    {
-                        flag = 0;
-                        break;
-                    }
-            if(flag)
-            {
-                it_escape = 1; //alguma transicao ativou
-                if((rand()%100 + 1) <= PCT)
-                {
-                    if(DEBUG) printf("Transicao %u ativou!\n",i);
-                    for(j=0;j<ql;j++)
-                        if(lt[j][i] != 0)
-                        {
-                            l[j] -= lt[j][i];
-                            if(DEBUG) printf("Transicao %u consumiu %u token(s) do lugar %u \n", i, lt[j][i], j);
-                        }
-                    for(j=0;j<ql;j++)
-                        if(tl[i][j] != 0)
-                        {
-                            l[j] += tl[i][j];
-                            v[i]++;     
-                            if(DEBUG) printf("Transicao %u produziu %u token(s) \n", i, tl[i][j]);   
-                        }
-                    if(DEBUG) printf("Token em cada lugar:[");
-                    if(DEBUG) printv(l,ql);
-                    if(DEBUG) printf(" ]\n");
-                }
-                else
-                    if(DEBUG) printf("Transicao %u decidiu nao ativar.\n",i);               
-            }
-        }
-        if(it_escape == 0) //se nada aconteceu com nenhuma transicao
-            break;
-    }*/
+       {
+       if(DEBUG) printf("\nInteracao %u:\n",k+1);
+       rlist(chosen,qt);
+       it_escape = 0;
+       if(DEBUG) printf("Ordem de tentativa:");
+       if(DEBUG) printv(chosen,qt);
+       if(DEBUG) printf("\n");
+       for(m=0;m<qt;m++)
+       {
+       i = chosen[m]; //sorteio i
+       if(DEBUG) printf("Tentativa %u: numero sorteado: [%u]\n",m+1,i);
+       flag = 1;
+       for(j=0;j<ql;j++)
+       if(lt[j][i] != 0)
+       if(l[j] < lt[j][i])
+       {
+       flag = 0;
+       break;
+       }
+       if(flag)
+       {
+       it_escape = 1; //alguma transicao ativou
+       if((rand()%100 + 1) <= PCT)
+       {
+       if(DEBUG) printf("Transicao %u ativou!\n",i);
+       for(j=0;j<ql;j++)
+       if(lt[j][i] != 0)
+       {
+       l[j] -= lt[j][i];
+       if(DEBUG) printf("Transicao %u consumiu %u token(s) do lugar %u \n", i, lt[j][i], j);
+       }
+       for(j=0;j<ql;j++)
+       if(tl[i][j] != 0)
+       {
+       l[j] += tl[i][j];
+       v[i]++;     
+       if(DEBUG) printf("Transicao %u produziu %u token(s) \n", i, tl[i][j]);   
+       }
+       if(DEBUG) printf("Token em cada lugar:[");
+       if(DEBUG) printv(l,ql);
+       if(DEBUG) printf(" ]\n");
+       }
+       else
+       if(DEBUG) printf("Transicao %u decidiu nao ativar.\n",i);               
+       }
+       }
+       if(it_escape == 0) //se nada aconteceu com nenhuma transicao
+       break;
+       }*/
     printf("======= FIM DA SIMULACAO ==========\n");
     t = time(NULL) - t;
     printf("Tempo de reprodução do programa: %u segundo(s).\n",t);
@@ -290,14 +272,14 @@ int main(void)
     printf("Lugares com token: \n");
     /* Imprimir "LX = Y" se Y > 0 */
     /* for(j=0;j<ql;j++)
-        if(l[j] != 0)
-            printf("Lugar %u: %u tokens \n",j,l[j]); */
+       if(l[j] != 0)
+       printf("Lugar %u: %u tokens \n",j,l[j]); */
 
     printf("Transicoes disparadas: \n");
     /* Imprimir "TX: Y vezes" se Y > 0 */
     /* for(j=0;j<ql;j++)
-        if(v[j] != 0)
-            printf("Transicao %u: disparada %u vezes \n",j,v[j]); */
+       if(v[j] != 0)
+       printf("Transicao %u: disparada %u vezes \n",j,v[j]); */
 
 
     return EXIT_SUCCESS;
@@ -319,8 +301,14 @@ void *transicao(void *arg)
 {
     dados *n = (dados *)(arg);
     petri_t *r = n->net;
-    unsigned i = n->pos;
-    printf("[transicao] Me passou a variavel net de endereco %p\n[transicao] Processando transicao %u\n", r, i);
+    unsigned i = n->pos,
+             j;
+    printf("[transicao, thread %u] Me passou a variavel net de endereco %p\n", i, r);
+    for(j=0;j<5;j++)
+    {
+        printf("[transicao, thread %u] Rodei %u vezes.\n", i, j);
+        sleep(1);
+    }
     return NULL;
 }
 
