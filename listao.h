@@ -44,6 +44,7 @@ flecha *buscarFlechaOr(flecha *cabeca, int xde, int xpara, int xtk);
 flecha *buscarFlechaDe(flecha *cabeca, int x);
 flecha *buscarFlechaPara(flecha *cabeca, int x);
 flecha *buscarFlechaTk(flecha *cabeca, int x);
+flecha *anteriorFlecha(flecha *cabeca, flecha *r);
 void inserirFlecha(flecha **cabeca, int xde, int xpara, int xtk);
 void removerFlecha(flecha **cabeca, flecha *r);
 void inserirThread(l_thread **cabeca, pthread_t p);
