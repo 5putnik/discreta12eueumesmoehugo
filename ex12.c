@@ -298,10 +298,24 @@ void *transicao(void *arg)
 void desenha_rede(petri_t *rede, const char *fname)
 {
     float ang;
+    unsigned i, q;
+    lugar *a_l = rede->l;
+    /*flecha *a_tl = rede->tl;
+    flecha *a_lt = rede->lt;*/
     if(rede->total_l > rede->total_t)
         ang = M_PI/rede->total_l;
     else
         ang = M_PI/rede->total_t;
     printf("Desenhando %u lugares e %u transicoes espacados entre si %.2fº...\nNome do arquivo: %s.bmp\n", rede->total_l, rede->total_t, ang*180.0/M_PI, fname);
+    for(i=0;i<rede->total_l;i++)
+    {
+        a_l = buscarLugarQtd(rede->l, i);
+        q = 0;
+        if(a_l != NULL)
+            q = a_l->qtd;
+        printf("L%u(%u) (posicionada %.2fº)\n", i, q, ang*(2*i)*180.0/M_PI);
+    }
+    for(i=0;i<rede->total_t;i++)
+        printf("T%u (posicionado %.2fº)\n", i, ang*(2*i+1)*180.0/M_PI);
     return;
 }
