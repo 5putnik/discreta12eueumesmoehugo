@@ -311,7 +311,9 @@ void *transicao(void *arg)
     printf("[transicao, thread %u] Me passou a variavel net de endereco %p\n", i, r);
     flecha *t = r -> lt;
     flecha *x = NULL;
-    int xde, xtk;
+    lugar *tp = r -> l;
+    lugar *y = NULL;
+    int xde, xtk, yqtd;
 
     for(j=0;j<5;j++)
     {
@@ -322,6 +324,19 @@ void *transicao(void *arg)
             xtk = x -> tk;
             xde = x -> de;
             printf("Precisa remover %d tokens do lugar %d\n", xtk, xde);
+            y = buscarLugarPos(tp, xde);
+            if(y != NULL)
+            {
+                yqtd = y -> qtd;
+                if(xtk <= yqtd)
+                {
+                    printf("Transicao disparou\n");
+                }
+                else
+                    printf("Lugar com tokens insuficientes");
+            }
+            else
+                printf("Erro nao existe lugar de partida da flecha");
         }
         else
             printf("Erro: transicao fantasma, nenhum lugar aponta para ela\n");
