@@ -5,17 +5,17 @@
 /* Tipo que descreve as caracteristicas da Flecha */
 typedef struct flecha_st
 {
-    int de;
-    int para;
-    int tk;
+    unsigned de;
+    unsigned para;
+    unsigned tk;
     struct flecha_st * prox;
 }flecha;
 
 /* Tipo que descreve as caracteristicas dos Lugares */
 typedef struct lugar_st
 {
-    int pos;
-    int qtd;
+    unsigned pos;
+    unsigned qtd;
     struct lugar_st * prox;
 }lugar;
 

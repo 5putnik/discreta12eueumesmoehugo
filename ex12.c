@@ -251,6 +251,8 @@ void *transicao(void *arg)
              j,
              q;
     flecha *t = r -> lt;
+    if(r == NULL)
+        printf("ERRO: passando nada pra transicao!!\n");
     flecha *x = NULL;
     lugar *tp = r -> l;
     lugar *y = NULL;
