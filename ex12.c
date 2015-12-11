@@ -261,12 +261,14 @@ void *transicao(void *arg)
     flecha *x = NULL;
     flecha *xx = NULL;
     lugar *tpp = r -> l;
+    lugar *tppp = r -> l;
     lugar *y = NULL;
-    
+    lugar *yy = NULL;
+
     unsigned xde,
              xtk,
              xxpara,
-             xxtk,
+             xxtk;
              yqtd, 
              c,
              cc;
@@ -321,8 +323,17 @@ void *transicao(void *arg)
                     xxtk = xx -> tk;
                     xxpara = xx -> para;
                     if(DEBUG) printf("[thread %u] Precisa adicionar %d tokens no lugar %d\n", i, xxtk, xxpara);
+                    yy = buscarLugarPos(tppp, xxpara);
+                    
+                    if(yy != NULL)
+                    {
+                        /* Achou o lugar que deve despejar os tokens */
+                        yy -> qtd = (yy -> qtd) + xxtk;
+                    }
+                    else
+                        if(DEBUG) printf("[thread %u] Erro: nao existe lugar de chegada da flecha\n", i);
                 }
-                if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n", i);
+                if(DEBUG && !cc) printf("[thread %u] Erro: transicao fantasma, nenhum lugar e' apontado por ela para ela\n", i);
 
             }
             else
