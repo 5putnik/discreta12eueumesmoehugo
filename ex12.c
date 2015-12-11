@@ -331,7 +331,7 @@ void *transicao(void *arg)
                 if(xtk <= yqtd)
                 {
                     printf("Transicao disparou\n");
-                    /* Devido a condicao de corrida a qtd pode ficar negativa */0
+                    /* Devido a condicao de corrida a qtd pode ficar negativa */
                     y -> qtd = (y -> qtd) - xtk;
             
                 }
@@ -346,7 +346,6 @@ void *transicao(void *arg)
 
 
         printf("[transicao, thread %u] Rodei %u vezes.\n", i, j);
-        sleep(1);
     }
     return NULL;
 }
