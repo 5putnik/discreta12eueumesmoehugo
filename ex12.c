@@ -312,7 +312,7 @@ void *transicao(void *arg)
     for(j=0;j<5;j++)
     {
         
-        x = buscarLugarPara(t, i);
+        x = buscarFlechaPara(t, i);
         if(x != NULL)
         {
             xtk = x -> tk;

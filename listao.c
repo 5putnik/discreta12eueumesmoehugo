@@ -160,9 +160,6 @@ flecha *anteriorFlecha(flecha *cabeca, flecha *r)
     return plant;
 }
 
-void inserirLugar(lugar **cabeca, int i, int x)
-{
-
 void inserirFlecha(flecha **cabeca, int xde, int xpara, int xtk)
 {
     flecha *pl = *cabeca;
