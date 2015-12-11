@@ -22,6 +22,8 @@ typedef struct lugar_st
 /* Descricao da rede de Petri sem as transicoes */ 
 typedef struct petri_st
 {
+    unsigned total_l,
+             total_t;
     lugar *l;
     flecha *lt;
     flecha *tl;

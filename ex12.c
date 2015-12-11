@@ -68,7 +68,7 @@
 #define M_LIN printf("-------------------------------------------------------\n")
 
 void *transicao(void *arg);
-void desenha_rede(petri_t rede, const char *fname);
+void desenha_rede(petri_t *rede, const char *fname);
 
 unsigned it_escape;                             /* Flag condicional da iteracao */
 
@@ -101,8 +101,10 @@ int main(void)
     srand(time(NULL));
     /* Escaneando a quantidade de lugares */
     scanf("%u",&ql);
+    rede->total_l = ql;
     /* Escaneando a quantidade de transicoes */
     scanf("%u",&qt); 
+    rede->total_t = qt;
     if(DEBUG) printf("Quantidade de lugares: %u\n",ql);
     /*if(ql>VMAX)
       {
@@ -343,7 +345,7 @@ void *transicao(void *arg)
  * \retval void a funcao retorna nada.
  *
  */
-void desenha_rede(petri_t rede, const char *fname)
+void desenha_rede(petri_t *rede, const char *fname)
 {
     printf("[desenha_rede] Me passou a variavel rede de endereco %p\n[desenha_rede] Me passou a variavel fname de nome %s\n", &rede, fname);
     return;
