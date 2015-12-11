@@ -55,6 +55,7 @@
 #include <pthread.h>
 #include <allegro.h>
 #include <unistd.h>
+#include <math.h>
 #include "listao.h"
 
 #ifndef ITER
@@ -172,6 +173,7 @@ int main(void)
     if(DEBUG) imprimirLugar(rede->l);
     if(DEBUG) imprimirFlecha(rede->tl);
     if(DEBUG) imprimirFlecha(rede->lt);
+    desenha_rede(rede, "inicio");
     printf("======= INICIO DA SIMULACAO =======\n");
     k = 0;
     do
@@ -209,6 +211,7 @@ int main(void)
             break;
         }
     }while(it_escape);
+    desenha_rede(rede, "fim");
     /* Este trecho sera retirado quanto a simulacao estiver pronta */
     printf("Under construction. WE APOLOGISE FOR THE INCONVENIENCE\n");
     return 0;
@@ -347,6 +350,11 @@ void *transicao(void *arg)
  */
 void desenha_rede(petri_t *rede, const char *fname)
 {
-    printf("[desenha_rede] Me passou a variavel rede de endereco %p\n[desenha_rede] Me passou a variavel fname de nome %s\n", &rede, fname);
+    float ang;
+    if(rede->total_l > rede->total_t)
+        ang = M_PI/rede->total_l;
+    else
+        ang = M_PI/rede->total_t;
+    printf("Desenhando %u lugares e %u transicoes espacados entre si %.2fº...\nNome do arquivo: %s.bmp\n", rede->total_l, rede->total_t, ang*180.0/M_PI, fname);
     return;
 }
