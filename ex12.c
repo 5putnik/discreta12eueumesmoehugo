@@ -54,7 +54,6 @@
 #include <time.h>
 #include <pthread.h>
 #include <allegro.h>
-#include <unistd.h>
 #include <math.h>
 #include "listao.h"
 
@@ -216,58 +215,6 @@ int main(void)
     printf("Under construction. WE APOLOGISE FOR THE INCONVENIENCE\n");
     return 0;
     /* Fim do trecho temporario */
-
-    /* Esta parte do codigo servira apenas para auxiliar no desenvolvimento do codigo */
-    /* for(k=0;k<ITER;k++)
-       {
-       if(DEBUG) printf("\nInteracao %u:\n",k+1);
-       rlist(chosen,qt);
-       it_escape = 0;
-       if(DEBUG) printf("Ordem de tentativa:");
-       if(DEBUG) printv(chosen,qt);
-       if(DEBUG) printf("\n");
-       for(m=0;m<qt;m++)
-       {
-       i = chosen[m]; //sorteio i
-       if(DEBUG) printf("Tentativa %u: numero sorteado: [%u]\n",m+1,i);
-       flag = 1;
-       for(j=0;j<ql;j++)
-       if(lt[j][i] != 0)
-       if(l[j] < lt[j][i])
-       {
-       flag = 0;
-       break;
-       }
-       if(flag)
-       {
-       it_escape = 1; //alguma transicao ativou
-       if((rand()%100 + 1) <= PCT)
-       {
-       if(DEBUG) printf("Transicao %u ativou!\n",i);
-       for(j=0;j<ql;j++)
-       if(lt[j][i] != 0)
-       {
-       l[j] -= lt[j][i];
-       if(DEBUG) printf("Transicao %u consumiu %u token(s) do lugar %u \n", i, lt[j][i], j);
-       }
-       for(j=0;j<ql;j++)
-       if(tl[i][j] != 0)
-       {
-       l[j] += tl[i][j];
-       v[i]++;     
-       if(DEBUG) printf("Transicao %u produziu %u token(s) \n", i, tl[i][j]);   
-       }
-       if(DEBUG) printf("Token em cada lugar:[");
-       if(DEBUG) printv(l,ql);
-       if(DEBUG) printf(" ]\n");
-       }
-       else
-       if(DEBUG) printf("Transicao %u decidiu nao ativar.\n",i);               
-       }
-       }
-       if(it_escape == 0) //se nada aconteceu com nenhuma transicao
-       break;
-       }*/
     printf("======= FIM DA SIMULACAO ==========\n");
     t = time(NULL) - t;
     printf("Tempo de reprodução do programa: %u segundo(s).\n",t);
