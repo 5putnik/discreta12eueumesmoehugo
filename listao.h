@@ -36,20 +36,20 @@ typedef struct thread_st
     struct thread_st *prox;
 }l_thread;
 
-lugar *buscarLugarQtd(lugar *cabeca, int x);
-lugar *buscarLugarPos(lugar *cabeca, int x);
+lugar *buscarLugarQtd(lugar *cabeca, unsigned x);
+lugar *buscarLugarPos(lugar *cabeca, unsigned x);
 lugar *anteriorLugar(lugar *cabeca, lugar *r);
-void inserirLugar(lugar **cabeca, int i, int x);
+void inserirLugar(lugar **cabeca, unsigned i, unsigned x);
 void removerLugar(lugar **cabeca, lugar *r);
 void imprimirLugar(lugar *cabeca);
 
-flecha *buscarFlechaAnd(flecha *cabeca, int xde, int xpara, int xtk);
-flecha *buscarFlechaOr(flecha *cabeca, int xde, int xpara, int xtk);
-flecha *buscarFlechaDe(flecha *cabeca, int x);
-flecha *buscarFlechaPara(flecha *cabeca, int x);
-flecha *buscarFlechaTk(flecha *cabeca, int x);
+flecha *buscarFlechaAnd(flecha *cabeca, unsigned xde, unsigned xpara, unsigned xtk);
+flecha *buscarFlechaOr(flecha *cabeca, unsigned xde, unsigned xpara, unsigned xtk);
+flecha *buscarFlechaDe(flecha *cabeca, unsigned x);
+flecha *buscarFlechaPara(flecha *cabeca, unsigned x);
+flecha *buscarFlechaTk(flecha *cabeca, unsigned x);
 flecha *anteriorFlecha(flecha *cabeca, flecha *r);
-void inserirFlecha(flecha **cabeca, int xde, int xpara, int xtk);
+void inserirFlecha(flecha **cabeca, unsigned xde, unsigned xpara, unsigned xtk);
 void removerFlecha(flecha **cabeca, flecha *r);
 void imprimirFlecha(flecha *cabeca);
 void inserirThread(l_thread **cabeca, pthread_t p);

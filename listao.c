@@ -1,6 +1,6 @@
 #include "listao.h"
 
-lugar *buscarLugarQtd(lugar *cabeca, int x)
+lugar *buscarLugarQtd(lugar *cabeca, unsigned x)
 {
     lugar *pl = cabeca;
     while(pl != NULL)
@@ -12,7 +12,7 @@ lugar *buscarLugarQtd(lugar *cabeca, int x)
     return NULL;
 }
 
-lugar *buscarLugarPos(lugar *cabeca, int x)
+lugar *buscarLugarPos(lugar *cabeca, unsigned x)
 {
     lugar *pl = cabeca;
     while(pl != NULL)
@@ -38,7 +38,7 @@ lugar *anteriorLugar(lugar *cabeca, lugar *r)
     return plant;
 }
 
-void inserirLugar(lugar **cabeca, int i, int x)
+void inserirLugar(lugar **cabeca, unsigned i, unsigned x)
 {
     lugar *pl = *cabeca;
     lugar *plant = NULL;
@@ -85,7 +85,7 @@ void removerLugar(lugar **cabeca, lugar *r)
     return;
 }
 
-flecha *buscarFlechaAnd(flecha *cabeca, int xde, int xpara, int xtk)
+flecha *buscarFlechaAnd(flecha *cabeca, unsigned xde, unsigned xpara, unsigned xtk)
 {
     flecha *pl = cabeca;
     while(pl != NULL)
@@ -97,7 +97,7 @@ flecha *buscarFlechaAnd(flecha *cabeca, int xde, int xpara, int xtk)
     return NULL;
 }
 
-flecha *buscarFlechaOr(flecha *cabeca, int xde, int xpara, int xtk)
+flecha *buscarFlechaOr(flecha *cabeca, unsigned xde, unsigned xpara, unsigned xtk)
 {
     flecha *pl = cabeca;
     while(pl != NULL)
@@ -109,7 +109,7 @@ flecha *buscarFlechaOr(flecha *cabeca, int xde, int xpara, int xtk)
     return NULL;
 }
 
-flecha *buscarFlechaDe(flecha *cabeca, int x)
+flecha *buscarFlechaDe(flecha *cabeca, unsigned x)
 {
     flecha *pl = cabeca;
     while(pl != NULL)
@@ -121,7 +121,7 @@ flecha *buscarFlechaDe(flecha *cabeca, int x)
     return NULL;
 }
 
-flecha *buscarFlechaPara(flecha *cabeca, int x)
+flecha *buscarFlechaPara(flecha *cabeca, unsigned x)
 {
     flecha *pl = cabeca;
     while(pl != NULL)
@@ -133,7 +133,7 @@ flecha *buscarFlechaPara(flecha *cabeca, int x)
     return NULL;
 }
 
-flecha *buscarFlechaTk(flecha *cabeca, int x)
+flecha *buscarFlechaTk(flecha *cabeca, unsigned x)
 {
     flecha *pl = cabeca;
     while(pl != NULL)
@@ -160,7 +160,7 @@ flecha *anteriorFlecha(flecha *cabeca, flecha *r)
     return plant;
 }
 
-void inserirFlecha(flecha **cabeca, int xde, int xpara, int xtk)
+void inserirFlecha(flecha **cabeca, unsigned xde, unsigned xpara, unsigned xtk)
 {
     flecha *pl = *cabeca;
     flecha *plant = NULL;

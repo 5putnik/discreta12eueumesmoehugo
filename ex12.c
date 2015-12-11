@@ -256,7 +256,7 @@ void *transicao(void *arg)
     flecha *x = NULL;
     lugar *tp = r -> l;
     lugar *y = NULL;
-    int xde, xtk, yqtd;
+    unsigned xde, xtk, yqtd;
     /* Varrendo Flechas L->T */
     while(t != NULL)
     {
