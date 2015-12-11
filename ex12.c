@@ -331,6 +331,9 @@ void *transicao(void *arg)
                 if(xtk <= yqtd)
                 {
                     printf("Transicao disparou\n");
+                    /* Devido a condicao de corrida a qtd pode ficar negativa */0
+                    y -> qtd = (y -> qtd) - xtk;
+            
                 }
                 else
                     printf("Lugar com tokens insuficientes");
