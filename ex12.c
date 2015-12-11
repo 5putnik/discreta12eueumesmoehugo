@@ -58,11 +58,11 @@
 #include "listao.h"
 
 #ifndef ITER
-    #define ITER 5 /**< Total de iteracoes */
+#define ITER 5 /**< Total de iteracoes */
 #endif
 
 #ifndef DEBUG
-    #define DEBUG 0 /**< Ativa modo de debug */
+#define DEBUG 0 /**< Ativa modo de debug */
 #endif
 
 #define M_LIN printf("-------------------------------------------------------\n")
@@ -223,15 +223,9 @@ int main(void)
     printf("Numero de iteracoes: %u.\n",k);
     printf("Lugares com token: \n");
     /* Imprimir "LX = Y" se Y > 0 */
-    /* for(j=0;j<ql;j++)
-       if(l[j] != 0)
-       printf("Lugar %u: %u tokens \n",j,l[j]); */
 
     printf("Transicoes disparadas: \n");
     /* Imprimir "TX: Y vezes" se Y > 0 */
-    /* for(j=0;j<ql;j++)
-       if(v[j] != 0)
-       printf("Transicao %u: disparada %u vezes \n",j,v[j]); */
 
 
     return EXIT_SUCCESS;
@@ -253,47 +247,37 @@ void *transicao(void *arg)
 {
     dados *n = (dados *)(arg);
     petri_t *r = n->net;
-    unsigned i = n->pos,
-             j;
-    printf("[transicao, thread %u] Me passou a variavel net de endereco %p\n", i, r);
+    unsigned i = n->pos;
     flecha *t = r -> lt;
     flecha *x = NULL;
     lugar *tp = r -> l;
     lugar *y = NULL;
     int xde, xtk, yqtd;
-
-    for(j=0;j<5;j++)
+    x = buscarFlechaPara(t, i);
+    if(x != NULL)
     {
-        
-        x = buscarFlechaPara(t, i);
-        if(x != NULL)
+        xtk = x -> tk;
+        xde = x -> de;
+        printf("[thread %u] Precisa remover %d tokens do lugar %d\n", i, xtk, xde);
+        y = buscarLugarPos(tp, xde);
+        if(y != NULL)
         {
-            xtk = x -> tk;
-            xde = x -> de;
-            printf("Precisa remover %d tokens do lugar %d\n", xtk, xde);
-            y = buscarLugarPos(tp, xde);
-            if(y != NULL)
+            yqtd = y -> qtd;
+            if(xtk <= yqtd)
             {
-                yqtd = y -> qtd;
-                if(xtk <= yqtd)
-                {
-                    printf("Transicao disparou\n");
-                    /* Devido a condicao de corrida a qtd pode ficar negativa */
-                    y -> qtd = (y -> qtd) - xtk;
-            
-                }
-                else
-                    printf("Lugar com tokens insuficientes");
+                printf("Transicao %u disparou\n", i);
+                /* Devido a condicao de corrida a qtd pode ficar negativa */
+                y -> qtd = (y -> qtd) - xtk;
+
             }
             else
-                printf("Erro nao existe lugar de partida da flecha");
+                printf("[thread %u] Lugar com tokens insuficientes\n", i);
         }
         else
-            printf("Erro: transicao fantasma, nenhum lugar aponta para ela\n");
-
-
-        printf("[transicao, thread %u] Rodei %u vezes.\n", i, j);
+            printf("[thread %u] Erro nao existe lugar de partida da flecha\n", i);
     }
+    else
+        printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n", i);
     return NULL;
 }
 
