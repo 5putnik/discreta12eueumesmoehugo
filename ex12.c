@@ -250,18 +250,26 @@ void *transicao(void *arg)
     unsigned i = n->pos,
              j,
              q;
-    flecha *t = r -> lt;
     if(r == NULL)
     {
         printf("ERRO: passando nada pra transicao!!\n");
         return ;
     }
-
+    
+    flecha *t = r -> lt;
+    flecha *tp = r -> tl; 
     flecha *x = NULL;
-    lugar *tp = r -> l;
+    flecha *xx = NULL;
+    lugar *tpp = r -> l;
     lugar *y = NULL;
     
-    unsigned xde, xtk, yqtd, c;
+    unsigned xde,
+             xtk,
+             xxpara,
+             xxtk,
+             yqtd, 
+             c,
+             cc;
     
     /* Codigo paralelo 1 */
     /* Varrendo Flechas L->T */
@@ -269,7 +277,7 @@ void *transicao(void *arg)
     {
         if(t->para == i)
         {
-            y = buscarLugarPos(tp, t->de);
+            y = buscarLugarPos(tpp, t->de);
             q = 0;
             if(y != NULL)
                 q = y->qtd;
@@ -288,13 +296,14 @@ void *transicao(void *arg)
     /* Codido paralelo 2 */
     x = buscarFlechaPara(t, i);
     c = 0;
+    cc = 0;
     while(x != NULL)
     {
         c = 1;
         xtk = x -> tk;
         xde = x -> de;
         if(DEBUG) printf("[thread %u] Precisa remover %d tokens do lugar %d\n", i, xtk, xde);
-        y = buscarLugarPos(tp, xde);
+        y = buscarLugarPos(tpp, xde);
         if(y != NULL)
         {
             yqtd = y -> qtd;
@@ -303,6 +312,17 @@ void *transicao(void *arg)
                 if(DEBUG) printf("Transicao %u disparou\n", i);
                 /* Devido a condicao de corrida a qtd pode ficar negativa */
                 y -> qtd = (y -> qtd) - xtk;
+
+                /*Inicio deposito de token no lugar de saida */
+                xx = buscarFlechaDe(tp, i)
+                while(xx != NULL)
+                {
+                    cc = 1;
+                    xxtk = xx -> tk;
+                    xxpara = xx -> para;
+                    if(DEBUG) printf("[thread %u] Precisa adicionar %d tokens no lugar %d\n", i, xxtk, xxpara);
+                }
+                if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n", i);
 
             }
             else
@@ -313,8 +333,10 @@ void *transicao(void *arg)
         t = t -> prox;
         x = buscarFlechaPara(t, i);
     }
-    if(DEBUG && c == 1) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n", i);
+
+    if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n", i);
     /* FIM Codigo paralelo 2 */
+  
     return ;
 }
 
