@@ -308,12 +308,11 @@ void *transicao(void *arg)
     petri_t *r = n->net;
     unsigned i = n->pos,
              j;
-
+    printf("[transicao, thread %u] Me passou a variavel net de endereco %p\n", i, r);
     flecha *t = r -> lt;
     flecha *x = NULL;
     int xde, xtk;
 
-    printf("[transicao, thread %u] Me passou a variavel net de endereco %p\n", i, r);
     for(j=0;j<5;j++)
     {
         
@@ -322,10 +321,10 @@ void *transicao(void *arg)
         {
             xtk = x -> tk;
             xde = x -> de;
-            printf("Precisa remover %d tokens do lugar %d", xtk, xde);
+            printf("Precisa remover %d tokens do lugar %d\n", xtk, xde);
         }
         else
-            printf("Erro transicao fantasma, nenhum lugar aponta para ela");
+            printf("Erro: transicao fantasma, nenhum lugar aponta para ela\n");
 
 
         printf("[transicao, thread %u] Rodei %u vezes.\n", i, j);
