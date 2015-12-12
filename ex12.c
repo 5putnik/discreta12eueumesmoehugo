@@ -58,11 +58,15 @@
 #include "listao.h"
 
 #ifndef ITER
-#define ITER 5 /**< Total de iteracoes */
+    #define ITER 5 /**< Total de iteracoes */
 #endif
 
 #ifndef DEBUG
-#define DEBUG 1 /**< Ativa modo de debug */
+    #define DEBUG 1 /**< Ativa modo de debug */
+#endif
+
+#ifndef GIF
+    #define GIF 0 /**< Ativa modo GIF (Ainda nao implementado) */
 #endif
 
 #define M_LIN printf("-------------------------------------------------------\n")
@@ -253,7 +257,7 @@ void *transicao(void *arg)
         printf("ERRO: passando nada pra transicao!!\n");
         return NULL;
     }
-    
+
     flecha *t = r -> lt;
     flecha *tp = r -> tl; 
     flecha *x = NULL;
@@ -272,7 +276,7 @@ void *transicao(void *arg)
              dd,
              c,
              cc;
-    
+
     /* Codido paralelo 2 */
     x = buscarFlechaPara(t, i);
     c = 0;
@@ -297,7 +301,7 @@ void *transicao(void *arg)
             }
             else
                 if(DEBUG) printf("[thread %u] Lugar com tokens insuficientes\n", i);
-   
+
             y = y -> prox; 
             tpp = tpp -> prox; 
             y = buscarLugarPos(tpp, xde);
@@ -306,14 +310,14 @@ void *transicao(void *arg)
         x = buscarFlechaPara(t, i);
     }
     printf("Passei daqui 4\n");
-    
+
     if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n", i);
-    
+
     if(d == dd && d && dd)
     {
         if(DEBUG) printf("Transicao %u disparou\n", i);
         /* Devido a condicao de corrida a qtd pode ficar negativa */
-        
+
         /* Enquanto houver elementos em Y subtrair os tokens da qtd */
         while(y != NULL) 
         {
@@ -330,7 +334,7 @@ void *transicao(void *arg)
             xxpara = xx -> para;
             if(DEBUG) printf("[thread %u] Precisa adicionar %d tokens no lugar %d\n", i, xxtk, xxpara);
             yy = buscarLugarPos(tppp, xxpara);
-                
+
             if(yy != NULL)
             {
                 /*Achou o lugar que deve despejar os tokens */
@@ -342,11 +346,11 @@ void *transicao(void *arg)
             tp = tp -> prox;
             xx = buscarFlechaDe(tp, i);
         }
-            
+
         if(DEBUG && !cc) printf("[thread %u] Erro: transicao fantasma, nenhum lugar e' apontado por ela\n", i);
     }
     /* FIM Codigo paralelo 2 */
-  
+
     return NULL;
 }
 
@@ -369,13 +373,29 @@ void desenha_rede(petri_t *rede, const char *fname)
     float ang;
     unsigned i, q;
     lugar *a_l = rede->l;
+    BITMAP *buff;
+    PALETTE pal;
     /*flecha *a_tl = rede->tl;
-    flecha *a_lt = rede->lt;*/
+      flecha *a_lt = rede->lt;*/
+    /* Inicializacao Allegro */
+    if(install_allegro(SYSTEM_NONE, &errno, atexit)!=0)
+        exit(EXIT_FAILURE);
+    set_color_depth(16);
+    get_palette(pal);
+    buff = create_bitmap(800,600);
+    if(buff == NULL)
+    {
+        printf("Could not create buffer!\n");
+        exit(EXIT_FAILURE);
+    }
+    /* Desenho propriamente dito */
+
     if(rede->total_l > rede->total_t)
         ang = M_PI/rede->total_l;
     else
         ang = M_PI/rede->total_t;
-    if(DEBUG) printf("Desenhando %u lugares e %u transicoes espacados entre si %.2fº...\nNome do arquivo: %s.bmp\n", rede->total_l, rede->total_t, ang*180.0/M_PI, fname);
+    if(DEBUG) printf("Desenhando %u lugares e %u transicoes espacados entre si %.2fº...\n", rede->total_l, rede->total_t, ang*180.0/M_PI);
+
     for(i=0;i<rede->total_l;i++)
     {
         a_l = buscarLugarPos(rede->l, i);
@@ -386,5 +406,10 @@ void desenha_rede(petri_t *rede, const char *fname)
     }
     for(i=0;i<rede->total_t;i++)
         if(DEBUG) printf("T%u (posicionado %.2fº)\n", i, ang*(2*i+1)*180.0/M_PI);
+    /* Salvando Imagem */
+    save_bitmap(IMAGENAME, buff, pal);
+    destroy_bitmap(buff);
+    allegro_exit();
+    if(!GIF) printf("Imagem %s salva com sucesso!\n", fname);
     return;
 }
