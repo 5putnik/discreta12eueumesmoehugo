@@ -269,7 +269,9 @@ void *transicao(void *arg)
              xtk,
              xxpara,
              xxtk;
-             yqtd, 
+             yqtd,
+             d,
+             dd;
              c,
              cc;
     
@@ -299,6 +301,8 @@ void *transicao(void *arg)
     x = buscarFlechaPara(t, i);
     c = 0;
     cc = 0;
+    d = 0;
+    dd = 0;
     while(x != NULL)
     {
         c = 1;
@@ -308,41 +312,50 @@ void *transicao(void *arg)
         y = buscarLugarPos(tpp, xde);
         if(y != NULL)
         {
+            d++;
             yqtd = y -> qtd;
             if(xtk <= yqtd)
             {
-                if(DEBUG) printf("Transicao %u disparou\n", i);
-                /* Devido a condicao de corrida a qtd pode ficar negativa */
-                y -> qtd = (y -> qtd) - xtk;
-
-                /*Inicio deposito de token no lugar de saida */
-                xx = buscarFlechaDe(tp, i)
-                while(xx != NULL)
-                {
-                    cc = 1;
-                    xxtk = xx -> tk;
-                    xxpara = xx -> para;
-                    if(DEBUG) printf("[thread %u] Precisa adicionar %d tokens no lugar %d\n", i, xxtk, xxpara);
-                    yy = buscarLugarPos(tppp, xxpara);
-                    
-                    if(yy != NULL)
-                    {
-                        /* Achou o lugar que deve despejar os tokens */
-                        yy -> qtd = (yy -> qtd) + xxtk;
-                    }
-                    else
-                        if(DEBUG) printf("[thread %u] Erro: nao existe lugar de chegada da flecha\n", i);
-                }
-                if(DEBUG && !cc) printf("[thread %u] Erro: transicao fantasma, nenhum lugar e' apontado por ela para ela\n", i);
-
+                if(DEBUG) printf("[thread %u] Lugar com tokens suficientes\n", i);
+                dd++;
             }
             else
                 if(DEBUG) printf("[thread %u] Lugar com tokens insuficientes\n", i);
         }
         else
             if(DEBUG) printf("[thread %u] Erro: nao existe lugar de partida da flecha\n", i);
+
         t = t -> prox;
         x = buscarFlechaPara(t, i);
+    }
+    
+    if(d == dd && d && dd)
+    {
+        if(DEBUG) printf("Transicao %u disparou\n", i);
+        /* Devido a condicao de corrida a qtd pode ficar negativa */
+            
+        y -> qtd = (y -> qtd) - xtk;
+
+        /*Inicio deposito de token no lugar de saida */
+        xx = buscarFlechaDe(tp, i)
+        while(xx != NULL)
+        {
+            cc = 1;
+            xxtk = xx -> tk;
+            xxpara = xx -> para;
+            if(DEBUG) printf("[thread %u] Precisa adicionar %d tokens no lugar %d\n", i, xxtk, xxpara);
+            yy = buscarLugarPos(tppp, xxpara);
+                
+            if(yy != NULL)
+            {
+                /*Achou o lugar que deve despejar os tokens */
+                yy -> qtd = (yy -> qtd) + xxtk;
+            }
+            else
+                if(DEBUG) printf("[thread %u] Erro: nao existe lugar de chegada da flecha\n", i);
+        }
+            
+        if(DEBUG && !cc) printf("[thread %u] Erro: transicao fantasma, nenhum lugar e' apontado por ela\n", i);
     }
 
     if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n", i);
