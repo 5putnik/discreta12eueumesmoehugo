@@ -248,12 +248,11 @@ void *transicao(void *arg)
     dados *n = (dados *)(arg);
     petri_t *r = n->net;
     unsigned i = n->pos,
-             j,
              q;
     if(r == NULL)
     {
         printf("ERRO: passando nada pra transicao!!\n");
-        return ;
+        return NULL;
     }
     
     flecha *t = r -> lt;
@@ -268,10 +267,10 @@ void *transicao(void *arg)
     unsigned xde,
              xtk,
              xxpara,
-             xxtk;
+             xxtk,
              yqtd,
              d,
-             dd;
+             dd,
              c,
              cc;
     
@@ -326,8 +325,6 @@ void *transicao(void *arg)
             tpp = tpp -> prox; 
             y = buscarLugarPos(tpp, xde);
         }
-        else
-            if(DEBUG) printf("[thread %u] Erro: nao existe lugar de partida da flecha\n", i);
         t = t -> prox;
         x = buscarFlechaPara(t, i);
     }
@@ -347,7 +344,7 @@ void *transicao(void *arg)
         }
 
         /*Inicio deposito de token no lugar de saida */
-        xx = buscarFlechaDe(tp, i)
+        xx = buscarFlechaDe(tp, i);
         while(xx != NULL)
         {
             cc = 1;
@@ -372,7 +369,7 @@ void *transicao(void *arg)
     }
     /* FIM Codigo paralelo 2 */
   
-    return ;
+    return NULL;
 }
 
 /**
