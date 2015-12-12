@@ -176,7 +176,7 @@ int main(void)
     if(DEBUG) imprimirLugar(rede->l);
     if(DEBUG) imprimirFlechaTL(rede->tl);
     if(DEBUG) imprimirFlechaLT(rede->lt);
-    desenha_rede(rede, "inicio");
+    desenha_rede(rede, "inicio.bmp");
     printf("======= INICIO DA SIMULACAO =======\n");
     k = 0;
     do
@@ -214,7 +214,7 @@ int main(void)
             break;
         }
     }while(it_escape);
-    desenha_rede(rede, "fim");
+    desenha_rede(rede, "fim.bmp");
     /* Este trecho sera retirado quanto a simulacao estiver pronta */
     printf("Under construction. WE APOLOGISE FOR THE INCONVENIENCE\n");
     return 0;
