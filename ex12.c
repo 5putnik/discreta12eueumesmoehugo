@@ -338,8 +338,13 @@ void *transicao(void *arg)
     {
         if(DEBUG) printf("Transicao %u disparou\n", i);
         /* Devido a condicao de corrida a qtd pode ficar negativa */
-            
-        y -> qtd = (y -> qtd) - xtk;
+        
+        /* Enquanto houver elementos em Y subtrair os tokens da qtd */
+        while(y != NULL) 
+        {
+            y -> qtd = (y -> qtd) - xtk;
+            y = y -> prox;
+        }
 
         /*Inicio deposito de token no lugar de saida */
         xx = buscarFlechaDe(tp, i)
@@ -354,10 +359,13 @@ void *transicao(void *arg)
             if(yy != NULL)
             {
                 /*Achou o lugar que deve despejar os tokens */
-                yy -> qtd = (yy -> qtd) + xxtk;
+                yy -> qtd = (yy -> qtd) + xxtk;        
             }
             else
                 if(DEBUG) printf("[thread %u] Erro: nao existe lugar de chegada da flecha\n", i);
+
+            tp = tp -> prox;
+            xx = buscarFlechaDe(tp, i);
         }
             
         if(DEBUG && !cc) printf("[thread %u] Erro: transicao fantasma, nenhum lugar e' apontado por ela\n", i);
