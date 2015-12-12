@@ -229,7 +229,18 @@ void inserirThread(l_thread **cabeca, pthread_t p)
         *cabeca = pl;
 }
 
-void imprimirFlecha(flecha *cabeca)
+void imprimirFlechaLT(flecha *cabeca)
+{
+    flecha *p = cabeca;
+    while(p != NULL)
+    {
+        printf("L%u ---(%u)---> T%u\n",p->de, p->tk, p->para);
+        p = (p->prox);
+    }
+    return;
+}
+
+void imprimirFlechaTL(flecha *cabeca)
 {
     flecha *p = cabeca;
     while(p != NULL)

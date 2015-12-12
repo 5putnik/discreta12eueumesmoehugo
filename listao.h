@@ -51,6 +51,7 @@ flecha *buscarFlechaTk(flecha *cabeca, unsigned x);
 flecha *anteriorFlecha(flecha *cabeca, flecha *r);
 void inserirFlecha(flecha **cabeca, unsigned xde, unsigned xpara, unsigned xtk);
 void removerFlecha(flecha **cabeca, flecha *r);
-void imprimirFlecha(flecha *cabeca);
+void imprimirFlechaLT(flecha *cabeca);
+void imprimirFlechaTL(flecha *cabeca);
 void inserirThread(l_thread **cabeca, pthread_t p);
 void imprimirThread(l_thread *cabeca);

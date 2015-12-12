@@ -170,8 +170,8 @@ int main(void)
         return -1;
     }
     if(DEBUG) imprimirLugar(rede->l);
-    if(DEBUG) imprimirFlecha(rede->tl);
-    if(DEBUG) imprimirFlecha(rede->lt);
+    if(DEBUG) imprimirFlechaTL(rede->tl);
+    if(DEBUG) imprimirFlechaLT(rede->lt);
     desenha_rede(rede, "inicio");
     printf("======= INICIO DA SIMULACAO =======\n");
     k = 0;
