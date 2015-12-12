@@ -310,7 +310,7 @@ void *transicao(void *arg)
         xde = x -> de;
         if(DEBUG) printf("[thread %u] Precisa remover %d tokens do lugar %d\n", i, xtk, xde);
         y = buscarLugarPos(tpp, xde);
-        if(y != NULL)
+        while(y != NULL)
         {
             d++;
             yqtd = y -> qtd;
@@ -321,13 +321,18 @@ void *transicao(void *arg)
             }
             else
                 if(DEBUG) printf("[thread %u] Lugar com tokens insuficientes\n", i);
+   
+            y = y -> prox; 
+            tpp = tpp -> prox; 
+            y = buscarLugarPos(tpp, xde);
         }
         else
             if(DEBUG) printf("[thread %u] Erro: nao existe lugar de partida da flecha\n", i);
-
         t = t -> prox;
         x = buscarFlechaPara(t, i);
     }
+    
+    if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n", i);
     
     if(d == dd && d && dd)
     {
@@ -357,8 +362,6 @@ void *transicao(void *arg)
             
         if(DEBUG && !cc) printf("[thread %u] Erro: transicao fantasma, nenhum lugar e' apontado por ela\n", i);
     }
-
-    if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n", i);
     /* FIM Codigo paralelo 2 */
   
     return ;
