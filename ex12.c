@@ -247,8 +247,7 @@ void *transicao(void *arg)
 {
     dados *n = (dados *)(arg);
     petri_t *r = n->net;
-    unsigned i = n->pos,
-             q;
+    unsigned i = n->pos;
     if(r == NULL)
     {
         printf("ERRO: passando nada pra transicao!!\n");
@@ -274,28 +273,6 @@ void *transicao(void *arg)
              c,
              cc;
     
-    /* Codigo paralelo 1 */
-    /* Varrendo Flechas L->T */
-    while(t != NULL)
-    {
-        if(t->para == i)
-        {
-            y = buscarLugarPos(tpp, t->de);
-            q = 0;
-            if(y != NULL)
-                q = y->qtd;
-            if(q >= t->tk)
-            {
-                printf("[thread %u] L%u(%u) esta apto a transferir %u tokens a T%u\n", i, t->de, y->qtd, t->tk, i);
-
-            }
-            else
-                printf("[thread %u] L%u(%u) nao pode transferir %u tokens a T%u\n", i, t->de, y->qtd, t->tk, i);
-        }
-        t = t->prox;
-    }
-    /* FIM Codigo paralelo 1 */
-
     /* Codido paralelo 2 */
     x = buscarFlechaPara(t, i);
     c = 0;
@@ -328,6 +305,7 @@ void *transicao(void *arg)
         t = t -> prox;
         x = buscarFlechaPara(t, i);
     }
+    printf("Passei daqui 4\n");
     
     if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n", i);
     
