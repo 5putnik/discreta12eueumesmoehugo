@@ -58,11 +58,11 @@
 #include "listao.h"
 
 #ifndef ITER
-    #define ITER 5 /**< Total de iteracoes */
+    #define ITER 1000 /**< Total de iteracoes */
 #endif
 
 #ifndef DEBUG
-    #define DEBUG 1 /**< Ativa modo de debug */
+    #define DEBUG 0 /**< Ativa modo de debug */
 #endif
 
 #ifndef GIF
@@ -250,8 +250,8 @@ int main(void)
 void *transicao(void *arg)
 {
     dados *n = (dados *)(arg);
-    petri_t *r = n->net;
     unsigned i = n->pos;
+    petri_t *r = n->net;
     if(r == NULL)
     {
         printf("ERRO: passando nada pra transicao!!\n");
@@ -309,7 +309,6 @@ void *transicao(void *arg)
         t = t -> prox;
         x = buscarFlechaPara(t, i);
     }
-    printf("Passei daqui 4\n");
 
     if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n", i);
 
@@ -407,7 +406,7 @@ void desenha_rede(petri_t *rede, const char *fname)
     for(i=0;i<rede->total_t;i++)
         if(DEBUG) printf("T%u (posicionado %.2fº)\n", i, ang*(2*i+1)*180.0/M_PI);
     /* Salvando Imagem */
-    save_bitmap(IMAGENAME, buff, pal);
+    save_bitmap(fname, buff, pal);
     destroy_bitmap(buff);
     allegro_exit();
     if(!GIF) printf("Imagem %s salva com sucesso!\n", fname);
