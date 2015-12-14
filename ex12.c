@@ -76,11 +76,16 @@ void desenha_rede(petri_t *rede, const char *fname);
 
 unsigned it_escape;                             /* Flag condicional da iteracao */
 
+
+/* petri_t *net; */
 typedef struct passa_dados_st
 {
-    petri_t *net;
     unsigned pos;
 }dados;
+
+/* Rede de petri propriamente dita */
+
+petri_t *rede;// = malloc(sizeof(petri_t));
 
 int main(void)
 {
@@ -93,7 +98,7 @@ int main(void)
              lctk,                              /* Variavel temporaria de insercao */
              alt,                               /* Total de arcos lugar -> transicao */
              atl;                               /* Total de arcos transicao -> lugar */
-    petri_t *rede = malloc(sizeof(petri_t));    /* Rede de petri propriamente dita */
+    
     dados *d = malloc(sizeof(dados));
     l_thread *lthr = NULL;
     pthread_t temp_thr;
@@ -101,7 +106,7 @@ int main(void)
     rede -> tl = NULL;
     rede -> lt = NULL;
     /* Parametros a serem passados para a funcao de transicao */
-
+    rede = malloc(sizeof(petri_t));
     srand(time(NULL));
     /* Escaneando a quantidade de lugares */
     scanf("%u",&ql);
@@ -195,7 +200,7 @@ int main(void)
     {
         k++;
         it_escape = 0;
-        d->net = rede;
+        /* d->net = rede; */
         M_LIN;
         for(i=0;i<qt;i++)
         {
@@ -263,7 +268,8 @@ void *transicao(void *arg)
 {
     dados *n = (dados *)(arg);
     unsigned i = n->pos;
-    petri_t *r = n->net;
+    /* petri_t *r = n->net; */
+    petri_t *r = rede;
     if(r == NULL)
     {
         printf("ERRO: passando nada pra transicao!!\n");
