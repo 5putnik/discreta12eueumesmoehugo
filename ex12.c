@@ -109,6 +109,18 @@ int main(void)
     /* Escaneando a quantidade de transicoes */
     scanf("%u",&qt); 
     rede->total_t = qt;
+
+    /*********** EasterEgg v1.0 BirthDay version **************/ 
+    /*********** Only programmers will now, it needs recompilate with the MACRO ***************/
+#ifdef EASTEREGGV1
+    printf("14/12/2015 The first day of the Petri Simulator, tagged v1.0 one day ago at 22:00 PM\n");
+    printf("It is also the day of the birthday of the co-developer Otacilio Neto\n");
+    printf("So congratulations to both!!!\n");
+    printf("\"Twenty years from now you will be more disappointed by the things that you didnt do than by the ones you did do. So throw off the bowlines. Sail away from the safe harbor. Catch the trade winds in your sails\"\n");
+    printf("Explore! Dream! Discover!\n");
+#endif
+    /********** End EasterEgg v1.0 ******************/ 
+
     if(DEBUG) printf("Quantidade de lugares: %u\n",ql);
     /*if(ql>VMAX)
       {
