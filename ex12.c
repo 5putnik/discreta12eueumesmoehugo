@@ -300,7 +300,8 @@ void *transicao(void *arg)
         xde = x -> de;
         if(DEBUG) printf("[thread %u] Precisa remover %d tokens do lugar %d\n", i, xtk, xde);
         y = buscarLugarPos(tpp, xde);
-        while(y != NULL)
+        
+        if(y != NULL)
         {
             d++;
             yqtd = y -> qtd;
@@ -311,11 +312,10 @@ void *transicao(void *arg)
             }
             else
                 if(DEBUG) printf("[thread %u] Lugar com tokens insuficientes\n", i);
-
-            y = y -> prox; 
-            tpp = tpp -> prox; 
-            y = buscarLugarPos(tpp, xde);
         }
+        else
+            if(DEBUG) printf("[thread %u]Erro: lugar inexistente\n", i);
+        
         t = t -> prox;
         x = buscarFlechaPara(t, i);
     }
