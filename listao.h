@@ -36,6 +36,13 @@ typedef struct thread_st
     struct thread_st *prox;
 }l_thread;
 
+/* Lista de posicoes a serem passadas */
+typedef struct passa_dados_st
+{
+    unsigned pos;
+    struct passa_dados_st *prox;
+}dados;
+
 lugar *buscarLugarQtd(lugar *cabeca, unsigned x);
 lugar *buscarLugarPos(lugar *cabeca, unsigned x);
 lugar *anteriorLugar(lugar *cabeca, lugar *r);
@@ -55,3 +62,6 @@ void imprimirFlechaLT(flecha *cabeca);
 void imprimirFlechaTL(flecha *cabeca);
 void inserirThread(l_thread **cabeca, pthread_t p);
 void imprimirThread(l_thread *cabeca);
+
+void inserirDados(dados **cabeca, unsigned x);
+void limparDados(dados **cabeca);

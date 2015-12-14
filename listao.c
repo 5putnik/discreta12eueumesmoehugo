@@ -272,3 +272,39 @@ void imprimirLugar(lugar *cabeca)
     }
     return;
 }
+
+void inserirDados(dados **cabeca, unsigned x)
+{
+    dados *pl = *cabeca;
+    dados *plant = NULL;
+    
+    while(pl != NULL)
+    {
+        plant = pl;
+        pl = pl -> prox;
+    }
+    
+    pl = malloc(sizeof(dados));
+    pl -> qtd = x;
+    pl -> prox = NULL;
+    
+    if(plant != NULL)
+        plant -> prox = pl;
+    else
+        *cabeca = pl;
+}
+
+void limparLugar(lugar **cabeca)
+{
+    dados *pl = *cabeca;
+    dados *plant = NULL;
+
+    while(pl != NULL)
+    {
+        plant = pl;
+        pl = pl -> prox;
+        free(plant);
+    }
+
+    return;
+}

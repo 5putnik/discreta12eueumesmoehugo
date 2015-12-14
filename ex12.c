@@ -58,11 +58,11 @@
 #include "listao.h"
 
 #ifndef ITER
-    #define ITER 1000 /**< Total de iteracoes */
+    #define ITER 5 /**< Total de iteracoes */
 #endif
 
 #ifndef DEBUG
-    #define DEBUG 0 /**< Ativa modo de debug */
+    #define DEBUG 1 /**< Ativa modo de debug */
 #endif
 
 #ifndef GIF
@@ -77,15 +77,8 @@ void desenha_rede(petri_t *rede, const char *fname);
 unsigned it_escape;                             /* Flag condicional da iteracao */
 
 
-/* petri_t *net; */
-typedef struct passa_dados_st
-{
-    unsigned pos;
-}dados;
-
 /* Rede de petri propriamente dita */
-
-petri_t *rede;// = malloc(sizeof(petri_t));
+petri_t *rede;
 
 int main(void)
 {
@@ -98,7 +91,7 @@ int main(void)
              lctk,                              /* Variavel temporaria de insercao */
              alt,                               /* Total de arcos lugar -> transicao */
              atl;                               /* Total de arcos transicao -> lugar */
-    
+    rede = malloc(sizeof(petri_t));
     dados *d = malloc(sizeof(dados));
     l_thread *lthr = NULL;
     pthread_t temp_thr;
@@ -106,7 +99,6 @@ int main(void)
     rede -> tl = NULL;
     rede -> lt = NULL;
     /* Parametros a serem passados para a funcao de transicao */
-    rede = malloc(sizeof(petri_t));
     srand(time(NULL));
     /* Escaneando a quantidade de lugares */
     scanf("%u",&ql);
