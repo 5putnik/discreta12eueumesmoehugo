@@ -45,6 +45,8 @@ typedef struct passa_dados_st
 
 lugar *buscarLugarQtd(lugar *cabeca, unsigned x);
 lugar *buscarLugarPos(lugar *cabeca, unsigned x);
+lugar *buscarLugarQtdProx(lugar *cabeca, unsigned x);
+lugar *buscarLugarPosProx(lugar *cabeca, unsigned x);
 lugar *anteriorLugar(lugar *cabeca, lugar *r);
 void inserirLugar(lugar **cabeca, unsigned i, unsigned x);
 void removerLugar(lugar **cabeca, lugar *r);
@@ -55,6 +57,9 @@ flecha *buscarFlechaOr(flecha *cabeca, unsigned xde, unsigned xpara, unsigned xt
 flecha *buscarFlechaDe(flecha *cabeca, unsigned x);
 flecha *buscarFlechaPara(flecha *cabeca, unsigned x);
 flecha *buscarFlechaTk(flecha *cabeca, unsigned x);
+flecha *buscarFlechaDeProx(flecha *cabeca, unsigned x);
+flecha *buscarFlechaParaProx(flecha *cabeca, unsigned x);
+flecha *buscarFlechaTkProx(flecha *cabeca, unsigned x);
 flecha *anteriorFlecha(flecha *cabeca, flecha *r);
 void inserirFlecha(flecha **cabeca, unsigned xde, unsigned xpara, unsigned xtk);
 void removerFlecha(flecha **cabeca, flecha *r);
