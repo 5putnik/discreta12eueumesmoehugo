@@ -29,21 +29,19 @@
  *    Phone: 55 (081) 9292-0944                                             *
  *                                                                          *
  *    Otacilio Saraiva Maia Neto <otacilio.n97@gmail.com>                   *
- *    Phone: 55 (819) 9959-7078                                             *                       
- *                                                                          *
- *                                                                          *       
+ *    Phone: 55 (819) 9959-7078                                             *
+ *                                                                          *                                                                          
  ************************************************************************** *
- *                                                
+ *
  */
-
 
 /**
  * \file ex12.c
  * \brief programa que simula rede de petri. 
  * \author Hugo Albuquerque de Fonsêca <<hugoalbuquerque0@gmail.com>>
  * \author Otacilio Saraiva Maia Neto <<otacilio.n97@gmail.com>>
- * \version 0.2
- * \date 2015-12-02
+ * \version 1.0
+ * \date 2015-12-14
  */
 /**
  * \
@@ -211,7 +209,6 @@ int main(void)
                 exit(1);
             }
             inserirThread(&lthr, temp_thr);
-            if(DEBUG) imprimirLugar(rede->l);
         }
         while(lthr != NULL)
         {
@@ -223,6 +220,7 @@ int main(void)
             }
             lthr = lthr->prox;
         }
+        if(DEBUG) imprimirLugar(rede->l);
         M_LIN;
         if(k>ITER)
         {
@@ -332,6 +330,7 @@ void *transicao(void *arg)
     if(d == dd && d && dd)
     {
         if(DEBUG) printf("Transicao %u disparou\n", i);
+        it_escape = 1;
         /* Devido a condicao de corrida a qtd pode ficar negativa */
 
         /* Enquanto houver elementos em Y subtrair os tokens da qtd */
@@ -350,14 +349,14 @@ void *transicao(void *arg)
             xxpara = xx -> para;
             if(DEBUG>1) printf("[thread %u] Precisa adicionar %d tokens no lugar %d\n", i, xxtk, xxpara);
             yy = buscarLugarPos(tppp, xxpara);
-
             if(yy != NULL)
             {
                 /*Achou o lugar que deve despejar os tokens */
-                yy -> qtd = (yy -> qtd) + xxtk;        
+                /* yy->qtd += xxtk; */
+                yy -> qtd = (yy -> qtd) + xxtk;
             }
             else
-                if(DEBUG>1) printf("[thread %u] Erro: nao existe lugar de chegada da flecha\n", i);
+                if(DEBUG) printf("[thread %u] Erro: nao existe lugar de chegada da flecha\n", i);
 
             tp = tp -> prox;
             xx = buscarFlechaDe(tp, i);
