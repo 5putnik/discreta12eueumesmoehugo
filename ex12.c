@@ -58,7 +58,7 @@
 #include "listao.h"
 
 #ifndef ITER
-    #define ITER 5 /**< Total de iteracoes */
+    #define ITER 1000 /**< Total de iteracoes */
 #endif
 
 #ifndef DEBUG
@@ -108,7 +108,6 @@ int main(void)
     /* Escaneando a quantidade de transicoes */
     scanf("%u",&qt); 
     rede->total_t = qt;
-
     /*********** EasterEgg v1.0 BirthDay version **************/ 
     /*********** Only programmers will now, it needs recompilate with the MACRO ***************/
 #ifdef EASTEREGGV1
@@ -148,6 +147,11 @@ int main(void)
             return -1;
         }
         inserirLugar(&(rede->l), i, j);
+    }
+    for(k=0;k<rede->total_l;k++)
+    {
+        if(buscarLugarPos((rede->l), k) == NULL)
+            inserirLugar(&(rede->l), k, 0);
     }
     if(rede->l == NULL)
     {
@@ -220,7 +224,6 @@ int main(void)
             lthr = lthr->prox;
         }
         M_LIN;
-        it_escape = 1;
         if(k>ITER)
         {
             printf("Atencao! Apos %u iteracoes, a rede de petri nao estabilizou! Finalizando a simulacao. \nPara aumentar a quantidade maxima de iteracoes, verifique o manual de utilizacao do programa.\n",ITER);
@@ -302,7 +305,7 @@ void *transicao(void *arg)
         c = 1;
         xtk = x -> tk;
         xde = x -> de;
-        if(DEBUG) printf("[thread %u] Precisa remover %d tokens do lugar %d\n", i, xtk, xde);
+        if(DEBUG>1) printf("[thread %u] Precisa remover %d tokens do lugar %d\n", i, xtk, xde);
         y = buscarLugarPos(tpp, xde);
         
         if(y != NULL)
@@ -311,14 +314,14 @@ void *transicao(void *arg)
             yqtd = y -> qtd;
             if(xtk <= yqtd)
             {
-                if(DEBUG) printf("[thread %u] Lugar com tokens suficientes\n", i);
+                if(DEBUG>1) printf("[thread %u] Lugar com tokens suficientes\n", i);
                 dd++;
             }
             else
-                if(DEBUG) printf("[thread %u] Lugar com tokens insuficientes\n", i);
+                if(DEBUG>1) printf("[thread %u] Lugar com tokens insuficientes\n", i);
         }
         else
-            if(DEBUG) printf("[thread %u]Erro: lugar inexistente\n", i);
+            if(DEBUG>1) printf("[thread %u]Erro: lugar inexistente\n", i);
         
         t = t -> prox;
         x = buscarFlechaPara(t, i);
@@ -345,7 +348,7 @@ void *transicao(void *arg)
             cc = 1;
             xxtk = xx -> tk;
             xxpara = xx -> para;
-            if(DEBUG) printf("[thread %u] Precisa adicionar %d tokens no lugar %d\n", i, xxtk, xxpara);
+            if(DEBUG>1) printf("[thread %u] Precisa adicionar %d tokens no lugar %d\n", i, xxtk, xxpara);
             yy = buscarLugarPos(tppp, xxpara);
 
             if(yy != NULL)
@@ -354,7 +357,7 @@ void *transicao(void *arg)
                 yy -> qtd = (yy -> qtd) + xxtk;        
             }
             else
-                if(DEBUG) printf("[thread %u] Erro: nao existe lugar de chegada da flecha\n", i);
+                if(DEBUG>1) printf("[thread %u] Erro: nao existe lugar de chegada da flecha\n", i);
 
             tp = tp -> prox;
             xx = buscarFlechaDe(tp, i);
