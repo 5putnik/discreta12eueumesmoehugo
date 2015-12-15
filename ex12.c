@@ -273,24 +273,109 @@ void *transicao(void *arg)
         return NULL;
     }
 
-    flecha *t = r -> lt;
-    flecha *tp = r -> tl; 
-    flecha *x = NULL;
-    flecha *xx = NULL;
-    lugar *tpp = r -> l;
-    lugar *tppp = r -> l;
-    lugar *y = NULL;
-    lugar *yy = NULL;
+    flecha *tlt = r -> lt; // Cabeca da lista LugarTransicao
+    flecha *ttl = r -> tl; // Cabeca da lista TransicaoLugar
+    lugar *tp = r -> l; // Cabeca da lista Lugar
+    flecha *x = NULL; // Flecha atual
+    lugar *y = NULL; // Lugar atual
 
     unsigned xde,
              xtk,
-             xxpara,
-             xxtk,
+             xpara,
              yqtd,
              d,
              dd,
-             c,
-             cc;
+             c;
+
+    /********************** Codigo reestruturado ****************/
+    
+    c = 0; // Para saber se entrou pelo menos 1x no loop
+    d = dd = 0; // Inicia os contadores de lugares existentes e lugares disponivels para tirar em 0
+    x = buscarFlechaPara(tlt, i); // Procura uma flecha 'lt' que aponte para a transicao atual 'i'
+
+    /********************* CHECKS DA TRANSICAO **************************/
+    while(x != NULL) // Enquanto houverem flechas 
+    {
+        c = 1; // Marca que entrou no loop
+        xtk = x -> tk; // armazena a qtd de tokens que a flecha pede
+        xde = x -> de; // armazena o lugar de origem dessa flecha 
+   
+        if(DEBUG>1) printf("[thread %u] Precisa remover %d tokens do lugar %d\n", i, xtk, xde);
+        y = buscarLugarPos(tp, xde); // Procura o lugar em que a flecha parte
+
+        if(y != NULL) // Se o lugar de origem da flecha existir
+        {
+            d++; // Marca que encontrou mais uma flecha 
+            yqtd = y -> qtd; // Armazena a qntd de tokens desponivels no local
+            
+            if(xtk <= yqtd) // Se a qntd de tokens que a flecha pede for disponiveis no local
+            {
+                dd++; // Marca que o local ta disponivel
+                if(DEBUG>1) printf("[thread %u] Lugar com tokens suficientes\n", i);
+            }
+            else
+                if(DEBUG>1) printf("[thread %u] Lugar com tokens insuficientes\n", i);
+        }
+        else 
+            if(DEBUG>1) printf("[thread %u]Erro: lugar inexistente\n", i);
+
+        x = buscarFlechaParaProx(x, i); // Procura uma nova flecha
+    }
+
+    if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n", i); //Um else pro while
+    c = 0; // Reseta a variavel de controle
+    
+    /**************************** ACOES DA TRANSICAO ***********************/
+    if(d == dd && d && dd) // Se a transicao estiver apta a disparar 
+    {
+        if(DEBUG) printf("Transicao %u disparou\n", i);
+        it_escape = 1;
+        x = buscarFlechaPara(tlt, i); // Busca novamente as flechas que apontam para a transicao
+        
+        while(x != NULL) // Repetindo a pesquisa de flechas
+        {
+            c = 1;
+            xtk = x -> tk;
+            xde = x -> de;
+     
+            y = buscarLugarPos(tp, xde);
+            if(y != NULL)
+            {
+                y -> qtd = (y -> qtd) - xtk; // Subtrai os tokens, condicao de corrida pode bugar essa parte deixando negativo
+            }
+            else
+                if(DEBUG>1) printf("[thread %u]Erro: lugar inexistente na 2 pesquisa\n", i);
+
+            x = buscarFlechaParaProx(x, i); // procura uma nova flecha
+        }
+
+        if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela 2 pesq\n", i);
+        c = 0; // Reseta a variavel de controle
+    
+        /* Inicio da busca das flechas tl */
+        x = buscarFlechaDe(ttl, i); // Busca uma flecha que parta da transicao
+
+        while(x != NULL)
+        {
+            c = 1;
+            xtk = x -> tk; // Armazena a qntd de tokens que deverao ser depositados indicados pela flecha
+            xpara = x -> para; // Armazena em que lugar deve depositar o token
+
+            y = buscarLugarPos(tp, xpara);
+
+            if(y != NULL)
+            {
+                y -> qtd = (y -> qtd) + xtk; // adiciona os tokens ao lugar de saida
+            }
+            else 
+                if(DEBUG) printf("[thread %u] Erro: nao existe lugar de chegada da flecha\n", i);
+
+            x = buscarFlechaDeProx(x, i); // Busca uma nova flecha
+        }
+        if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar e' apontado por ela\n", i);
+    }
+
+    /***********************************************************/
 
     /* Codido paralelo 2 */
     x = buscarFlechaPara(t, i);
