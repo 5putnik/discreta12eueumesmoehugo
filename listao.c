@@ -24,6 +24,34 @@ lugar *buscarLugarPos(lugar *cabeca, unsigned x)
     return NULL;
 }
 
+lugar *buscarLugarQtdProx(lugar *cabeca, unsigned x)
+{
+    lugar *pl = cabeca;
+    pl = pl -> prox;
+
+    while(pl != NULL)
+    {
+        if(pl -> qtd == x)
+            return pl;
+        pl = pl -> prox;
+    }
+    return NULL;
+}
+
+lugar *buscarLugarPosProx(lugar *cabeca, unsigned x)
+{
+    lugar *pl = cabeca;
+    pl = pl -> prox;
+
+    while(pl != NULL)
+    {
+        if(pl -> pos == x)
+            return pl;
+        pl = pl -> prox;
+    }
+    return NULL;
+}
+
 lugar *anteriorLugar(lugar *cabeca, lugar *r)
 {
     lugar *pl=cabeca, *plant=NULL;    
@@ -136,6 +164,48 @@ flecha *buscarFlechaPara(flecha *cabeca, unsigned x)
 flecha *buscarFlechaTk(flecha *cabeca, unsigned x)
 {
     flecha *pl = cabeca;
+    while(pl != NULL)
+    {
+        if(pl -> tk == x)
+            return pl;
+        pl = pl -> prox;
+    }
+    return NULL;
+}
+
+flecha *buscarFlechaDeProx(flecha *cabeca, unsigned x)
+{
+    flecha *pl = cabeca;
+    pl = pl -> prox; 
+
+    while(pl != NULL)
+    {
+        if(pl -> de == x)
+            return pl;
+        pl = pl -> prox;
+    }
+    return NULL;
+}
+
+flecha *buscarFlechaParaProx(flecha *cabeca, unsigned x)
+{
+    flecha *pl = cabeca;
+    pl = pl -> prox;
+
+    while(pl != NULL)
+    {
+        if(pl -> para == x)
+            return pl;
+        pl = pl -> prox;
+    }
+    return NULL;
+}
+
+flecha *buscarFlechaTkProx(flecha *cabeca, unsigned x)
+{
+    flecha *pl = cabeca;
+    pl = pl -> prox;
+
     while(pl != NULL)
     {
         if(pl -> tk == x)
