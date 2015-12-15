@@ -285,7 +285,7 @@ void inserirDados(dados **cabeca, unsigned x)
     }
     
     pl = malloc(sizeof(dados));
-    pl -> qtd = x;
+    pl -> pos = x;
     pl -> prox = NULL;
     
     if(plant != NULL)
@@ -294,7 +294,7 @@ void inserirDados(dados **cabeca, unsigned x)
         *cabeca = pl;
 }
 
-void limparLugar(lugar **cabeca)
+void limparLugar(dados **cabeca)
 {
     dados *pl = *cabeca;
     dados *plant = NULL;
