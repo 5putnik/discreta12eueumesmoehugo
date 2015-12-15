@@ -292,9 +292,10 @@ void inserirDados(dados **cabeca, unsigned x)
         plant -> prox = pl;
     else
         *cabeca = pl;
+    return;
 }
 
-void limparLugar(dados **cabeca)
+void limparDados(dados **cabeca)
 {
     dados *pl = *cabeca;
     dados *plant = NULL;

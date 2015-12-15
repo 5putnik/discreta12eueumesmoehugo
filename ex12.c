@@ -69,7 +69,7 @@
     #define GIF 0 /**< Ativa modo GIF (Ainda nao implementado) */
 #endif
 
-#define M_LIN printf("-------------------------------------------------------\n")
+#define M_LIN if(DEBUG) printf("-------------------------------------------------------\n")
 
 void *transicao(void *arg);
 void desenha_rede(petri_t *rede, const char *fname);
@@ -82,6 +82,7 @@ petri_t *rede;
 
 int main(void)
 {
+    rede = malloc(sizeof(petri_t));
     unsigned t = time(NULL);                    /* Temporizador da simulacao */
     unsigned qt,                                /* Quantidade de transicoes */
              ql;                                /* Quantidade de lugares */
@@ -91,15 +92,16 @@ int main(void)
              lctk,                              /* Variavel temporaria de insercao */
              alt,                               /* Total de arcos lugar -> transicao */
              atl;                               /* Total de arcos transicao -> lugar */
-    rede = malloc(sizeof(petri_t));
-    dados *d = malloc(sizeof(dados));
-    l_thread *lthr = NULL;
-    pthread_t temp_thr;
+    dados *d = malloc(sizeof(dados)),           /* Lista de transicoes */
+          *pd = d;                              /* Ponteiro auxiliar da lista de transicoes */
+    l_thread *lthr = NULL;                      /* Lista de threads */
+    pthread_t temp_thr;                         /* Variavel auxiliar da lista de threads */
+
     rede -> l = NULL;
     rede -> tl = NULL;
     rede -> lt = NULL;
-    /* Parametros a serem passados para a funcao de transicao */
     srand(time(NULL));
+
     /* Escaneando a quantidade de lugares */
     scanf("%u",&ql);
     rede->total_l = ql;
@@ -196,14 +198,16 @@ int main(void)
         M_LIN;
         for(i=0;i<qt;i++)
         {
-            printf("Passando %u\n",i);
-            d->pos = i;
-            if(pthread_create(&temp_thr, NULL, transicao, (void *)d))
+            inserirDados(&d, i);
+            if(pd->prox != NULL)
+                pd = pd->prox;
+            if(pthread_create(&temp_thr, NULL, transicao, (void *)pd))
             {
                 printf("Erro criando thread %u!\n",i);
                 exit(1);
             }
             inserirThread(&lthr, temp_thr);
+            if(DEBUG) imprimirLugar(rede->l);
         }
         while(lthr != NULL)
         {
