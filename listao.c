@@ -379,3 +379,28 @@ void limparDados(dados **cabeca)
 
     return;
 }
+
+float arctan(float x1, float y1, float x2, float y2)
+{
+    float dx = x2-x1,
+          dy = y2-y1;
+    if(dx == 0.0)
+    {
+        if(dy == 0.0)
+            return 9.0;
+        else
+            if(dy > 0.0)
+                return (M_PI/2.0);
+            return (-M_PI/2.0);
+    }
+    if((dy == 0.0) && (dx < 0.0))
+        return M_PI;
+    float a = atan(fabs(dy)/fabs(dx));
+    if((dx < 0.0) && (dy > 0.0)) // QUAD = 2
+        return a + M_PI/2.0;
+    if((dx < 0.0) && (dy < 0.0)) // QUAD = 3
+        return a - M_PI;
+    if((dx > 0.0) && (dy < 0.0)) // QUAD = 4
+        return a - M_PI/2.0;
+    return a; // QUAD = 1
+}

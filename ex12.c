@@ -409,13 +409,14 @@ void *transicao(void *arg)
  */
 void desenha_rede(petri_t *rede, const char *fname)
 {
-    float ang,
-          r_lugar,
-          smaller,
-          x,
-          y,
-          x1,
-          y1;
+    float ang,      /* Angulacao antre cada elemento na imagem */
+          r_lugar,  /* Raio da circunferencia que representa o lugar */
+          smaller,  /* A menor das dimensoes da imagem */
+          x,        /* Variavel geral para representar coordenada X */
+          y,        /* Variavel geral para representar coordenada Y */
+          x1,       /* Variavel geral para representar coordenada X */
+          y1,       /* Variavel geral para representar coordenada Y */
+          g;        /* Variavel geral para representar angulo */
     unsigned i, q;
     lugar *a_l = rede->l;
     BITMAP *buff;
@@ -479,6 +480,9 @@ void desenha_rede(petri_t *rede, const char *fname)
         i = a_tl->para;
         x = IMG_X/2.0 + (IMG_X/2.0 - r_lugar)*cos(2*i*ang);
         y = IMG_Y/2.0 + (IMG_Y/2.0 - r_lugar)*sin(2*i*ang);
+        g = arctan(x1,y1,x,y);
+        x -= r_lugar*cos(g);
+        y -= r_lugar*sin(g);
         line(buff, x1, y1, x, y, CORBRANCO);
         a_tl = a_tl->prox;
     }
@@ -490,6 +494,9 @@ void desenha_rede(petri_t *rede, const char *fname)
         i = a_lt->para;
         x = IMG_X/2.0 + 0.9*(IMG_X/2.0 - r_lugar)*cos((2*i+1)*ang);
         y = IMG_Y/2.0 + 0.9*(IMG_Y/2.0 - r_lugar)*sin((2*i+1)*ang);
+        g = arctan(x1,y1,x,y);
+        x1 += r_lugar*cos(g);
+        y1 += r_lugar*sin(g);
         line(buff, x1, y1, x, y, CORBRANCO);
         a_lt = a_lt->prox;
     }

@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <pthread.h>
+#include <math.h>
 
 /* Tipo que descreve as caracteristicas da Flecha */
 typedef struct flecha_st
@@ -70,3 +71,5 @@ void imprimirThread(l_thread *cabeca);
 
 void inserirDados(dados **cabeca, unsigned x);
 void limparDados(dados **cabeca);
+
+float arctan(float x1, float y1, float x2, float y2);
