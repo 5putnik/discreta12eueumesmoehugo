@@ -39,4 +39,3 @@ Isso gera uma Rede de Petri com o seguinte formato:
 
 
 ![Exemplo](http://puu.sh/lXHnM/464b42214f.png "Exemplo - Rede de Petri")
-(Imagem temporaria!)
