@@ -58,8 +58,9 @@
 #define A 1
 #define B 2
 #define C 3
+#define D 4
 
-#define DEBUG C
+#define DEBUG D
 
 #ifndef ITER
     #define ITER 1000 /**< Total de iteracoes */
@@ -81,7 +82,7 @@
     #define IMG_Y 600
 #endif
 
-#define M_LIN if(DEBUG) printf("-------------------------------------------------------\n")
+#define M_LIN if(DEBUG == A || DEBUG == D) printf("-------------------------------------------------------\n")
 #define CORBRANCO (makecol(255,255,255))
 #define CORPRETO 1
 #define CORCINZA (makecol(160,160,160))
@@ -138,13 +139,13 @@ int main(void)
 #endif
     /********** End EasterEgg v1.0 ******************/ 
 
-    if(DEBUG) printf("Quantidade de lugares: %u\n",ql);
+    if(DEBUG == A || DEBUG == D) printf("Quantidade de lugares: %u\n",ql);
     /*if(ql>VMAX)
       {
       printf("Erro linha 1: quantidade de lugares acima do maximo. \n");
       return -1;
       }*/
-    if(DEBUG) printf("Quantidade de transicoes: %u\n",qt);
+    if(DEBUG == A || DEBUG == D) printf("Quantidade de transicoes: %u\n",qt);
     /*if(qt>VMAX)
       {
       printf("Erro linha 2: quantidade de transicoes acima do maximo. \n");
@@ -207,9 +208,9 @@ int main(void)
         printf("Erro: flecha transicao->lugar nao pode ser lido no documento de texto.\n");
         return -1;
     }
-    if(DEBUG) imprimirLugar(rede->l);
-    if(DEBUG) imprimirFlechaTL(rede->tl);
-    if(DEBUG) imprimirFlechaLT(rede->lt);
+    if(DEBUG == A || DEBUG == D) imprimirLugar(rede->l);
+    if(DEBUG == A || DEBUG == D) imprimirFlechaTL(rede->tl);
+    if(DEBUG == A || DEBUG == D) imprimirFlechaLT(rede->lt);
     desenha_rede(rede, "inicio.bmp");
     printf("======= INICIO DA SIMULACAO =======\n");
     k = 0;
@@ -241,7 +242,7 @@ int main(void)
             }
             lthr = lthr->prox;
         }
-        if(DEBUG) imprimirLugar(rede->l);
+        if(DEBUG == A || DEBUG == D) imprimirLugar(rede->l);
         M_LIN;
         if(k>ITER)
         {
@@ -317,7 +318,7 @@ void *transicao(void *arg)
         xtk = x -> tk; // armazena a qtd de tokens que a flecha pede
         xde = x -> de; // armazena o lugar de origem dessa flecha 
    
-        if(DEBUG>1) printf("[thread %u] Precisa remover %d tokens do lugar %d\n", i, xtk, xde);
+        if(DEBUG == B || DEBUG == D) printf("[thread %u] Precisa remover %d tokens do lugar %d\n", i, xtk, xde);
         y = buscarLugarPos(tp, xde); // Procura o lugar em que a flecha parte
 
         if(y != NULL) // Se o lugar de origem da flecha existir
@@ -328,24 +329,24 @@ void *transicao(void *arg)
             if(xtk <= yqtd) // Se a qntd de tokens que a flecha pede for disponiveis no local
             {
                 dd++; // Marca que o local ta disponivel
-                if(DEBUG>1) printf("[thread %u] Lugar com tokens suficientes\n", i);
+                if(DEBUG == B || DEBUG == D) printf("[thread %u] Lugar com tokens suficientes\n", i);
             }
             else
-                if(DEBUG>1) printf("[thread %u] Lugar com tokens insuficientes\n", i);
+                if(DEBUG == B || DEBUG == D) printf("[thread %u] Lugar com tokens insuficientes\n", i);
         }
         else 
-            if(DEBUG>1) printf("[thread %u]Erro: lugar inexistente\n", i);
+            if(DEBUG == C || DEBUG == D) printf("[thread %u]Erro: lugar inexistente\n", i);
 
         x = buscarFlechaParaProx(x, i); // Procura uma nova flecha
     }
 
-    if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n", i); //Um else pro while
+    if((DEBUG == C || DEBUG == D) && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n", i); //Um else pro while
     c = 0; // Reseta a variavel de controle
     
     /**************************** ACOES DA TRANSICAO ***********************/
     if(d == dd && d && dd) // Se a transicao estiver apta a disparar 
     {
-        if(DEBUG) printf("Transicao %u disparou\n", i);
+        if(DEBUG == B || DEBUG == D) printf("Transicao %u disparou\n", i);
         it_escape = 1;
         x = buscarFlechaPara(tlt, i); // Busca novamente as flechas que apontam para a transicao
         
@@ -361,12 +362,12 @@ void *transicao(void *arg)
                 y -> qtd = (y -> qtd) - xtk; // Subtrai os tokens, condicao de corrida pode bugar essa parte deixando negativo
             }
             else
-                if(DEBUG>1) printf("[thread %u]Erro: lugar inexistente na 2 pesquisa\n", i);
+                if(DEBUG == C || DEBUG == D) printf("[thread %u]Erro: lugar inexistente na 2 pesquisa\n", i);
 
             x = buscarFlechaParaProx(x, i); // procura uma nova flecha
         }
 
-        if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela 2 pesq\n", i);
+        if(DEBUG == C || DEBUG == D) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela 2 pesq\n", i);
         c = 0; // Reseta a variavel de controle
     
         /* Inicio da busca das flechas tl */
@@ -385,11 +386,11 @@ void *transicao(void *arg)
                 y -> qtd = (y -> qtd) + xtk; // adiciona os tokens ao lugar de saida
             }
             else 
-                if(DEBUG) printf("[thread %u] Erro: nao existe lugar de chegada da flecha\n", i);
+                if(DEBUG == C || DEBUG == D) printf("[thread %u] Erro: nao existe lugar de chegada da flecha\n", i);
 
             x = buscarFlechaDeProx(x, i); // Busca uma nova flecha
         }
-        if(DEBUG && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar e' apontado por ela\n", i);
+        if((DEBUG == C || DEBUG == D) && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar e' apontado por ela\n", i);
     }
 
     return NULL;
@@ -452,7 +453,7 @@ void desenha_rede(petri_t *rede, const char *fname)
         ang = M_PI/rede->total_l;
     else
         ang = M_PI/rede->total_t;
-    if(DEBUG) printf("Desenhando %u lugares e %u transicoes espacados entre si %.2fº...\n", rede->total_l, rede->total_t, ang*180.0/M_PI);
+    if(DEBUG == B || DEBUG == D) printf("Desenhando %u lugares e %u transicoes espacados entre si %.2fº...\n", rede->total_l, rede->total_t, ang*180.0/M_PI);
 
     /* Desenhando os lugares  */
     for(i=0;i<rede->total_l;i++)
@@ -465,7 +466,7 @@ void desenha_rede(petri_t *rede, const char *fname)
         y = IMG_Y/2.0 + (IMG_Y/2.0 - r_lugar)*sin(2*i*ang);
         circle(buff, x, y, r_lugar, CORBRANCO);
         textprintf_ex(buff, font, x, y, CORVERDE, CORPRETO, "%u", q);
-        if(DEBUG) printf("L%u(%u) (posicionada %.2fº)\n", i, q, ang*(2*i)*180.0/M_PI);
+        if(DEBUG == B || DEBUG == D) printf("L%u(%u) (posicionada %.2fº)\n", i, q, ang*(2*i)*180.0/M_PI);
         textprintf_ex(buff, font, x, y - r_lugar, CORVERDE, CORPRETO, "L%u", i);
     }
 
@@ -475,7 +476,7 @@ void desenha_rede(petri_t *rede, const char *fname)
         x = IMG_X/2.0 + (IMG_X/2.0 - r_lugar)*cos((2*i+1)*ang);
         y = IMG_Y/2.0 + (IMG_Y/2.0 - r_lugar)*sin((2*i+1)*ang);
         line(buff, x, y+r_lugar, x, y-r_lugar, CORBRANCO);
-        if(DEBUG) printf("T%u (posicionado %.2fº)\n", i, ang*(2*i+1)*180.0/M_PI);
+        if(DEBUG == B || DEBUG == D) printf("T%u (posicionado %.2fº)\n", i, ang*(2*i+1)*180.0/M_PI);
         textprintf_ex(buff, font, x, y - r_lugar, CORVERDE, CORPRETO, "T%u", i);
     }
 
