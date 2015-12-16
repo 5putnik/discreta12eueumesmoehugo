@@ -37,5 +37,8 @@ Exemplo de input:
 ```
 Isso gera uma Rede de Petri com o seguinte formato:
 
+Inicio da simulacao:
+![Exemplo](http://puu.sh/lXP18/8eb140cc09.png "Exemplo - Rede de Petri")
 
+Fim da simulacao:
 ![Exemplo](http://puu.sh/lXOLq/b90e25f895.png "Exemplo - Rede de Petri")
