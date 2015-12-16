@@ -38,5 +38,5 @@ Exemplo de input:
 Isso gera uma Rede de Petri com o seguinte formato:
 
 
-![Exemplo](http://puu.sh/lKHeK/0e3d3a6e48.png "Exemplo - Rede de Petri")
+![Exemplo](http://puu.sh/lXHh1/c48b531c08.bmp "Exemplo - Rede de Petri")
 (Imagem temporaria!)
