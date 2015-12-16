@@ -68,6 +68,13 @@
 #endif
 
 #define M_LIN if(DEBUG) printf("-------------------------------------------------------\n")
+#define CORBRANCO (makecol(255,255,255))
+#define CORPRETO 1
+#define CORCINZA (makecol(160,160,160))
+#define CORAZUL (makecol(0, 0, 255))
+#define CORVERDE (makecol(0, 255, 0))
+#define CORAMARELO (makecol(255,255,100))
+#define CORVERMELHO (makecol(255, 0, 0))
 
 void *transicao(void *arg);
 void desenha_rede(petri_t *rede, const char *fname);
@@ -394,7 +401,9 @@ void *transicao(void *arg)
  */
 void desenha_rede(petri_t *rede, const char *fname)
 {
-    float ang;
+    float ang,
+          r_lugar,
+          r_total;
     unsigned i, q;
     lugar *a_l = rede->l;
     BITMAP *buff;
@@ -407,6 +416,8 @@ void desenha_rede(petri_t *rede, const char *fname)
     set_color_depth(16);
     get_palette(pal);
     buff = create_bitmap(800,600);
+    r_lugar = 300.0*(M_PI/(M_PI+(float)rede->total_l));
+    r_total = 600.0 - 2*r_lugar;
     if(buff == NULL)
     {
         printf("Could not create buffer!\n");
@@ -426,6 +437,7 @@ void desenha_rede(petri_t *rede, const char *fname)
         q = 0;
         if(a_l != NULL)
             q = a_l->qtd;
+        circle(buff, r_total*cos(2*i*ang), r_total*sin(2*i*ang), r_lugar, CORBRANCO);
         if(DEBUG) printf("L%u(%u) (posicionada %.2fº)\n", i, q, ang*(2*i)*180.0/M_PI);
     }
     for(i=0;i<rede->total_t;i++)

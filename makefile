@@ -12,18 +12,22 @@
 #        :make
 #    - Aspipo program (ex1.c)
 #        :make obj=libaspipo-ux64.o
+# Define DEBUG:
+#   $ make ex1.x DBG=1
+#   -B force update
 
 .PHONY: clean
 .PRECIOUS: %.o
 SHELL=/bin/bash -o pipefail
 
+DBG ?= 0
 MAJOR = 0
 MINOR = 1
 BUILD = $(shell date +"%g%m%d.%H%M%S")
 DEFSYM = $(subst .,_,$(BUILD))
 VERSION = "\"$(MAJOR).$(MINOR).$(BUILD)\""
 CC = gcc
-CFLAGS = "listao.c" -Wall -Wextra -g -O0 -std=gnu99
+CFLAGS = "listao.c" -Wall -Wextra -g -O0
 #-pedantic-errors
 #-ansi
 CPPFLAGS = -DVERSION=$(VERSION) -DBUILD="\"$(BUILD)\""
@@ -31,6 +35,9 @@ LDLIBS = -Wl,--defsym,BUILD_$(DEFSYM)=0 -lpthread -lm -lgmp `allegro-config --cf
 
 %.x : %.c $(obj)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDLIBS) $^ -o $@ 2>&1 | tee errors.err
+
+%.bfx : %.bf
+	    bf $^ -o $@ -i on -p both -r on -w on
 
 clean:
 	rm -f *.x errors.err
