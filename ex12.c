@@ -55,6 +55,12 @@
 #include <math.h>
 #include "listao.h"
 
+#define A 1
+#define B 2
+#define C 3
+
+#define DEBUG C
+
 #ifndef ITER
     #define ITER 1000 /**< Total de iteracoes */
 #endif
