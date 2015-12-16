@@ -487,7 +487,7 @@ void desenha_rede(petri_t *rede, const char *fname)
         x -= r_lugar*co;
         y -= r_lugar*si;
         line(buff, x1, y1, x, y, CORBRANCO);
-        textprintf_ex(buff, font, (x+x1)/2, (y+y1)/2, CORVERDE, CORPRETO, "%u", a_tl->qtd);
+        textprintf_ex(buff, font, (x+x1)/2, (y+y1)/2, CORVERDE, CORPRETO, "%u", a_tl->tk);
         x2 = x - (r_lugar / 4) * (si + co);
         y2 = y + (r_lugar / 4) * (co - si);
         x3 = x + (r_lugar / 4) * (si - co);
@@ -508,7 +508,7 @@ void desenha_rede(petri_t *rede, const char *fname)
         x1 += r_lugar*co;
         y1 += r_lugar*si;
         line(buff, x1, y1, x, y, CORBRANCO);
-        textprintf_ex(buff, font, (x+x1)/2, (y+y1)/2, CORVERDE, CORPRETO, "%u", a_tl->qtd);
+        textprintf_ex(buff, font, (x+x1)/2, (y+y1)/2, CORVERDE, CORPRETO, "%u", a_lt->tk);
         x2 = x - (r_lugar / 4) * (si + co);
         y2 = y + (r_lugar / 4) * (co - si);
         x3 = x + (r_lugar / 4) * (si - co);
