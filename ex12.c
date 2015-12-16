@@ -416,7 +416,13 @@ void desenha_rede(petri_t *rede, const char *fname)
           y,        /* Variavel geral para representar coordenada Y */
           x1,       /* Variavel geral para representar coordenada X */
           y1,       /* Variavel geral para representar coordenada Y */
-          g;        /* Variavel geral para representar angulo */
+          x2,       /* Variavel geral para representar coordenada X */
+          y2,       /* Variavel geral para representar coordenada Y */
+          x3,       /* Variavel geral para representar coordenada X */
+          y3,       /* Variavel geral para representar coordenada Y */
+          co,       /* Variavel geral para representar cosseno */
+          si;       /* Variavel geral para representar seno */
+
     unsigned i, q;
     lugar *a_l = rede->l;
     BITMAP *buff;
@@ -480,9 +486,16 @@ void desenha_rede(petri_t *rede, const char *fname)
         i = a_tl->para;
         x = IMG_X/2.0 + (IMG_X/2.0 - r_lugar)*cos(2*i*ang);
         y = IMG_Y/2.0 + (IMG_Y/2.0 - r_lugar)*sin(2*i*ang);
-        x -= r_lugar*lcos(x1,y1,x,y);
-        y -= r_lugar*lsin(x1,y1,x,y);
+        co = lcos(x1,y1,x,y);
+        si = lsin(x1,y1,x,y);
+        x -= r_lugar*co;
+        y -= r_lugar*si;
         line(buff, x1, y1, x, y, CORBRANCO);
+        x2 = x - (r_lugar / 4) * (si + co);
+        y2 = y + (r_lugar / 4) * (co - si);
+        x3 = x + (r_lugar / 4) * (si - co);
+        y3 = y - (r_lugar / 4) * (si + co);
+        triangle(buff, x, y, x2, y2, x3, y3, CORBRANCO);
         a_tl = a_tl->prox;
     }
     while(a_lt != NULL)
@@ -491,12 +504,18 @@ void desenha_rede(petri_t *rede, const char *fname)
         x1 = IMG_X/2.0 + (IMG_X/2.0 - r_lugar)*cos(2*i*ang);
         y1 = IMG_Y/2.0 + (IMG_Y/2.0 - r_lugar)*sin(2*i*ang);
         i = a_lt->para;
-        x = IMG_X/2.0 + 0.9*(IMG_X/2.0 - r_lugar)*cos((2*i+1)*ang);
-        y = IMG_Y/2.0 + 0.9*(IMG_Y/2.0 - r_lugar)*sin((2*i+1)*ang);
-        g = arctan(x1,y1,x,y);
-        x1 += r_lugar*lcos(x1,y1,x,y);
-        y1 += r_lugar*lsin(x1,y1,x,y);
+        x = IMG_X/2.0 + (IMG_X/2.0 - r_lugar)*cos((2*i+1)*ang);
+        y = IMG_Y/2.0 + (IMG_Y/2.0 - r_lugar)*sin((2*i+1)*ang);
+        co = lcos(x1,y1,x,y);
+        si = lsin(x1,y1,x,y);
+        x1 += r_lugar*co;
+        y1 += r_lugar*si;
         line(buff, x1, y1, x, y, CORBRANCO);
+        x2 = x - (r_lugar / 4) * (si + co);
+        y2 = y + (r_lugar / 4) * (co - si);
+        x3 = x + (r_lugar / 4) * (si - co);
+        y3 = y - (r_lugar / 4) * (si + co);
+        triangle(buff, x, y, x2, y2, x3, y3, CORBRANCO);
         a_lt = a_lt->prox;
     }
     /* Salvando Imagem */
