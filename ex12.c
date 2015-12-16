@@ -244,22 +244,18 @@ int main(void)
         }
     }while(it_escape);
     desenha_rede(rede, "fim.bmp");
-    /* Este trecho sera retirado quanto a simulacao estiver pronta */
-    printf("Under construction. WE APOLOGISE FOR THE INCONVENIENCE\n");
-    return 0;
-    /* Fim do trecho temporario */
     printf("======= FIM DA SIMULACAO ==========\n");
     t = time(NULL) - t;
     printf("Tempo de reprodução do programa: %u segundo(s).\n",t);
     if(k==0)
         printf("Aviso: nenhuma transicao foi disparada! \n");
-    printf("Numero de iteracoes: %u.\n",k);
+    if(k<ITER)
+        printf("Numero de iteracoes necessarias pra convergir: %u.\n",k);
     printf("Lugares com token: \n");
     /* Imprimir "LX = Y" se Y > 0 */
 
     printf("Transicoes disparadas: \n");
     /* Imprimir "TX: Y vezes" se Y > 0 */
-
 
     return EXIT_SUCCESS;
 }
