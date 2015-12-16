@@ -60,11 +60,19 @@
 #endif
 
 #ifndef DEBUG
-    #define DEBUG 1 /**< Ativa modo de debug */
+    #define DEBUG 0 /**< Ativa modo de debug */
 #endif
 
 #ifndef GIF
     #define GIF 0 /**< Ativa modo GIF (Ainda nao implementado) */
+#endif
+
+#ifndef IMG_X
+    #define IMG_X 800
+#endif
+
+#ifndef IMG_Y
+    #define IMG_Y 600
 #endif
 
 #define M_LIN if(DEBUG) printf("-------------------------------------------------------\n")
@@ -403,7 +411,9 @@ void desenha_rede(petri_t *rede, const char *fname)
 {
     float ang,
           r_lugar,
-          r_total;
+          smaller,
+          x,
+          y;
     unsigned i, q;
     lugar *a_l = rede->l;
     BITMAP *buff;
@@ -415,9 +425,11 @@ void desenha_rede(petri_t *rede, const char *fname)
         exit(EXIT_FAILURE);
     set_color_depth(16);
     get_palette(pal);
-    buff = create_bitmap(800,600);
-    r_lugar = 300.0*(M_PI/(M_PI+(float)rede->total_l));
-    r_total = 600.0 - 2*r_lugar;
+    buff = create_bitmap(IMG_X,IMG_Y);
+    smaller = (float)IMG_X;
+    if(smaller > (float)IMG_Y)
+        smaller = (float)IMG_Y;
+    r_lugar = smaller/4.0*(M_PI/(M_PI+(float)rede->total_l));
     if(buff == NULL)
     {
         printf("Could not create buffer!\n");
@@ -437,11 +449,21 @@ void desenha_rede(petri_t *rede, const char *fname)
         q = 0;
         if(a_l != NULL)
             q = a_l->qtd;
-        circle(buff, r_total*cos(2*i*ang), r_total*sin(2*i*ang), r_lugar, CORBRANCO);
+        x = IMG_X/2.0 + (IMG_X/2.0 - r_lugar)*cos(2*i*ang);
+        y = IMG_Y/2.0 + (IMG_Y/2.0 - r_lugar)*sin(2*i*ang);
+        circle(buff, x, y, r_lugar, CORBRANCO);
+        textprintf_ex(buff, font, x, y, CORVERDE, CORPRETO, "%u", q);
         if(DEBUG) printf("L%u(%u) (posicionada %.2fº)\n", i, q, ang*(2*i)*180.0/M_PI);
+        textprintf_ex(buff, font, x, y - r_lugar, CORVERDE, CORPRETO, "L%u", i);
     }
     for(i=0;i<rede->total_t;i++)
+    {
+        x = IMG_X/2.0 + 0.9*(IMG_X/2.0 - r_lugar)*cos((2*i+1)*ang);
+        y = IMG_Y/2.0 + 0.9*(IMG_Y/2.0 - r_lugar)*sin((2*i+1)*ang);
+        line(buff, x, y+r_lugar, x, y-r_lugar, CORBRANCO);
         if(DEBUG) printf("T%u (posicionado %.2fº)\n", i, ang*(2*i+1)*180.0/M_PI);
+        textprintf_ex(buff, font, x, y - r_lugar, CORVERDE, CORPRETO, "T%u", i);
+    }
     /* Salvando Imagem */
     save_bitmap(fname, buff, pal);
     destroy_bitmap(buff);
