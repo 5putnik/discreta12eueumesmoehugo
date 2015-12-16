@@ -404,3 +404,17 @@ float arctan(float x1, float y1, float x2, float y2)
         return a - M_PI/2.0;
     return a; // QUAD = 1
 }
+
+float lcos(float x1, float y1, float x2, float y2)
+{
+    if(x1==0 && x2 == 0 && y1 == 0 && y2 == 0)
+        return ~0;
+    return ((x2-x1)/sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)));
+}
+
+float lsin(float x1, float y1, float x2, float y2)
+{
+    if(x1==0 && x2 == 0 && y1 == 0 && y2 == 0)
+        return ~0;
+    return ((y2-y1)/sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)));
+}

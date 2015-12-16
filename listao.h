@@ -73,3 +73,5 @@ void inserirDados(dados **cabeca, unsigned x);
 void limparDados(dados **cabeca);
 
 float arctan(float x1, float y1, float x2, float y2);
+float lcos(float x1, float y1, float x2, float y2);
+float lsin(float x1, float y1, float x2, float y2);

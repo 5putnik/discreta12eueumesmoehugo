@@ -480,9 +480,8 @@ void desenha_rede(petri_t *rede, const char *fname)
         i = a_tl->para;
         x = IMG_X/2.0 + (IMG_X/2.0 - r_lugar)*cos(2*i*ang);
         y = IMG_Y/2.0 + (IMG_Y/2.0 - r_lugar)*sin(2*i*ang);
-        g = arctan(x1,y1,x,y);
-        x -= r_lugar*cos(g);
-        y -= r_lugar*sin(g);
+        x -= r_lugar*lcos(x1,y1,x,y);
+        y -= r_lugar*lsin(x1,y1,x,y);
         line(buff, x1, y1, x, y, CORBRANCO);
         a_tl = a_tl->prox;
     }
@@ -495,8 +494,8 @@ void desenha_rede(petri_t *rede, const char *fname)
         x = IMG_X/2.0 + 0.9*(IMG_X/2.0 - r_lugar)*cos((2*i+1)*ang);
         y = IMG_Y/2.0 + 0.9*(IMG_Y/2.0 - r_lugar)*sin((2*i+1)*ang);
         g = arctan(x1,y1,x,y);
-        x1 += r_lugar*cos(g);
-        y1 += r_lugar*sin(g);
+        x1 += r_lugar*lcos(x1,y1,x,y);
+        y1 += r_lugar*lsin(x1,y1,x,y);
         line(buff, x1, y1, x, y, CORBRANCO);
         a_lt = a_lt->prox;
     }
