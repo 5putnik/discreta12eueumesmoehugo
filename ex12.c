@@ -413,13 +413,15 @@ void desenha_rede(petri_t *rede, const char *fname)
           r_lugar,
           smaller,
           x,
-          y;
+          y,
+          x1,
+          y1;
     unsigned i, q;
     lugar *a_l = rede->l;
     BITMAP *buff;
     PALETTE pal;
-    /*flecha *a_tl = rede->tl;
-      flecha *a_lt = rede->lt;*/
+    flecha *a_tl = rede->tl,
+           *a_lt = rede->lt;
     /* Inicializacao Allegro */
     if(install_allegro(SYSTEM_NONE, &errno, atexit)!=0)
         exit(EXIT_FAILURE);
@@ -443,6 +445,7 @@ void desenha_rede(petri_t *rede, const char *fname)
         ang = M_PI/rede->total_t;
     if(DEBUG) printf("Desenhando %u lugares e %u transicoes espacados entre si %.2fº...\n", rede->total_l, rede->total_t, ang*180.0/M_PI);
 
+    /* Desenhando os lugares  */
     for(i=0;i<rede->total_l;i++)
     {
         a_l = buscarLugarPos(rede->l, i);
@@ -456,6 +459,8 @@ void desenha_rede(petri_t *rede, const char *fname)
         if(DEBUG) printf("L%u(%u) (posicionada %.2fº)\n", i, q, ang*(2*i)*180.0/M_PI);
         textprintf_ex(buff, font, x, y - r_lugar, CORVERDE, CORPRETO, "L%u", i);
     }
+
+    /* Desenhando as transicoes  */
     for(i=0;i<rede->total_t;i++)
     {
         x = IMG_X/2.0 + 0.9*(IMG_X/2.0 - r_lugar)*cos((2*i+1)*ang);
@@ -463,6 +468,30 @@ void desenha_rede(petri_t *rede, const char *fname)
         line(buff, x, y+r_lugar, x, y-r_lugar, CORBRANCO);
         if(DEBUG) printf("T%u (posicionado %.2fº)\n", i, ang*(2*i+1)*180.0/M_PI);
         textprintf_ex(buff, font, x, y - r_lugar, CORVERDE, CORPRETO, "T%u", i);
+    }
+
+    /* Desenhando as flechas */
+    while(a_tl != NULL)
+    {
+        i = a_tl->de;
+        x1 = IMG_X/2.0 + 0.9*(IMG_X/2.0 - r_lugar)*cos((2*i+1)*ang);
+        y1 = IMG_Y/2.0 + 0.9*(IMG_Y/2.0 - r_lugar)*sin((2*i+1)*ang);
+        i = a_tl->para;
+        x = IMG_X/2.0 + (IMG_X/2.0 - r_lugar)*cos(2*i*ang);
+        y = IMG_Y/2.0 + (IMG_Y/2.0 - r_lugar)*sin(2*i*ang);
+        line(buff, x1, y1, x, y, CORBRANCO);
+        a_tl = a_tl->prox;
+    }
+    while(a_lt != NULL)
+    {
+        i = a_lt->de;
+        x1 = IMG_X/2.0 + (IMG_X/2.0 - r_lugar)*cos(2*i*ang);
+        y1 = IMG_Y/2.0 + (IMG_Y/2.0 - r_lugar)*sin(2*i*ang);
+        i = a_lt->para;
+        x = IMG_X/2.0 + 0.9*(IMG_X/2.0 - r_lugar)*cos((2*i+1)*ang);
+        y = IMG_Y/2.0 + 0.9*(IMG_Y/2.0 - r_lugar)*sin((2*i+1)*ang);
+        line(buff, x1, y1, x, y, CORBRANCO);
+        a_lt = a_lt->prox;
     }
     /* Salvando Imagem */
     save_bitmap(fname, buff, pal);
