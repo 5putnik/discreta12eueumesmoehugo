@@ -333,16 +333,20 @@ void *transicao(void *arg)
 
         if(y != NULL) // Se o lugar de origem da flecha existir
         {
-            d++; // Marca que encontrou mais uma flecha 
-            yqtd = y -> qtd; // Armazena a qntd de tokens desponivels no local
-            
-            if(xtk <= yqtd) // Se a qntd de tokens que a flecha pede for disponiveis no local
+            d++; // Marca que encontrou mais uma flecha
+            if( y -> isBusy == LIVRE)
             {
-                dd++; // Marca que o local ta disponivel
-                if(DEBUG == B || DEBUG == D) printf("[thread %u] Lugar com tokens suficientes\n", i);
+                y -> isBusy = OCUPADO; // Marca que o lugar esta ocupado pela Thread
+                yqtd = y -> qtd; // Armazena a qntd de tokens desponivels no local
+            
+                if(xtk <= yqtd) // Se a qntd de tokens que a flecha pede for disponiveis no local
+                {
+                    dd++; // Marca que o local ta disponivel
+                    if(DEBUG == B || DEBUG == D) printf("[thread %u] Lugar com tokens suficientes\n", i);
+                }
+                else
+                    if(DEBUG == B || DEBUG == D) printf("[thread %u] Lugar com tokens insuficientes\n", i);
             }
-            else
-                if(DEBUG == B || DEBUG == D) printf("[thread %u] Lugar com tokens insuficientes\n", i);
         }
         else 
             if(DEBUG == C || DEBUG == D) printf("[thread %u]Erro: lugar inexistente\n", i);
@@ -371,6 +375,7 @@ void *transicao(void *arg)
             if(y != NULL)
             {
                 y -> qtd = (y -> qtd) - xtk; // Subtrai os tokens, condicao de corrida pode bugar essa parte deixando negativo
+                y -> isBusy = LIVRE;
             }
             else
                 if(DEBUG == C || DEBUG == D) printf("[thread %u]Erro: lugar inexistente na 2 pesquisa\n", i);
