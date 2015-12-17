@@ -17,6 +17,7 @@ typedef struct lugar_st
 {
     unsigned pos;
     unsigned qtd;
+    int isBusy;
     struct lugar_st * prox;
 }lugar;
 
