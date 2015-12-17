@@ -57,7 +57,7 @@ lugar *buscarLugarPos(lugar *cabeca, unsigned x);
 lugar *buscarLugarQtdProx(lugar *cabeca, unsigned x);
 lugar *buscarLugarPosProx(lugar *cabeca, unsigned x);
 lugar *anteriorLugar(lugar *cabeca, lugar *r);
-void inserirLugar(lugar **cabeca, unsigned i, unsigned x);
+void inserirLugar(lugar **cabeca, unsigned i, unsigned x, int b);
 void removerLugar(lugar **cabeca, lugar *r);
 void imprimirLugar(lugar *cabeca);
 

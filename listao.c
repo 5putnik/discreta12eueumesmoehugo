@@ -66,7 +66,7 @@ lugar *anteriorLugar(lugar *cabeca, lugar *r)
     return plant;
 }
 
-void inserirLugar(lugar **cabeca, unsigned i, unsigned x)
+void inserirLugar(lugar **cabeca, unsigned i, unsigned x, int b)
 {
     lugar *pl = *cabeca;
     lugar *plant = NULL;
@@ -80,6 +80,7 @@ void inserirLugar(lugar **cabeca, unsigned i, unsigned x)
     pl = malloc(sizeof(lugar));
     pl -> pos = i;
     pl -> qtd = x;
+    pl -> isBusy = b;
     pl -> prox = NULL;
 
     if(plant != NULL)
