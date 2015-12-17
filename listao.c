@@ -394,7 +394,7 @@ float lsin(float x1, float y1, float x2, float y2)
     return ((y2-y1)/sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)));
 }
 
-void incrementaTrans(conta_trans **cabeca, unsigned pos);
+void incrementaTrans(conta_trans **cabeca, unsigned pos)
 {
     conta_trans *pl = *cabeca;
     conta_trans *plant = NULL;
@@ -402,7 +402,7 @@ void incrementaTrans(conta_trans **cabeca, unsigned pos);
     while(pl != NULL)
     {
         plant = pl;
-        if(pl->pos == x)
+        if(pl->pos == pos)
             break;
         pl = pl->prox;
     }
@@ -411,7 +411,7 @@ void incrementaTrans(conta_trans **cabeca, unsigned pos);
     if(pl == NULL) /* Se contador de transicao nao existe, cria */
     {
         pl = malloc(sizeof(lugar));
-        pl->pos = i;
+        pl->pos = pos;
         pl->x = 1;
         pl->prox = NULL;
 

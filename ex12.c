@@ -60,8 +60,6 @@
 #define C 3
 #define D 4
 
-#define DEBUG D
-
 #ifndef ITER
     #define ITER 1000 /**< Total de iteracoes */
 #endif
@@ -99,9 +97,12 @@ unsigned it_escape;                             /* Flag condicional da iteracao 
 /* Rede de petri propriamente dita */
 petri_t *rede;
 
+conta_trans *contador;
+
 int main(void)
 {
     rede = malloc(sizeof(petri_t));
+    contador = malloc(sizeof(conta_trans));
     unsigned t = time(NULL);                    /* Temporizador da simulacao */
     unsigned qt,                                /* Quantidade de transicoes */
              ql;                                /* Quantidade de lugares */
@@ -212,6 +213,7 @@ int main(void)
     if(DEBUG == A || DEBUG == D) imprimirFlechaLT(rede->lt);
     desenha_rede(rede, "inicio.bmp");
     printf("======= INICIO DA SIMULACAO =======\n");
+    printf("(execucao pode demorar dependendo do tamanho da rede...)\n");
     k = 0;
     do
     {
@@ -249,8 +251,8 @@ int main(void)
             break;
         }
     }while(it_escape);
-    desenha_rede(rede, "fim.bmp");
     printf("======= FIM DA SIMULACAO ==========\n");
+    desenha_rede(rede, "fim.bmp");
     t = time(NULL) - t;
     printf("Tempo de reprodução do programa: %u segundo(s).\n",t);
     if(k==0)
@@ -258,9 +260,16 @@ int main(void)
     if(k<ITER)
         printf("Numero de iteracoes necessarias pra convergir: %u.\n",k);
     printf("Lugares com token: \n");
+    imprimirLugar(rede->l);
     /* Imprimir "LX = Y" se Y > 0 */
 
     printf("Transicoes disparadas: \n");
+    conta_trans *ct = contador;
+    while(ct != NULL)
+    {
+        printf("T%u: %u vezes\n", ct->pos, ct->x);
+        ct = ct->prox;
+    }
     /* Imprimir "TX: Y vezes" se Y > 0 */
 
     return EXIT_SUCCESS;
@@ -348,6 +357,7 @@ void *transicao(void *arg)
         if(DEBUG == B || DEBUG == D) printf("Transicao %u disparou\n", i);
         it_escape = 1;
         x = buscarFlechaPara(tlt, i); // Busca novamente as flechas que apontam para a transicao
+        incrementaTrans(&contador, i);
         
         while(x != NULL) // Repetindo a pesquisa de flechas
         {
