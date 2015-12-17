@@ -59,6 +59,8 @@
 #define B 2
 #define C 3
 #define D 4
+#define LIVRE 0
+#define OCUPADO 1
 
 #ifndef ITER
     #define ITER 1000 /**< Total de iteracoes */
@@ -166,12 +168,12 @@ int main(void)
             printf("Erro linha %u: lugar maior que o definido. \n", 6+k);
             return -1;
         }
-        inserirLugar(&(rede->l), i, j);
+        inserirLugar(&(rede->l), i, j, LIVRE);
     }
     for(k=0;k<rede->total_l;k++)
     {
         if(buscarLugarPos((rede->l), k) == NULL)
-            inserirLugar(&(rede->l), k, 0);
+            inserirLugar(&(rede->l), k, 0, LIVRE);
     }
     if(rede->l == NULL)
     {
