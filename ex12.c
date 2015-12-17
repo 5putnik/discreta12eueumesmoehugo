@@ -96,7 +96,6 @@ void desenha_rede(petri_t *rede, const char *fname);
 
 unsigned it_escape;                             /* Flag condicional da iteracao */
 
-
 /* Rede de petri propriamente dita */
 petri_t *rede;
 

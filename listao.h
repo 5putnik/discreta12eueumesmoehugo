@@ -44,6 +44,13 @@ typedef struct passa_dados_st
     struct passa_dados_st *prox;
 }dados;
 
+typedef struct conta_trans_st
+{
+    unsigned pos,
+             x;
+    struct conta_trans_st *prox;
+}conta_trans;
+
 lugar *buscarLugarQtd(lugar *cabeca, unsigned x);
 lugar *buscarLugarPos(lugar *cabeca, unsigned x);
 lugar *buscarLugarQtdProx(lugar *cabeca, unsigned x);
@@ -74,3 +81,5 @@ void limparDados(dados **cabeca);
 
 float lcos(float x1, float y1, float x2, float y2);
 float lsin(float x1, float y1, float x2, float y2);
+
+void incrementaTrans(conta_trans **cabeca, unsigned pos);
