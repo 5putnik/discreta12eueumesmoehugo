@@ -62,6 +62,7 @@
 #define LIVRE 0
 #define OCUPADO 1
 
+
 #ifndef ITER
     #define ITER 1000 /**< Total de iteracoes */
 #endif
