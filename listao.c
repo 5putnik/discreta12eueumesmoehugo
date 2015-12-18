@@ -340,7 +340,8 @@ void imprimirLugar(lugar *cabeca)
     {
         printf("L%u(%u) ",p->pos, p->qtd);
         if(p->isBusy)
-            printf("(OCUPADO)\n");
+            printf("(OCUPADO)");
+        printf("\n");
         p = (p->prox);
     }
     return;
