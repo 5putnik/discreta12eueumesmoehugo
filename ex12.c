@@ -407,7 +407,8 @@ void *transicao(void *arg)
         }
         if((DEBUG == C || DEBUG == D) && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar e' apontado por ela\n", i);
     }
-
+    
+    y -> isBusy = LIVRE;
     return NULL;
 }
 
