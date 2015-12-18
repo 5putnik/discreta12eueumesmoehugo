@@ -53,7 +53,7 @@ typedef struct conta_trans_st
 }conta_trans;
 
 /**
- * \ingroup Listao
+ * \ingroup Header
  *
  * \brief Busca o primeiro lugar na lista que contenha aquela quantidade de tokens.
  *
@@ -71,7 +71,7 @@ typedef struct conta_trans_st
 lugar *buscarLugarQtd(lugar *cabeca, unsigned x);
 
 /**
- * \ingroup Listao
+ * \ingroup Header
  *
  * \brief Busca na lista o lugar Lx.
  *
@@ -114,7 +114,7 @@ void inserirDados(dados **cabeca, unsigned x);
 void limparDados(dados **cabeca);
 
 /**
- * \ingroup Listao
+ * \ingroup Header
  *
  * \brief Calcula o cosseno de um segmento de reta.
  *
@@ -134,7 +134,7 @@ void limparDados(dados **cabeca);
 float lcos(float x1, float y1, float x2, float y2);
 
 /**
- * \ingroup Listao
+ * \ingroup Header
  *
  * \brief Calcula o seno de um segmento de reta.
  *
@@ -154,7 +154,7 @@ float lcos(float x1, float y1, float x2, float y2);
 float lsin(float x1, float y1, float x2, float y2);
 
 /**
- * \ingroup Listao
+ * \ingroup Header
  *
  * \brief Incrementa 1 num contador inserido numa lista.
  *

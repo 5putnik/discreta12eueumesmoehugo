@@ -277,7 +277,7 @@ int main(void)
 }
 
 /**
- * \ingroup GroupUnique
+ * \ingroup Main
  *
  * \brief Funcao que executa a transicao da rede.
  *
@@ -412,7 +412,7 @@ void *transicao(void *arg)
 }
 
 /**
- * \ingroup GroupUnique
+ * \ingroup Main
  *
  * \brief Desenha uma rede no Allegro e imprime num arquivo de imagem.
  *

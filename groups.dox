@@ -1,0 +1,9 @@
+/**
+* @defgroup Main Funcoes primarias
+* Grupo de funcoes que se encontram no programa principal, que executam as tarefas essenciais para o funcionamento do programa.
+*/
+
+/**
+* @defgroup Header Funcoes secundarias
+* Grupo de funcoes que se encontram no header listao.h, que executam tarefas auxiliares para o funcionamento do programa principal.
+*/
