@@ -382,7 +382,7 @@ void *transicao(void *arg)
             x = buscarFlechaParaProx(x, i); // procura uma nova flecha
         }
 
-        if(DEBUG == C || DEBUG == D) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela 2 pesq\n", i);
+        if((DEBUG == C || DEBUG == D) && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela 2 pesq\n", i);
         c = 0; // Reseta a variavel de controle
     
         /* Inicio da busca das flechas tl */
@@ -408,7 +408,25 @@ void *transicao(void *arg)
         if((DEBUG == C || DEBUG == D) && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar e' apontado por ela\n", i);
     }
     
-    y -> isBusy = LIVRE;
+    /* Desocupa os lugares */
+    x = buscarFlechaPara(tlt, i); // Busca novamente as flechas que apontam para a transicao
+    c = 0;     
+    while(x != NULL) // Repetindo a pesquisa de flechas
+    {
+        c = 1;
+        xde = x -> de;
+     
+        y = buscarLugarPos(tp, xde);
+        if(y != NULL)
+            y -> isBusy = LIVRE;
+        else
+            if(DEBUG == C || DEBUG == D) printf("[thread %u]Erro: lugar inexistente na 3 pesquisa\n", i);
+
+        x = buscarFlechaParaProx(x, i); // procura uma nova flecha
+    }
+    
+    if((DEBUG == C || DEBUG == D) && !c) printf("[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela 3 pesq\n", i);
+    
     return NULL;
 }
 
