@@ -96,6 +96,7 @@ void *transicao(void *arg);
 void desenha_rede(petri_t *rede, const char *fname);
 
 unsigned it_escape;                             /* Flag condicional da iteracao */
+unsigned trigger;                               /* Flag para todas as threads partirem "ao mesmo tempo" */
 
 /* Rede de petri propriamente dita */
 petri_t *rede;
@@ -224,6 +225,7 @@ int main(void)
         it_escape = 0;
         /* d->net = rede; */
         M_LIN;
+        trigger = 1;
         for(i=0;i<qt;i++)
         {
             inserirDados(&d, i);
@@ -236,6 +238,7 @@ int main(void)
             }
             inserirThread(&lthr, temp_thr);
         }
+        trigger = 0;
         while(lthr != NULL)
         {
             temp_thr = lthr->thr;
@@ -314,6 +317,11 @@ void *transicao(void *arg)
              dd,
              c;
 
+    /* Espera para todas as threads rodarem juntas */
+
+    while(trigger)
+        ;
+    if(DEBUG==B || DEBUG == D) printf("[thread %u] Comecei\n", i);
     /********************** Codigo reestruturado ****************/
     
     c = 0; // Para saber se entrou pelo menos 1x no loop
