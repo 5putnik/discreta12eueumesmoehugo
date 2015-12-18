@@ -264,16 +264,14 @@ int main(void)
         printf("Numero de iteracoes necessarias pra convergir: %u.\n",k);
     printf("Lugares com token: \n");
     imprimirLugar(rede->l);
-    /* Imprimir "LX = Y" se Y > 0 */
 
     printf("Transicoes disparadas: \n");
     conta_trans *ct = contador;
     while(ct != NULL)
     {
-        printf("T%u: %u vezes\n", ct->pos, ct->x);
+        printf("T%u: %u vez(es)\n", ct->pos, ct->x);
         ct = ct->prox;
     }
-    /* Imprimir "TX: Y vezes" se Y > 0 */
 
     return EXIT_SUCCESS;
 }
