@@ -59,8 +59,10 @@
 #define B 2
 #define C 3
 #define D 4
+
 #define LIVRE 0
 #define OCUPADO 1
+#define PROIBIDO 2
 
 
 #ifndef ITER
@@ -341,9 +343,8 @@ void *transicao(void *arg)
         if(y != NULL) // Se o lugar de origem da flecha existir
         {
             d++; // Marca que encontrou mais uma flecha
-            if( y -> isBusy == LIVRE)
+            if((y->isBusy = (y->isBusy==LIVRE ? OCUPADO : PROIBIDO)) == OCUPADO)
             {
-                y -> isBusy = OCUPADO; // Marca que o lugar esta ocupado pela Thread
                 yqtd = y -> qtd; // Armazena a qntd de tokens desponivels no local
             
                 if(xtk <= yqtd) // Se a qntd de tokens que a flecha pede for disponiveis no local
