@@ -20,9 +20,9 @@
 .PRECIOUS: %.o
 SHELL=/bin/bash -o pipefail
 
-DBG ?= 0
-IT_MAX ?= 1000
-FAZ_GIF ?= 0
+SET_DEBUG ?= 0
+MAX_ITERATION ?= 1000
+DO_GIF ?= 0
 MAJOR = 0
 MINOR = 1
 BUILD = $(shell date +"%g%m%d.%H%M%S")
@@ -32,7 +32,7 @@ CC = gcc
 CFLAGS = "listao.c" -Wall -Wextra -g -O0
 #-pedantic-errors
 #-ansi
-CPPFLAGS = -DVERSION=$(VERSION) -DBUILD="\"$(BUILD)\"" -DDEBUG=$(DBG) -DITER=$(IT_MAX) -DGIF=$(FAZ_GIF)
+CPPFLAGS = -DVERSION=$(VERSION) -DBUILD="\"$(BUILD)\"" -DDEBUG=$(SET_DEBUG) -DITER=$(MAX_ITERATION) -DGIF=$(DO_GIF)
 LDLIBS = -Wl,--defsym,BUILD_$(DEFSYM)=0 -lpthread -lm -lgmp `allegro-config --cflags --libs`
 
 %.x : %.c $(obj)
