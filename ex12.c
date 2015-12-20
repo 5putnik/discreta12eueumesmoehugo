@@ -85,23 +85,23 @@
     #define IMG_Y 600 /**< Tamanho Y da imagem gerada pelo Allegro */
 #endif
 
-#define M_LIN if(DEBUG == A || DEBUG == D) printf("-------------------------------------------------------\n")
-#define CORBRANCO (makecol(255,255,255))
-#define CORPRETO 1
-#define CORCINZA (makecol(160,160,160))
-#define CORAZUL (makecol(0, 0, 255))
-#define CORVERDE (makecol(0, 255, 0))
-#define CORAMARELO (makecol(255,255,100))
-#define CORVERMELHO (makecol(255, 0, 0))
+#define M_LIN if(DEBUG == A || DEBUG == D) printf("-------------------------------------------------------\n") /**< Macro para divisor de linha (utilizado em debug) */
+
+#define CORBRANCO (makecol(255,255,255)) /**< Macro para cor Allegro branca */
+#define CORPRETO 1 /**< Macro para cor Allegro preta */
+#define CORCINZA (makecol(160,160,160)) /**< Macro para cor Allegro cinza */
+#define CORAZUL (makecol(0, 0, 255)) /**< Macro para cor Allegro azul */
+#define CORVERDE (makecol(0, 255, 0)) /**< Macro para cor Allegro verde */
+#define CORAMARELO (makecol(255,255,100)) /**< Macro para cor Allegro amarela */
+#define CORVERMELHO (makecol(255, 0, 0)) /**< Macro para cor Allegro vermelha */
 
 void *transicao(void *arg);
 void desenha_rede(petri_t *rede, const char *fname);
 
-unsigned it_escape;                             /* Flag condicional da iteracao */
-unsigned trigger;                               /* Flag para todas as threads partirem "ao mesmo tempo" */
+unsigned it_escape;                             /**< Flag condicional da iteracao */
+unsigned trigger;                               /**< Flag para todas as threads partirem "ao mesmo tempo" */
 
-/* Rede de petri propriamente dita */
-petri_t *rede;
+petri_t *rede; /**< Rede de petri propriamente dita */
 
 conta_trans *contador;
 
