@@ -30,8 +30,8 @@ typedef struct lugar_st
  */ 
 typedef struct petri_st
 {
-    unsigned total_l, /**< Quantidade otal de lugares */
-             total_t; /**< Quantidade otal de transicoes */
+    unsigned total_l, /**< Quantidade total de lugares */
+             total_t; /**< Quantidade total de transicoes */
     lugar *l; /**< Lista de lugares */
     flecha *lt; /**< Lista de flechas Lugar -> Transicao */
     flecha *tl; /**< Lista de flechas Transicao -> Lugar */
@@ -103,6 +103,25 @@ lugar *buscarLugarPos(lugar *cabeca, unsigned x);
 lugar *buscarLugarQtdProx(lugar *cabeca, unsigned x);
 lugar *buscarLugarPosProx(lugar *cabeca, unsigned x);
 lugar *anteriorLugar(lugar *cabeca, lugar *r);
+
+/**
+ * \ingroup Header
+ *
+ * \brief Insere um lugar na lista.
+ *
+ * \details Esta funcao se utiliza do ponto que o tipo lugar possui um comportamento de lista e insere um elemento no final da mesma. Caso nao haja elemento nenhum, o "cabeca" da lista passa a ser o proprio elemento inserido. 
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da busca na lista.
+ *
+ * \param[in] i A variavel \a i representa a posicao do lugar (L0, L1, ...).
+ *
+ * \param[in] x A variavel \a x representa a quantidade inicial de tokens daquele lugar.
+ *
+ * \param[in] b A variavel \a b e' uma variavel interna, que diz se este lugar pode doar tokens ou nao.
+ *
+ * \retval void a funcao retorna nada.
+ *
+ */
 void inserirLugar(lugar **cabeca, unsigned i, unsigned x, int b);
 void removerLugar(lugar **cabeca, lugar *r);
 void imprimirLugar(lugar *cabeca);
