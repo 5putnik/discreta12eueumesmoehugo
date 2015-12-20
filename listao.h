@@ -3,53 +3,66 @@
 #include <pthread.h>
 #include <math.h>
 
-/* Tipo que descreve as caracteristicas da Flecha */
+/** 
+ * Lista que descreve as caracteristicas da Flecha 
+ */
 typedef struct flecha_st
 {
-    unsigned de;
-    unsigned para;
-    unsigned tk;
-    struct flecha_st * prox;
+    unsigned de; /**< Ponto de partida da flecha */
+    unsigned para; /**< Ponto de chegada da flecha */
+    unsigned tk; /**< Quantidade de tokens necessaria para ativar a flecha */
+    struct flecha_st * prox; /**< Proximo elemento da lista de flechas */
 }flecha;
 
-/* Tipo que descreve as caracteristicas dos Lugares */
+/**
+ * Lista que descreve as caracteristicas dos Lugares
+ */
 typedef struct lugar_st
 {
-    unsigned pos;
-    unsigned qtd;
-    int isBusy;
-    struct lugar_st * prox;
+    unsigned pos; /**< Ordem do lugar (L0, L1, ...) */
+    unsigned qtd; /**< Quantidade de tokens no lugar */
+    int isBusy; /**< Flag se o lugar esta sendo modificado por uma transicao */
+    struct lugar_st * prox; /**< Proximo elemento da lista de lugares */
 }lugar;
 
-/* Descricao da rede de Petri sem as transicoes */ 
+/**
+ * Descricao da rede de Petri sem as transicoes 
+ */ 
 typedef struct petri_st
 {
-    unsigned total_l,
-             total_t;
-    lugar *l;
-    flecha *lt;
-    flecha *tl;
+    unsigned total_l, /**< Quantidade otal de lugares */
+             total_t; /**< Quantidade otal de transicoes */
+    lugar *l; /**< Lista de lugares */
+    flecha *lt; /**< Lista de flechas Lugar -> Transicao */
+    flecha *tl; /**< Lista de flechas Transicao -> Lugar */
 }petri_t;
 
-/* Lista de threads */
+/**
+ * Lista de threads ativas
+ */
 typedef struct thread_st
 {
-    pthread_t thr;
-    struct thread_st *prox;
+    pthread_t thr; /**< Endereco da thread */
+    struct thread_st *prox; /**< Proximo elemento da lista de threads */
 }l_thread;
 
-/* Lista de posicoes a serem passadas */
+/**
+ * Lista de posicoes a serem passadas para a funcao transicao()
+ */
 typedef struct passa_dados_st
 {
-    unsigned pos;
-    struct passa_dados_st *prox;
+    unsigned pos; /**< Endereco da transicao */
+    struct passa_dados_st *prox; /**< Proximo elemento da lista de dados */
 }dados;
 
+/**
+ * Lista que conta o numero de ativacoes de uma transicao
+ */
 typedef struct conta_trans_st
 {
-    unsigned pos,
-             x;
-    struct conta_trans_st *prox;
+    unsigned pos, /**< Endereco da transicao */
+             x; /**< Contador de ativacoes */
+    struct conta_trans_st *prox; /**< Proximo elemento da lista de ativacoes */
 }conta_trans;
 
 /**
