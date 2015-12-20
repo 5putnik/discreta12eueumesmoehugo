@@ -40,8 +40,8 @@
  * \brief programa que simula rede de petri. 
  * \author Hugo Albuquerque de Fonsêca <<hugoalbuquerque0@gmail.com>>
  * \author Otacilio Saraiva Maia Neto <<otacilio.n97@gmail.com>>
- * \version 1.0
- * \date 2015-12-14
+ * \version 2.0
+ * \date 2015-12-20
  */
 /**
  * \
@@ -55,14 +55,14 @@
 #include <math.h>
 #include "listao.h"
 
-#define A 1
-#define B 2
-#define C 3
-#define D 4
+#define A 1 /**< Nivel de debug A */
+#define B 2 /**< Nivel de debug B */
+#define C 3 /**< Nivel de debug C */
+#define D 4 /**< Nivel de debug D */
 
-#define LIVRE 0
-#define OCUPADO 1
-#define PROIBIDO 2
+#define LIVRE 0 /**< Estado do lugar em que ela pode executar uma transicao */
+#define OCUPADO 1 /**< Estado do lugar em que uma transicao esta ocorrendo */
+#define PROIBIDO 2 /**< Estado do lugar em que uma transicao tenta ocupar um lugar ja ocupado */
 
 
 #ifndef ITER
@@ -78,11 +78,11 @@
 #endif
 
 #ifndef IMG_X
-    #define IMG_X 800
+    #define IMG_X 800 /**< Tamanho X da imagem gerada pelo Allegro */
 #endif
 
 #ifndef IMG_Y
-    #define IMG_Y 600
+    #define IMG_Y 600 /**< Tamanho Y da imagem gerada pelo Allegro */
 #endif
 
 #define M_LIN if(DEBUG == A || DEBUG == D) printf("-------------------------------------------------------\n")
