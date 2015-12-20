@@ -113,8 +113,9 @@ Funções</h2></td></tr>
 <tr class="separator:accb2892e4f1c5da474a94f6a9e3fc4ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6707637cee7bf3ecaf519621f9b89a52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="listao_8h.html#a870c1442598cee46a9fb19693f582cb6">lugar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="listao_8c.html#a6707637cee7bf3ecaf519621f9b89a52">anteriorLugar</a> (<a class="el" href="listao_8h.html#a870c1442598cee46a9fb19693f582cb6">lugar</a> *cabeca, <a class="el" href="listao_8h.html#a870c1442598cee46a9fb19693f582cb6">lugar</a> *r)</td></tr>
 <tr class="separator:a6707637cee7bf3ecaf519621f9b89a52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c2e55ae221858951beba2ad4cb6ed2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="listao_8c.html#a9c2e55ae221858951beba2ad4cb6ed2b">inserirLugar</a> (<a class="el" href="listao_8h.html#a870c1442598cee46a9fb19693f582cb6">lugar</a> **cabeca, unsigned i, unsigned x, int b)</td></tr>
-<tr class="separator:a9c2e55ae221858951beba2ad4cb6ed2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9c2e55ae221858951beba2ad4cb6ed2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Header.html#ga9c2e55ae221858951beba2ad4cb6ed2b">inserirLugar</a> (<a class="el" href="listao_8h.html#a870c1442598cee46a9fb19693f582cb6">lugar</a> **cabeca, unsigned i, unsigned x, int b)</td></tr>
+<tr class="memdesc:ga9c2e55ae221858951beba2ad4cb6ed2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insere um lugar na lista.  <a href="group__Header.html#ga9c2e55ae221858951beba2ad4cb6ed2b">Mais...</a><br /></td></tr>
+<tr class="separator:ga9c2e55ae221858951beba2ad4cb6ed2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedb069358f8bf226e278fd2b4d632bda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="listao_8c.html#aedb069358f8bf226e278fd2b4d632bda">removerLugar</a> (<a class="el" href="listao_8h.html#a870c1442598cee46a9fb19693f582cb6">lugar</a> **cabeca, <a class="el" href="listao_8h.html#a870c1442598cee46a9fb19693f582cb6">lugar</a> *r)</td></tr>
 <tr class="separator:aedb069358f8bf226e278fd2b4d632bda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9d229ee02dcfaafd94fb4858c0b1f62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="listao_8h.html#abf15f4dcf1e464acbadd5e6ba51178ca">flecha</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="listao_8c.html#ac9d229ee02dcfaafd94fb4858c0b1f62">buscarFlechaAnd</a> (<a class="el" href="listao_8h.html#abf15f4dcf1e464acbadd5e6ba51178ca">flecha</a> *cabeca, unsigned xde, unsigned xpara, unsigned xtk)</td></tr>
@@ -935,71 +936,6 @@ Funções</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a class="anchor" id="a9c2e55ae221858951beba2ad4cb6ed2b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void inserirLugar </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="listao_8h.html#a870c1442598cee46a9fb19693f582cb6">lugar</a> **&#160;</td>
-          <td class="paramname"><em>cabeca</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned&#160;</td>
-          <td class="paramname"><em>i</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definição na linha <a class="el" href="listao_8c_source.html#l00069">69</a> do arquivo <a class="el" href="listao_8c_source.html">listao.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="structlugar__st.html">lugar</a> *pl = *cabeca;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="structlugar__st.html">lugar</a> *plant = NULL;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">while</span>(pl != NULL)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        plant = pl;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        pl = pl -&gt; <a class="code" href="structconta__trans__st.html#a54a41f162a51befa671af798241a37c6">prox</a>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    pl = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structlugar__st.html">lugar</a>));</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    pl -&gt; <a class="code" href="structconta__trans__st.html#aed874882a2027e3868cd5031ee0c922d">pos</a> = i;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    pl -&gt; qtd = <a class="code" href="structconta__trans__st.html#a4bd5af356cf0ea6cdaf27175d06d7d12">x</a>;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    pl -&gt; isBusy = b;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    pl -&gt; <a class="code" href="structconta__trans__st.html#a54a41f162a51befa671af798241a37c6">prox</a> = NULL;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">if</span>(plant != NULL)</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        plant -&gt; <a class="code" href="structconta__trans__st.html#a54a41f162a51befa671af798241a37c6">prox</a> = pl;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        *cabeca = pl;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
-<div class="ttc" id="structconta__trans__st_html_a54a41f162a51befa671af798241a37c6"><div class="ttname"><a href="structconta__trans__st.html#a54a41f162a51befa671af798241a37c6">conta_trans_st::prox</a></div><div class="ttdeci">struct conta_trans_st * prox</div><div class="ttdoc">Proximo elemento da lista de ativacoes. </div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00065">listao.h:65</a></div></div>
-<div class="ttc" id="structlugar__st_html"><div class="ttname"><a href="structlugar__st.html">lugar_st</a></div><div class="ttdoc">Lista que descreve as caracteristicas dos Lugares. </div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00020">listao.h:20</a></div></div>
-<div class="ttc" id="structconta__trans__st_html_aed874882a2027e3868cd5031ee0c922d"><div class="ttname"><a href="structconta__trans__st.html#aed874882a2027e3868cd5031ee0c922d">conta_trans_st::pos</a></div><div class="ttdeci">unsigned pos</div><div class="ttdoc">Endereco da transicao. </div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00063">listao.h:63</a></div></div>
-<div class="ttc" id="structconta__trans__st_html_a4bd5af356cf0ea6cdaf27175d06d7d12"><div class="ttname"><a href="structconta__trans__st.html#a4bd5af356cf0ea6cdaf27175d06d7d12">conta_trans_st::x</a></div><div class="ttdeci">unsigned x</div><div class="ttdoc">Contador de ativacoes. </div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00063">listao.h:63</a></div></div>
-</div><!-- fragment -->
-</div>
-</div>
 <a class="anchor" id="a988911e061b0af008965c1d9b37d96af"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1191,7 +1127,7 @@ Funções</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Gerado em Domingo, 20 de Dezembro de 2015 10:43:47 para Exercicio 12 - Simulador de Rede de Petri por &#160;<a href="http://www.doxygen.org/index.html">
+Gerado em Domingo, 20 de Dezembro de 2015 11:10:38 para Exercicio 12 - Simulador de Rede de Petri por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

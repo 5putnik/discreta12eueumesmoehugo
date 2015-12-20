@@ -94,6 +94,9 @@ Funções</h2></td></tr>
 <tr class="memitem:gaee2af46b4e7f9af51e4e93b412639c5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="listao_8h.html#a870c1442598cee46a9fb19693f582cb6">lugar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Header.html#gaee2af46b4e7f9af51e4e93b412639c5a">buscarLugarPos</a> (<a class="el" href="listao_8h.html#a870c1442598cee46a9fb19693f582cb6">lugar</a> *cabeca, unsigned x)</td></tr>
 <tr class="memdesc:gaee2af46b4e7f9af51e4e93b412639c5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Busca na lista o lugar Lx.  <a href="#gaee2af46b4e7f9af51e4e93b412639c5a">Mais...</a><br /></td></tr>
 <tr class="separator:gaee2af46b4e7f9af51e4e93b412639c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9c2e55ae221858951beba2ad4cb6ed2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Header.html#ga9c2e55ae221858951beba2ad4cb6ed2b">inserirLugar</a> (<a class="el" href="listao_8h.html#a870c1442598cee46a9fb19693f582cb6">lugar</a> **cabeca, unsigned i, unsigned x, int b)</td></tr>
+<tr class="memdesc:ga9c2e55ae221858951beba2ad4cb6ed2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insere um lugar na lista.  <a href="#ga9c2e55ae221858951beba2ad4cb6ed2b">Mais...</a><br /></td></tr>
+<tr class="separator:ga9c2e55ae221858951beba2ad4cb6ed2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadb4877932ec102678fc7b2e07b5ac653"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Header.html#gadb4877932ec102678fc7b2e07b5ac653">lcos</a> (float x1, float y1, float x2, float y2)</td></tr>
 <tr class="memdesc:gadb4877932ec102678fc7b2e07b5ac653"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcula o cosseno de um segmento de reta.  <a href="#gadb4877932ec102678fc7b2e07b5ac653">Mais...</a><br /></td></tr>
 <tr class="separator:gadb4877932ec102678fc7b2e07b5ac653"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -301,6 +304,89 @@ Funções</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
+<a class="anchor" id="ga9c2e55ae221858951beba2ad4cb6ed2b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void inserirLugar </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="listao_8h.html#a870c1442598cee46a9fb19693f582cb6">lugar</a> **&#160;</td>
+          <td class="paramname"><em>cabeca</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Insere um lugar na lista. </p>
+<p>Esta funcao se utiliza do ponto que o tipo lugar possui um comportamento de lista e insere um elemento no final da mesma. Caso nao haja elemento nenhum, o "cabeca" da lista passa a ser o proprio elemento inserido.</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">cabeca</td><td>A variavel <em>cabeca</em> seria o primeiro elemento da busca na lista.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">i</td><td>A variavel <em>i</em> representa a posicao do lugar (L0, L1, ...).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>A variavel <em>x</em> representa a quantidade inicial de tokens daquele lugar.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">b</td><td>A variavel <em>b</em> e' uma variavel interna, que diz se este lugar pode doar tokens ou nao.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores Retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">void</td><td>a funcao retorna nada. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definição na linha <a class="el" href="listao_8c_source.html#l00069">69</a> do arquivo <a class="el" href="listao_8c_source.html">listao.c</a>.</p>
+<div class="fragment"><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="structlugar__st.html">lugar</a> *pl = *cabeca;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="structlugar__st.html">lugar</a> *plant = NULL;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">while</span>(pl != NULL)</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        plant = pl;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        pl = pl -&gt; <a class="code" href="structconta__trans__st.html#a54a41f162a51befa671af798241a37c6">prox</a>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    pl = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structlugar__st.html">lugar</a>));</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    pl -&gt; <a class="code" href="structconta__trans__st.html#aed874882a2027e3868cd5031ee0c922d">pos</a> = i;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    pl -&gt; qtd = <a class="code" href="structconta__trans__st.html#a4bd5af356cf0ea6cdaf27175d06d7d12">x</a>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    pl -&gt; isBusy = b;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    pl -&gt; <a class="code" href="structconta__trans__st.html#a54a41f162a51befa671af798241a37c6">prox</a> = NULL;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">if</span>(plant != NULL)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        plant -&gt; <a class="code" href="structconta__trans__st.html#a54a41f162a51befa671af798241a37c6">prox</a> = pl;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        *cabeca = pl;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<div class="ttc" id="structconta__trans__st_html_a54a41f162a51befa671af798241a37c6"><div class="ttname"><a href="structconta__trans__st.html#a54a41f162a51befa671af798241a37c6">conta_trans_st::prox</a></div><div class="ttdeci">struct conta_trans_st * prox</div><div class="ttdoc">Proximo elemento da lista de ativacoes. </div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00065">listao.h:65</a></div></div>
+<div class="ttc" id="structlugar__st_html"><div class="ttname"><a href="structlugar__st.html">lugar_st</a></div><div class="ttdoc">Lista que descreve as caracteristicas dos Lugares. </div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00020">listao.h:20</a></div></div>
+<div class="ttc" id="structconta__trans__st_html_aed874882a2027e3868cd5031ee0c922d"><div class="ttname"><a href="structconta__trans__st.html#aed874882a2027e3868cd5031ee0c922d">conta_trans_st::pos</a></div><div class="ttdeci">unsigned pos</div><div class="ttdoc">Endereco da transicao. </div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00063">listao.h:63</a></div></div>
+<div class="ttc" id="structconta__trans__st_html_a4bd5af356cf0ea6cdaf27175d06d7d12"><div class="ttname"><a href="structconta__trans__st.html#a4bd5af356cf0ea6cdaf27175d06d7d12">conta_trans_st::x</a></div><div class="ttdeci">unsigned x</div><div class="ttdoc">Contador de ativacoes. </div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00063">listao.h:63</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
 <a class="anchor" id="gadb4877932ec102678fc7b2e07b5ac653"></a>
 <div class="memitem">
 <div class="memproto">
@@ -430,7 +516,7 @@ Funções</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Gerado em Domingo, 20 de Dezembro de 2015 10:43:48 para Exercicio 12 - Simulador de Rede de Petri por &#160;<a href="http://www.doxygen.org/index.html">
+Gerado em Domingo, 20 de Dezembro de 2015 11:10:38 para Exercicio 12 - Simulador de Rede de Petri por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
