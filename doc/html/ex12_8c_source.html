@@ -1,0 +1,734 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>Exercicio 12 - Simulador de Rede de Petri: Código-Fonte de ex12.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Exercicio 12 - Simulador de Rede de Petri
+   &#160;<span id="projectnumber">2.0</span>
+   </div>
+   <div id="projectbrief">Este exercício tem como objetivo simular uma Rede de Petri, dado um arquivo de entrada</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Busca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;Principal</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="annotated.html"><span>Estruturas&#160;de&#160;Dados</span></a></li>
+      <li class="current"><a href="files.html"><span>Arquivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Busca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;Arquivos</span></a></li>
+      <li><a href="globals.html"><span>Globais</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Todos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Estruturas de Dados</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Arquivos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de Tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Definições e Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Grupos</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">ex12.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="ex12_8c.html">Vá para a documentação deste arquivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* ************************************************************************ *</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> *    ex3.c, v0.1                                                           *</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *    Programa feito para simular uma rede de petri dado um arquivo de      *</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *    texto como entrada, utilizando paralelismo com threads e gerando uma  *</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *    imagem descritiva da rede                                             *</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *                                                                          *</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> *    Copyright (C) 2015                                                    *</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> *    Hugo Albuquerque de Fonseca                                           *</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> *    Otacilio Saraiva Maia Neto                                            *</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> *                                                                          *</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> *    This program is free software; you can redistribute it and/or modify  *</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *    it under the terms of the GNU General Public License as published by  *</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> *    the Free Software Foundation; either version 2 of the License, or     *</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> *    (at your option) any later version.                                   *</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> *                                                                          *</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *    This program is distributed in the hope that it will be useful,       *</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> *    but WITHOUT ANY WARRANTY; without even the implied warranty of        *</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> *    GNU General Public License for more details.                          *</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> *                                                                          *</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> *    You should have received a copy of the GNU General Public License     *</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"> *    along with this program; if not, write to the                         *</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> *    Free Software Foundation, Inc.,                                       *</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"> *    59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"> *                                                                          *</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"> *    To contact the author, please write to:                               *</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"> *                                                                          *</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> *    Hugo Albuquerque de Fonseca &lt;hugoalbuquerque0@gmail.com&gt;              *</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> *    Phone: 55 (081) 9292-0944                                             *</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> *                                                                          *</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> *    Otacilio Saraiva Maia Neto &lt;otacilio.n97@gmail.com&gt;                   *</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> *    Phone: 55 (819) 9959-7078                                             *</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> *                                                                          *                                                                          </span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> ************************************************************************** *</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> * \file ex12.c</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> * \brief programa que simula rede de petri. </span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * \author Hugo Albuquerque de Fonsêca &lt;&lt;hugoalbuquerque0@gmail.com&gt;&gt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * \author Otacilio Saraiva Maia Neto &lt;&lt;otacilio.n97@gmail.com&gt;&gt;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> * \version 1.0</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"> * \date 2015-12-14</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"> */</span><span class="comment"></span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * \</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> * @{ */</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#include &lt;pthread.h&gt;</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#include &lt;allegro.h&gt;</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#include &lt;math.h&gt;</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="listao_8h.html">listao.h</a>&quot;</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="ex12_8c.html#a955f504eccf76b4eb2489c0adab03121">   58</a></span>&#160;<span class="preprocessor">#define A 1</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="ex12_8c.html#a111da81ae5883147168bbb8366377b10">   59</a></span>&#160;<span class="preprocessor">#define B 2</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="ex12_8c.html#ac4cf4b2ab929bd23951a8676eeac086b">   60</a></span>&#160;<span class="preprocessor">#define C 3</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">   61</a></span>&#160;<span class="preprocessor">#define D 4</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="ex12_8c.html#a4425d0e101bb499fafbb34111e9869fb">   63</a></span>&#160;<span class="preprocessor">#define LIVRE 0</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="ex12_8c.html#abb10170b4e16362fbd158cb136e6274d">   64</a></span>&#160;<span class="preprocessor">#define OCUPADO 1</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="ex12_8c.html#a52a8efdf2cea302bff179102d93271ab">   65</a></span>&#160;<span class="preprocessor">#define PROIBIDO 2</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#ifndef ITER</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="ex12_8c.html#ab5b92945430bd0cb7a04673282cf70c3">   69</a></span>&#160;<span class="preprocessor">    #define ITER 1000 </span><span class="comment">/**&lt; Total de iteracoes */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#ifndef DEBUG</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">   73</a></span>&#160;<span class="preprocessor">    #define DEBUG 0 </span><span class="comment">/**&lt; Ativa modo de debug */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#ifndef GIF</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="ex12_8c.html#a06894677b320bfc02e448e1e62c6ddab">   77</a></span>&#160;<span class="preprocessor">    #define GIF 0 </span><span class="comment">/**&lt; Ativa modo GIF (Ainda nao implementado) */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#ifndef IMG_X</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">   81</a></span>&#160;<span class="preprocessor">    #define IMG_X 800</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#ifndef IMG_Y</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">   85</a></span>&#160;<span class="preprocessor">    #define IMG_Y 600</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="ex12_8c.html#a6b69ec2319c0792041eec4aa53522347">   88</a></span>&#160;<span class="preprocessor">#define M_LIN if(DEBUG == A || DEBUG == D) printf(&quot;-------------------------------------------------------\n&quot;)</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="ex12_8c.html#a564a8a1173bd4fb63c4f3a1903143e6a">   89</a></span>&#160;<span class="preprocessor">#define CORBRANCO (makecol(255,255,255))</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="ex12_8c.html#aaa9af825d3a4f75b40c0403bd37c55bd">   90</a></span>&#160;<span class="preprocessor">#define CORPRETO 1</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="ex12_8c.html#a6ba7276f7e11d0099ad5386922bfa495">   91</a></span>&#160;<span class="preprocessor">#define CORCINZA (makecol(160,160,160))</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="ex12_8c.html#a70d9bb57e73b641e6394d1a743d4d891">   92</a></span>&#160;<span class="preprocessor">#define CORAZUL (makecol(0, 0, 255))</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="ex12_8c.html#ad7dde6e35154225591228222edb21c1b">   93</a></span>&#160;<span class="preprocessor">#define CORVERDE (makecol(0, 255, 0))</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="ex12_8c.html#a70bb1aad71a6f756c61983e9fa967737">   94</a></span>&#160;<span class="preprocessor">#define CORAMARELO (makecol(255,255,100))</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="ex12_8c.html#a0e2857429e52d86533c9fcc6b7e92bfb">   95</a></span>&#160;<span class="preprocessor">#define CORVERMELHO (makecol(255, 0, 0))</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keywordtype">void</span> *<a class="code" href="group__Main.html#ga369407cd752b7e48268fc24f3a162839">transicao</a>(<span class="keywordtype">void</span> *arg);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__Main.html#ga73fc4450c799be5fbd99fdb0af67af4a">desenha_rede</a>(<a class="code" href="structpetri__st.html">petri_t</a> *<a class="code" href="ex12_8c.html#aad43441acd0a9193f197c827a0309e50">rede</a>, <span class="keyword">const</span> <span class="keywordtype">char</span> *fname);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="ex12_8c.html#a1a39641cc834e8d937c095ff99d9b0dc">  100</a></span>&#160;<span class="keywordtype">unsigned</span> <a class="code" href="ex12_8c.html#a1a39641cc834e8d937c095ff99d9b0dc">it_escape</a>;                             <span class="comment">/* Flag condicional da iteracao */</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="ex12_8c.html#a9d7b490fa24d308a9c60bfaeabaafaa4">  101</a></span>&#160;<span class="keywordtype">unsigned</span> <a class="code" href="ex12_8c.html#a9d7b490fa24d308a9c60bfaeabaafaa4">trigger</a>;                               <span class="comment">/* Flag para todas as threads partirem &quot;ao mesmo tempo&quot; */</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">/* Rede de petri propriamente dita */</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="ex12_8c.html#aad43441acd0a9193f197c827a0309e50">  104</a></span>&#160;<a class="code" href="structpetri__st.html">petri_t</a> *<a class="code" href="ex12_8c.html#aad43441acd0a9193f197c827a0309e50">rede</a>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="ex12_8c.html#a8ef42b7518beda7205e045d76799ea3a">  106</a></span>&#160;<a class="code" href="structconta__trans__st.html">conta_trans</a> *<a class="code" href="ex12_8c.html#a8ef42b7518beda7205e045d76799ea3a">contador</a>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="ex12_8c.html#a840291bc02cba5474a4cb46a9b9566fe">  108</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="ex12_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;{</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    rede = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structpetri__st.html">petri_t</a>));</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    contador = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structconta__trans__st.html">conta_trans</a>));</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">unsigned</span> t = time(NULL);                    <span class="comment">/* Temporizador da simulacao */</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">unsigned</span> qt,                                <span class="comment">/* Quantidade de transicoes */</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;             ql;                                <span class="comment">/* Quantidade de lugares */</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">unsigned</span> i,                                 <span class="comment">/* Variavel geral de laco */</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;             j,                                 <span class="comment">/* Variavel geral de laco */</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;             k,                                 <span class="comment">/* Variavel geral de laco */</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;             lctk,                              <span class="comment">/* Variavel temporaria de insercao */</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;             alt,                               <span class="comment">/* Total de arcos lugar -&gt; transicao */</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;             atl;                               <span class="comment">/* Total de arcos transicao -&gt; lugar */</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <a class="code" href="structpassa__dados__st.html">dados</a> *d = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structpassa__dados__st.html">dados</a>)),           <span class="comment">/* Lista de transicoes */</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;          *pd = d;                              <span class="comment">/* Ponteiro auxiliar da lista de transicoes */</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <a class="code" href="structthread__st.html">l_thread</a> *lthr = NULL;                      <span class="comment">/* Lista de threads */</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    pthread_t temp_thr;                         <span class="comment">/* Variavel auxiliar da lista de threads */</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    rede -&gt; l = NULL;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    rede -&gt; tl = NULL;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    rede -&gt; lt = NULL;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    srand(time(NULL));</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="comment">/* Escaneando a quantidade de lugares */</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    scanf(<span class="stringliteral">&quot;%u&quot;</span>,&amp;ql);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    rede-&gt;<a class="code" href="structpetri__st.html#a7435770b899472b5d783871fc6ea1c3f">total_l</a> = ql;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="comment">/* Escaneando a quantidade de transicoes */</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    scanf(<span class="stringliteral">&quot;%u&quot;</span>,&amp;qt); </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    rede-&gt;<a class="code" href="structpetri__st.html#a046c3eff311a245441d47fdf1405dbd6">total_t</a> = qt;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="comment">/*********** EasterEgg v1.0 BirthDay version **************/</span> </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="comment">/*********** Only programmers will now, it needs recompilate with the MACRO ***************/</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="preprocessor">#ifdef EASTEREGGV1</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    printf(<span class="stringliteral">&quot;14/12/2015 The first day of the Petri Simulator, tagged v1.0 one day ago at 22:00 PM\n&quot;</span>);</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    printf(<span class="stringliteral">&quot;It is also the day of the birthday of the co-developer Otacilio Neto\n&quot;</span>);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    printf(<span class="stringliteral">&quot;So congratulations to both!!!\n&quot;</span>);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    printf(<span class="stringliteral">&quot;\&quot;Twenty years from now you will be more disappointed by the things that you didnt do than by the ones you did do. So throw off the bowlines. Sail away from the safe harbor. Catch the trade winds in your sails\&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    printf(<span class="stringliteral">&quot;Explore! Dream! Discover!\n&quot;</span>);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="comment">/********** End EasterEgg v1.0 ******************/</span> </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#a955f504eccf76b4eb2489c0adab03121">A</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) printf(<span class="stringliteral">&quot;Quantidade de lugares: %u\n&quot;</span>,ql);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="comment">/*if(ql&gt;VMAX)</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">      {</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">      printf(&quot;Erro linha 1: quantidade de lugares acima do maximo. \n&quot;);</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">      return -1;</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">      }*/</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#a955f504eccf76b4eb2489c0adab03121">A</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) printf(<span class="stringliteral">&quot;Quantidade de transicoes: %u\n&quot;</span>,qt);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="comment">/*if(qt&gt;VMAX)</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">      {</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">      printf(&quot;Erro linha 2: quantidade de transicoes acima do maximo. \n&quot;);</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">      return -1;</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">      }*/</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="comment">/* Escaneando total de lugares com pelo menos um token */</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    scanf(<span class="stringliteral">&quot;%u&quot;</span>,&amp;lctk);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="comment">/* Escaneando total de arcos lugar -&gt; transicao */</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    scanf(<span class="stringliteral">&quot;%u&quot;</span>,&amp;alt);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="comment">/* Escaneando total de arcos transicao -&gt; lugar */</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    scanf(<span class="stringliteral">&quot;%u&quot;</span>,&amp;atl);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordflow">for</span>(k=0;k&lt;lctk;k++)</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    {</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        scanf(<span class="stringliteral">&quot;%u %u&quot;</span>, &amp;i, &amp;j);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keywordflow">if</span>(i&gt;=ql)</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        {</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            printf(<span class="stringliteral">&quot;Erro linha %u: lugar maior que o definido. \n&quot;</span>, 6+k);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        }</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <a class="code" href="listao_8h.html#a9c2e55ae221858951beba2ad4cb6ed2b">inserirLugar</a>(&amp;(rede-&gt;<a class="code" href="structpetri__st.html#af33f73d8c092a54cad15b87453f8d75e">l</a>), i, j, <a class="code" href="ex12_8c.html#a4425d0e101bb499fafbb34111e9869fb">LIVRE</a>);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    }</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keywordflow">for</span>(k=0;k&lt;rede-&gt;<a class="code" href="structpetri__st.html#a7435770b899472b5d783871fc6ea1c3f">total_l</a>;k++)</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    {</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="group__Header.html#gaee2af46b4e7f9af51e4e93b412639c5a">buscarLugarPos</a>((rede-&gt;<a class="code" href="structpetri__st.html#af33f73d8c092a54cad15b87453f8d75e">l</a>), k) == NULL)</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            <a class="code" href="listao_8h.html#a9c2e55ae221858951beba2ad4cb6ed2b">inserirLugar</a>(&amp;(rede-&gt;<a class="code" href="structpetri__st.html#af33f73d8c092a54cad15b87453f8d75e">l</a>), k, 0, <a class="code" href="ex12_8c.html#a4425d0e101bb499fafbb34111e9869fb">LIVRE</a>);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    }</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keywordflow">if</span>(rede-&gt;<a class="code" href="structpetri__st.html#af33f73d8c092a54cad15b87453f8d75e">l</a> == NULL)</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    {</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        printf(<span class="stringliteral">&quot;Erro: lugar nao pode ser lido no documento de texto.\n&quot;</span>);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordflow">for</span>(k=0;k&lt;alt;k++)</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    {</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        scanf(<span class="stringliteral">&quot;%u %u %u&quot;</span>, &amp;i, &amp;lctk, &amp;j);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <span class="keywordflow">if</span>(i&gt;=ql||j&gt;=qt)</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        {</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            printf(<span class="stringliteral">&quot;Erro linha %u: lugar ou transicao acima do definido. \n&quot;</span>, 6+lctk+k);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        }</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <a class="code" href="listao_8h.html#a4efb2cc779dff95e1dd723f2e5e6de06">inserirFlecha</a>(&amp;(rede-&gt;<a class="code" href="structpetri__st.html#a0f32b70f9a86b58b0fadf2d9ca4dcdac">lt</a>), i, j, lctk);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    }</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordflow">if</span>(rede-&gt;<a class="code" href="structpetri__st.html#a0f32b70f9a86b58b0fadf2d9ca4dcdac">lt</a> == NULL)</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    {</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        printf(<span class="stringliteral">&quot;Erro: flecha lugar-&gt;transicao nao pode ser lido no documento de texto.\n&quot;</span>);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    }</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">for</span>(k=0;k&lt;atl;k++)</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    {</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        scanf(<span class="stringliteral">&quot;%u %u %u&quot;</span>, &amp;i, &amp;lctk, &amp;j);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keywordflow">if</span>(i&gt;=qt||j&gt;=ql)</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        {</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            printf(<span class="stringliteral">&quot;Erro linha %u: lugar ou transicao acima do definido. \n&quot;</span>, 6+lctk+k+alt);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        }</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <a class="code" href="listao_8h.html#a4efb2cc779dff95e1dd723f2e5e6de06">inserirFlecha</a>(&amp;(rede-&gt;<a class="code" href="structpetri__st.html#a856547f2832f74fcc7bd11b229b4dabd">tl</a>), i, j, lctk);</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    }</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordflow">if</span>(rede-&gt;<a class="code" href="structpetri__st.html#a856547f2832f74fcc7bd11b229b4dabd">tl</a> == NULL)</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    {</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        printf(<span class="stringliteral">&quot;Erro: flecha transicao-&gt;lugar nao pode ser lido no documento de texto.\n&quot;</span>);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    }</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#a955f504eccf76b4eb2489c0adab03121">A</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) <a class="code" href="listao_8h.html#ad91f50efed059d8196f27d4e3d429555">imprimirLugar</a>(rede-&gt;<a class="code" href="structpetri__st.html#af33f73d8c092a54cad15b87453f8d75e">l</a>);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#a955f504eccf76b4eb2489c0adab03121">A</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) <a class="code" href="listao_8h.html#ab60e0d0d3b32e0a02f9219569ceee300">imprimirFlechaTL</a>(rede-&gt;<a class="code" href="structpetri__st.html#a856547f2832f74fcc7bd11b229b4dabd">tl</a>);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#a955f504eccf76b4eb2489c0adab03121">A</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) <a class="code" href="listao_8h.html#a4e04d1f8db3dff6f1710738b67287ae1">imprimirFlechaLT</a>(rede-&gt;<a class="code" href="structpetri__st.html#a0f32b70f9a86b58b0fadf2d9ca4dcdac">lt</a>);</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <a class="code" href="group__Main.html#ga73fc4450c799be5fbd99fdb0af67af4a">desenha_rede</a>(rede, <span class="stringliteral">&quot;inicio.bmp&quot;</span>);</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    printf(<span class="stringliteral">&quot;======= INICIO DA SIMULACAO =======\n&quot;</span>);</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    printf(<span class="stringliteral">&quot;(execucao pode demorar dependendo do tamanho da rede...)\n&quot;</span>);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    k = 0;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keywordflow">do</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    {</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        k++;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <a class="code" href="ex12_8c.html#a1a39641cc834e8d937c095ff99d9b0dc">it_escape</a> = 0;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <span class="comment">/* d-&gt;net = rede; */</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <a class="code" href="ex12_8c.html#a6b69ec2319c0792041eec4aa53522347">M_LIN</a>;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <a class="code" href="ex12_8c.html#a9d7b490fa24d308a9c60bfaeabaafaa4">trigger</a> = 1;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keywordflow">for</span>(i=0;i&lt;qt;i++)</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        {</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            <a class="code" href="listao_8h.html#ade0d5aa8344e7de9eaae14b0b7e488ac">inserirDados</a>(&amp;d, i);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;            <span class="keywordflow">if</span>(pd-&gt;prox != NULL)</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                pd = pd-&gt;prox;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            <span class="keywordflow">if</span>(pthread_create(&amp;temp_thr, NULL, <a class="code" href="group__Main.html#ga369407cd752b7e48268fc24f3a162839">transicao</a>, (<span class="keywordtype">void</span> *)pd))</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            {</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                printf(<span class="stringliteral">&quot;Erro criando thread %u!\n&quot;</span>,i);</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                exit(1);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            }</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            <a class="code" href="listao_8h.html#a988911e061b0af008965c1d9b37d96af">inserirThread</a>(&amp;lthr, temp_thr);</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        }</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        <a class="code" href="ex12_8c.html#a9d7b490fa24d308a9c60bfaeabaafaa4">trigger</a> = 0;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        <span class="keywordflow">while</span>(lthr != NULL)</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        {</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            temp_thr = lthr-&gt;<a class="code" href="structthread__st.html#a70c2c66840c4aae09be1d5cb031179c8">thr</a>;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            <span class="keywordflow">if</span>(pthread_join(temp_thr, NULL))</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            {</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                printf(<span class="stringliteral">&quot;Erro juntando thread!\n&quot;</span>);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                exit(1);</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            }</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            lthr = lthr-&gt;<a class="code" href="structthread__st.html#a63d87e3def93637001505e0f1b92320e">prox</a>;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        }</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#a955f504eccf76b4eb2489c0adab03121">A</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) <a class="code" href="listao_8h.html#ad91f50efed059d8196f27d4e3d429555">imprimirLugar</a>(rede-&gt;<a class="code" href="structpetri__st.html#af33f73d8c092a54cad15b87453f8d75e">l</a>);</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        <a class="code" href="ex12_8c.html#a6b69ec2319c0792041eec4aa53522347">M_LIN</a>;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        <span class="keywordflow">if</span>(k&gt;<a class="code" href="ex12_8c.html#ab5b92945430bd0cb7a04673282cf70c3">ITER</a>)</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        {</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            printf(<span class="stringliteral">&quot;Atencao! Apos %u iteracoes, a rede de petri nao estabilizou! Finalizando a simulacao. \nPara aumentar a quantidade maxima de iteracoes, verifique o manual de utilizacao do programa.\n&quot;</span>,<a class="code" href="ex12_8c.html#ab5b92945430bd0cb7a04673282cf70c3">ITER</a>);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        }</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    }<span class="keywordflow">while</span>(<a class="code" href="ex12_8c.html#a1a39641cc834e8d937c095ff99d9b0dc">it_escape</a>);</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    printf(<span class="stringliteral">&quot;======= FIM DA SIMULACAO ==========\n&quot;</span>);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <a class="code" href="group__Main.html#ga73fc4450c799be5fbd99fdb0af67af4a">desenha_rede</a>(rede, <span class="stringliteral">&quot;fim.bmp&quot;</span>);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    t = time(NULL) - t;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    printf(<span class="stringliteral">&quot;Tempo de reprodução do programa: %u segundo(s).\n&quot;</span>,t);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordflow">if</span>(k==0)</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        printf(<span class="stringliteral">&quot;Aviso: nenhuma transicao foi disparada! \n&quot;</span>);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordflow">if</span>(k&lt;<a class="code" href="ex12_8c.html#ab5b92945430bd0cb7a04673282cf70c3">ITER</a>)</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        printf(<span class="stringliteral">&quot;Numero de iteracoes necessarias pra convergir: %u.\n&quot;</span>,k);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    printf(<span class="stringliteral">&quot;Lugares com token: \n&quot;</span>);</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <a class="code" href="listao_8h.html#ad91f50efed059d8196f27d4e3d429555">imprimirLugar</a>(rede-&gt;<a class="code" href="structpetri__st.html#af33f73d8c092a54cad15b87453f8d75e">l</a>);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    printf(<span class="stringliteral">&quot;Transicoes disparadas: \n&quot;</span>);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <a class="code" href="structconta__trans__st.html">conta_trans</a> *ct = <a class="code" href="ex12_8c.html#a8ef42b7518beda7205e045d76799ea3a">contador</a>;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keywordflow">while</span>(ct != NULL)</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    {</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        printf(<span class="stringliteral">&quot;T%u: %u vez(es)\n&quot;</span>, ct-&gt;<a class="code" href="structconta__trans__st.html#aed874882a2027e3868cd5031ee0c922d">pos</a>, ct-&gt;<a class="code" href="structconta__trans__st.html#a4bd5af356cf0ea6cdaf27175d06d7d12">x</a>);</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        ct = ct-&gt;<a class="code" href="structconta__trans__st.html#a54a41f162a51befa671af798241a37c6">prox</a>;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    }</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keywordflow">return</span> EXIT_SUCCESS;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;}</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment"> * \ingroup Main</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment"> * \brief Funcao que executa a transicao da rede.</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment"> * \details Esta funcao deve checar as flechas de entrada, checar os lugares para ver se existe quantidade de tokens suficientes para disparar indicadas pelas flechas, checar as flechas de saida e depositar nos lugares a quantidade de token indicados pelas flechas</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment"> * \param[in] arg A variavel \a arg seria na realidade uma struct que recebeu um cast para ser passada atraves de uma pthread. Ela deve conter a rede de petri e o indice da transicao.</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment"> * \retval void a funcao retorna nada.</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno"><a class="line" href="group__Main.html#ga369407cd752b7e48268fc24f3a162839">  296</a></span>&#160;<span class="keywordtype">void</span> *<a class="code" href="group__Main.html#ga369407cd752b7e48268fc24f3a162839">transicao</a>(<span class="keywordtype">void</span> *arg)</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;{</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <a class="code" href="structpassa__dados__st.html">dados</a> *n = (<a class="code" href="structpassa__dados__st.html">dados</a> *)(arg);</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keywordtype">unsigned</span> i = n-&gt;<a class="code" href="structpassa__dados__st.html#a5057d2ab77480a830502f7b82ad38992">pos</a>;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="comment">/* petri_t *r = n-&gt;net; */</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <a class="code" href="structpetri__st.html">petri_t</a> *r = <a class="code" href="ex12_8c.html#aad43441acd0a9193f197c827a0309e50">rede</a>;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordflow">if</span>(r == NULL)</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    {</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        printf(<span class="stringliteral">&quot;ERRO: passando nada pra transicao!!\n&quot;</span>);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    }</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <a class="code" href="structflecha__st.html">flecha</a> *tlt = r -&gt; lt; <span class="comment">/* Cabeca da lista LugarTransicao */</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <a class="code" href="structflecha__st.html">flecha</a> *ttl = r -&gt; tl; <span class="comment">/* Cabeca da lista TransicaoLugar */</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <a class="code" href="structlugar__st.html">lugar</a> *tp = r -&gt; l; <span class="comment">/* Cabeca da lista Lugar */</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <a class="code" href="structflecha__st.html">flecha</a> *x = NULL; <span class="comment">/* Flecha atual */</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <a class="code" href="structlugar__st.html">lugar</a> *y = NULL; <span class="comment">/* Lugar atual */</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <span class="keywordtype">unsigned</span> xde,</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;             xtk,</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;             xpara,</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;             yqtd,</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;             d,</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;             dd,</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;             c;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="comment">/* Espera para todas as threads rodarem juntas */</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keywordflow">while</span>(<a class="code" href="ex12_8c.html#a9d7b490fa24d308a9c60bfaeabaafaa4">trigger</a>)</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        ;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a>==<a class="code" href="ex12_8c.html#a111da81ae5883147168bbb8366377b10">B</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) printf(<span class="stringliteral">&quot;[thread %u] Comecei\n&quot;</span>, i);</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="comment">/********************** Codigo reestruturado ****************/</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    </div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    c = 0; <span class="comment">/* Para saber se entrou pelo menos 1x no loop */</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    d = dd = 0; <span class="comment">/* Inicia os contadores de lugares existentes e lugares disponivels para tirar em 0 */</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    x = <a class="code" href="listao_8h.html#a44238f73c97e99e78bb48a3deacb03d6">buscarFlechaPara</a>(tlt, i); <span class="comment">/* Procura uma flecha &#39;lt&#39; que aponte para a transicao atual &#39;i&#39; */</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="comment">/********************* CHECKS DA TRANSICAO **************************/</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="keywordflow">while</span>(x != NULL) <span class="comment">/* Enquanto houverem flechas */</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    {</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        c = 1; <span class="comment">/* Marca que entrou no loop */</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        xtk = x -&gt; tk; <span class="comment">/* armazena a qtd de tokens que a flecha pede */</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        xde = x -&gt; de; <span class="comment">/* armazena o lugar de origem dessa flecha */</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;   </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#a111da81ae5883147168bbb8366377b10">B</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) printf(<span class="stringliteral">&quot;[thread %u] Precisa remover %d tokens do lugar %d\n&quot;</span>, i, xtk, xde);</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        y = <a class="code" href="group__Header.html#gaee2af46b4e7f9af51e4e93b412639c5a">buscarLugarPos</a>(tp, xde); <span class="comment">/* Procura o lugar em que a flecha parte */</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keywordflow">if</span>(y != NULL) <span class="comment">/* Se o lugar de origem da flecha existir */</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        {</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            d++; <span class="comment">/* Marca que encontrou mais uma flecha */</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;            <span class="keywordflow">if</span>((y-&gt;<a class="code" href="structlugar__st.html#a9d8c9892f5903f2a94e60718884baa98">isBusy</a> = (y-&gt;<a class="code" href="structlugar__st.html#a9d8c9892f5903f2a94e60718884baa98">isBusy</a>==<a class="code" href="ex12_8c.html#a4425d0e101bb499fafbb34111e9869fb">LIVRE</a> ? <a class="code" href="ex12_8c.html#abb10170b4e16362fbd158cb136e6274d">OCUPADO</a> : <a class="code" href="ex12_8c.html#a52a8efdf2cea302bff179102d93271ab">PROIBIDO</a>)) == <a class="code" href="ex12_8c.html#abb10170b4e16362fbd158cb136e6274d">OCUPADO</a>)</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            {</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                yqtd = y -&gt; qtd; <span class="comment">/* Armazena a qntd de tokens desponivels no local */</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                <span class="keywordflow">if</span>(xtk &lt;= yqtd) <span class="comment">/* Se a qntd de tokens que a flecha pede for disponiveis no local */</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                {</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                    dd++; <span class="comment">/* Marca que o local ta disponivel */</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                    <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#a111da81ae5883147168bbb8366377b10">B</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) printf(<span class="stringliteral">&quot;[thread %u] Lugar com tokens suficientes\n&quot;</span>, i);</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                }</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                    <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#a111da81ae5883147168bbb8366377b10">B</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) printf(<span class="stringliteral">&quot;[thread %u] Lugar com tokens insuficientes\n&quot;</span>, i);</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;            }</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        }</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        <span class="keywordflow">else</span> </div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#ac4cf4b2ab929bd23951a8676eeac086b">C</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) printf(<span class="stringliteral">&quot;[thread %u]Erro: lugar inexistente\n&quot;</span>, i);</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        x = <a class="code" href="listao_8h.html#ab8236479d38d428287df73ed3ed6c7c8">buscarFlechaParaProx</a>(x, i); <span class="comment">/* Procura uma nova flecha */</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    }</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordflow">if</span>((<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#ac4cf4b2ab929bd23951a8676eeac086b">C</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) &amp;&amp; !c) printf(<span class="stringliteral">&quot;[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela\n&quot;</span>, i); <span class="comment">/* Um else pro while */</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    c = 0; <span class="comment">/* Reseta a variavel de controle */</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    </div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="comment">/**************************** ACOES DA TRANSICAO ***********************/</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keywordflow">if</span>(d == dd &amp;&amp; d &amp;&amp; dd) <span class="comment">/* Se a transicao estiver apta a disparar */</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    {</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#a111da81ae5883147168bbb8366377b10">B</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) printf(<span class="stringliteral">&quot;Transicao %u disparou\n&quot;</span>, i);</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <a class="code" href="ex12_8c.html#a1a39641cc834e8d937c095ff99d9b0dc">it_escape</a> = 1;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        x = <a class="code" href="listao_8h.html#a44238f73c97e99e78bb48a3deacb03d6">buscarFlechaPara</a>(tlt, i); <span class="comment">/* Busca novamente as flechas que apontam para a transicao */</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        <a class="code" href="group__Header.html#gac01181eca3e2a49b238339b8b3dcc6df">incrementaTrans</a>(&amp;contador, i);</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        </div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        <span class="keywordflow">while</span>(x != NULL) <span class="comment">/* Repetindo a pesquisa de flechas */</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        {</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;            c = 1;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;            xtk = x -&gt; tk;</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;            xde = x -&gt; de;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;     </div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;            y = <a class="code" href="group__Header.html#gaee2af46b4e7f9af51e4e93b412639c5a">buscarLugarPos</a>(tp, xde);</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;            <span class="keywordflow">if</span>(y != NULL)</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            {</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;                y -&gt; qtd = (y -&gt; qtd) - xtk; <span class="comment">/* Subtrai os tokens, condicao de corrida pode bugar essa parte deixando negativo */</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                y -&gt; isBusy = <a class="code" href="ex12_8c.html#a4425d0e101bb499fafbb34111e9869fb">LIVRE</a>;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;            }</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;                <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#ac4cf4b2ab929bd23951a8676eeac086b">C</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) printf(<span class="stringliteral">&quot;[thread %u]Erro: lugar inexistente na 2 pesquisa\n&quot;</span>, i);</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;            x = <a class="code" href="listao_8h.html#ab8236479d38d428287df73ed3ed6c7c8">buscarFlechaParaProx</a>(x, i); <span class="comment">/* procura uma nova flecha */</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        }</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        <span class="keywordflow">if</span>((<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#ac4cf4b2ab929bd23951a8676eeac086b">C</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) &amp;&amp; !c) printf(<span class="stringliteral">&quot;[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela 2 pesq\n&quot;</span>, i);</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        c = 0; <span class="comment">/* Reseta a variavel de controle */</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    </div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        <span class="comment">/* Inicio da busca das flechas tl */</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;        x = <a class="code" href="listao_8h.html#a7716eeb8f217006abda3bad5e6e4dfbb">buscarFlechaDe</a>(ttl, i); <span class="comment">/* Busca uma flecha que parta da transicao */</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        <span class="keywordflow">while</span>(x != NULL)</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        {</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;            c = 1;</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;            xtk = x -&gt; tk; <span class="comment">/* Armazena a qntd de tokens que deverao ser depositados indicados pela flecha */</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            xpara = x -&gt; para; <span class="comment">/* Armazena em que lugar deve depositar o token */</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;            y = <a class="code" href="group__Header.html#gaee2af46b4e7f9af51e4e93b412639c5a">buscarLugarPos</a>(tp, xpara);</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;            <span class="keywordflow">if</span>(y != NULL)</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;            {</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;                y -&gt; qtd = (y -&gt; qtd) + xtk; <span class="comment">/* adiciona os tokens ao lugar de saida */</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;            }</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;            <span class="keywordflow">else</span> </div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;                <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#ac4cf4b2ab929bd23951a8676eeac086b">C</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) printf(<span class="stringliteral">&quot;[thread %u] Erro: nao existe lugar de chegada da flecha\n&quot;</span>, i);</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;            x = <a class="code" href="listao_8h.html#a27a84e1b0d701fe5e8916eecf03cdb5d">buscarFlechaDeProx</a>(x, i); <span class="comment">/* Busca uma nova flecha */</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;        }</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;        <span class="keywordflow">if</span>((<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#ac4cf4b2ab929bd23951a8676eeac086b">C</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) &amp;&amp; !c) printf(<span class="stringliteral">&quot;[thread %u] Erro: transicao fantasma, nenhum lugar e&#39; apontado por ela\n&quot;</span>, i);</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    }</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    </div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <span class="comment">/* Desocupa os lugares */</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    x = <a class="code" href="listao_8h.html#a44238f73c97e99e78bb48a3deacb03d6">buscarFlechaPara</a>(tlt, i); <span class="comment">/* Busca novamente as flechas que apontam para a transicao */</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    c = 0;     </div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    <span class="keywordflow">while</span>(x != NULL) <span class="comment">/* Repetindo a pesquisa de flechas */</span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    {</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;        c = 1;</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;        xde = x -&gt; de;</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;     </div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;        y = <a class="code" href="group__Header.html#gaee2af46b4e7f9af51e4e93b412639c5a">buscarLugarPos</a>(tp, xde);</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;        <span class="keywordflow">if</span>(y != NULL)</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;            y -&gt; isBusy = <a class="code" href="ex12_8c.html#a4425d0e101bb499fafbb34111e9869fb">LIVRE</a>;</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;            <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#ac4cf4b2ab929bd23951a8676eeac086b">C</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) printf(<span class="stringliteral">&quot;[thread %u]Erro: lugar inexistente na 3 pesquisa\n&quot;</span>, i);</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;        x = <a class="code" href="listao_8h.html#ab8236479d38d428287df73ed3ed6c7c8">buscarFlechaParaProx</a>(x, i); <span class="comment">/* procura uma nova flecha */</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;    }</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;    </div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;    <span class="keywordflow">if</span>((<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#ac4cf4b2ab929bd23951a8676eeac086b">C</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) &amp;&amp; !c) printf(<span class="stringliteral">&quot;[thread %u] Erro: transicao fantasma, nenhum lugar aponta para ela 3 pesq\n&quot;</span>, i);</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;    </div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;    <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;}</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment"> * \ingroup Main</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment"> * \brief Desenha uma rede no Allegro e imprime num arquivo de imagem.</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment"> * \details Esta funcao utiliza a biblioteca grafica Allegro para imprimir uma rede de Petri. </span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment"> * \param[in] rede A variavel \a rede seria a rede de Petri.</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment"> * \param[in] fname A variavel \a fname representa o nome do arquivo que sera gerado.</span></div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment"> * \retval void a funcao retorna nada.</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00456"></a><span class="lineno"><a class="line" href="group__Main.html#ga73fc4450c799be5fbd99fdb0af67af4a">  456</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__Main.html#ga73fc4450c799be5fbd99fdb0af67af4a">desenha_rede</a>(<a class="code" href="structpetri__st.html">petri_t</a> *rede, <span class="keyword">const</span> <span class="keywordtype">char</span> *fname)</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;{</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;    <span class="keywordtype">float</span> ang,      <span class="comment">/* Angulacao antre cada elemento na imagem */</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;          r_lugar,  <span class="comment">/* Raio da circunferencia que representa o lugar */</span></div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;          smaller,  <span class="comment">/* A menor das dimensoes da imagem */</span></div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;          x,        <span class="comment">/* Variavel geral para representar coordenada X */</span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;          y,        <span class="comment">/* Variavel geral para representar coordenada Y */</span></div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;          x1,       <span class="comment">/* Variavel geral para representar coordenada X */</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;          y1,       <span class="comment">/* Variavel geral para representar coordenada Y */</span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;          x2,       <span class="comment">/* Variavel geral para representar coordenada X */</span></div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;          y2,       <span class="comment">/* Variavel geral para representar coordenada Y */</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;          x3,       <span class="comment">/* Variavel geral para representar coordenada X */</span></div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;          y3,       <span class="comment">/* Variavel geral para representar coordenada Y */</span></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;          co,       <span class="comment">/* Variavel geral para representar cosseno */</span></div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;          si;       <span class="comment">/* Variavel geral para representar seno */</span></div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;    <span class="keywordtype">unsigned</span> i, q;</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;    <a class="code" href="structlugar__st.html">lugar</a> *a_l = rede-&gt;<a class="code" href="structpetri__st.html#af33f73d8c092a54cad15b87453f8d75e">l</a>;</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;    BITMAP *buff;</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;    PALETTE pal;</div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;    <a class="code" href="structflecha__st.html">flecha</a> *a_tl = rede-&gt;<a class="code" href="structpetri__st.html#a856547f2832f74fcc7bd11b229b4dabd">tl</a>,</div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;           *a_lt = rede-&gt;<a class="code" href="structpetri__st.html#a0f32b70f9a86b58b0fadf2d9ca4dcdac">lt</a>;</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;    <span class="comment">/* Inicializacao Allegro */</span></div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;    <span class="keywordflow">if</span>(install_allegro(SYSTEM_NONE, &amp;errno, atexit)!=0)</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;        exit(EXIT_FAILURE);</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;    set_color_depth(16);</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;    get_palette(pal);</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;    buff = create_bitmap(<a class="code" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a>,<a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>);</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;    smaller = (float)<a class="code" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a>;</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;    <span class="keywordflow">if</span>(smaller &gt; (<span class="keywordtype">float</span>)<a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>)</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;        smaller = (<span class="keywordtype">float</span>)<a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>;</div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;    r_lugar = smaller/4.0*(M_PI/(M_PI+(float)rede-&gt;<a class="code" href="structpetri__st.html#a7435770b899472b5d783871fc6ea1c3f">total_l</a>));</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;    <span class="keywordflow">if</span>(buff == NULL)</div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;    {</div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;        printf(<span class="stringliteral">&quot;Could not create buffer!\n&quot;</span>);</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;        exit(EXIT_FAILURE);</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;    }</div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;    <span class="comment">/* Desenho propriamente dito */</span></div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;</div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;    <span class="keywordflow">if</span>(rede-&gt;<a class="code" href="structpetri__st.html#a7435770b899472b5d783871fc6ea1c3f">total_l</a> &gt; rede-&gt;<a class="code" href="structpetri__st.html#a046c3eff311a245441d47fdf1405dbd6">total_t</a>)</div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;        ang = M_PI/rede-&gt;<a class="code" href="structpetri__st.html#a7435770b899472b5d783871fc6ea1c3f">total_l</a>;</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;        ang = M_PI/rede-&gt;<a class="code" href="structpetri__st.html#a046c3eff311a245441d47fdf1405dbd6">total_t</a>;</div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#a111da81ae5883147168bbb8366377b10">B</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) printf(<span class="stringliteral">&quot;Desenhando %u lugares e %u transicoes espacados entre si %.2fº...\n&quot;</span>, rede-&gt;<a class="code" href="structpetri__st.html#a7435770b899472b5d783871fc6ea1c3f">total_l</a>, rede-&gt;<a class="code" href="structpetri__st.html#a046c3eff311a245441d47fdf1405dbd6">total_t</a>, ang*180.0/M_PI);</div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;</div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;    <span class="comment">/* Desenhando os lugares  */</span></div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;    <span class="keywordflow">for</span>(i=0;i&lt;rede-&gt;<a class="code" href="structpetri__st.html#a7435770b899472b5d783871fc6ea1c3f">total_l</a>;i++)</div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;    {</div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;        a_l = <a class="code" href="group__Header.html#gaee2af46b4e7f9af51e4e93b412639c5a">buscarLugarPos</a>(rede-&gt;<a class="code" href="structpetri__st.html#af33f73d8c092a54cad15b87453f8d75e">l</a>, i);</div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;        q = 0;</div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;        <span class="keywordflow">if</span>(a_l != NULL)</div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;            q = a_l-&gt;<a class="code" href="structlugar__st.html#a0e2b4d5a8f5ab1526571847e9462a254">qtd</a>;</div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;        x = <a class="code" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a>/2.0 + (<a class="code" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a>/2.0 - r_lugar)*cos(2*i*ang);</div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;        y = <a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>/2.0 + (<a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>/2.0 - r_lugar)*sin(2*i*ang);</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;        circle(buff, x, y, r_lugar, <a class="code" href="ex12_8c.html#a564a8a1173bd4fb63c4f3a1903143e6a">CORBRANCO</a>);</div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;        textprintf_ex(buff, font, x, y, <a class="code" href="ex12_8c.html#ad7dde6e35154225591228222edb21c1b">CORVERDE</a>, <a class="code" href="ex12_8c.html#aaa9af825d3a4f75b40c0403bd37c55bd">CORPRETO</a>, <span class="stringliteral">&quot;%u&quot;</span>, q);</div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#a111da81ae5883147168bbb8366377b10">B</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) printf(<span class="stringliteral">&quot;L%u(%u) (posicionada %.2fº)\n&quot;</span>, i, q, ang*(2*i)*180.0/M_PI);</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;        textprintf_ex(buff, font, x, y - r_lugar, <a class="code" href="ex12_8c.html#ad7dde6e35154225591228222edb21c1b">CORVERDE</a>, <a class="code" href="ex12_8c.html#aaa9af825d3a4f75b40c0403bd37c55bd">CORPRETO</a>, <span class="stringliteral">&quot;L%u&quot;</span>, i);</div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;    }</div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;</div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;    <span class="comment">/* Desenhando as transicoes  */</span></div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;    <span class="keywordflow">for</span>(i=0;i&lt;rede-&gt;<a class="code" href="structpetri__st.html#a046c3eff311a245441d47fdf1405dbd6">total_t</a>;i++)</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;    {</div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;        x = <a class="code" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a>/2.0 + (<a class="code" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a>/2.0 - r_lugar)*cos((2*i+1)*ang);</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;        y = <a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>/2.0 + (<a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>/2.0 - r_lugar)*sin((2*i+1)*ang);</div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;        line(buff, x, y+r_lugar, x, y-r_lugar, <a class="code" href="ex12_8c.html#a564a8a1173bd4fb63c4f3a1903143e6a">CORBRANCO</a>);</div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#a111da81ae5883147168bbb8366377b10">B</a> || <a class="code" href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a> == <a class="code" href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a>) printf(<span class="stringliteral">&quot;T%u (posicionado %.2fº)\n&quot;</span>, i, ang*(2*i+1)*180.0/M_PI);</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;        textprintf_ex(buff, font, x, y - r_lugar, <a class="code" href="ex12_8c.html#ad7dde6e35154225591228222edb21c1b">CORVERDE</a>, <a class="code" href="ex12_8c.html#aaa9af825d3a4f75b40c0403bd37c55bd">CORPRETO</a>, <span class="stringliteral">&quot;T%u&quot;</span>, i);</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;    }</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;    <span class="comment">/* Desenhando as flechas */</span></div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;    <span class="keywordflow">while</span>(a_tl != NULL)</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;    {</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;        i = a_tl-&gt;<a class="code" href="structflecha__st.html#a13b187a9cba943c6a87ec339b8c899ae">de</a>;</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;        x1 = <a class="code" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a>/2.0 + (<a class="code" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a>/2.0 - r_lugar)*cos((2*i+1)*ang);</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;        y1 = <a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>/2.0 + (<a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>/2.0 - r_lugar)*sin((2*i+1)*ang);</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;        i = a_tl-&gt;<a class="code" href="structflecha__st.html#a5223790dbdf3eb9f52abc54d6e959833">para</a>;</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;        x = <a class="code" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a>/2.0 + (<a class="code" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a>/2.0 - r_lugar)*cos(2*i*ang);</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;        y = <a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>/2.0 + (<a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>/2.0 - r_lugar)*sin(2*i*ang);</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;        co = <a class="code" href="group__Header.html#gadb4877932ec102678fc7b2e07b5ac653">lcos</a>(x1,y1,x,y);</div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;        si = <a class="code" href="group__Header.html#ga648c3d8c98be97e55642a0a3adc9c82e">lsin</a>(x1,y1,x,y);</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;        x -= r_lugar*co;</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;        y -= r_lugar*si;</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;        line(buff, x1, y1, x, y, <a class="code" href="ex12_8c.html#a564a8a1173bd4fb63c4f3a1903143e6a">CORBRANCO</a>);</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;        textprintf_ex(buff, font, (x+x1)/2, (y+y1)/2, <a class="code" href="ex12_8c.html#ad7dde6e35154225591228222edb21c1b">CORVERDE</a>, <a class="code" href="ex12_8c.html#aaa9af825d3a4f75b40c0403bd37c55bd">CORPRETO</a>, <span class="stringliteral">&quot;%u&quot;</span>, a_tl-&gt;<a class="code" href="structflecha__st.html#a9e39e32e3bfa9e8839668247873ef8f9">tk</a>);</div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;        x2 = x - (r_lugar / 4) * (si + co);</div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;        y2 = y + (r_lugar / 4) * (co - si);</div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;        x3 = x + (r_lugar / 4) * (si - co);</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;        y3 = y - (r_lugar / 4) * (si + co);</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;        triangle(buff, x, y, x2, y2, x3, y3, <a class="code" href="ex12_8c.html#a564a8a1173bd4fb63c4f3a1903143e6a">CORBRANCO</a>);</div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;        a_tl = a_tl-&gt;<a class="code" href="structflecha__st.html#abad38d52ef7177586f206eea56a7ed06">prox</a>;</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;    }</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;    <span class="keywordflow">while</span>(a_lt != NULL)</div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;    {</div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;        i = a_lt-&gt;<a class="code" href="structflecha__st.html#a13b187a9cba943c6a87ec339b8c899ae">de</a>;</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;        x1 = <a class="code" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a>/2.0 + (<a class="code" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a>/2.0 - r_lugar)*cos(2*i*ang);</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;        y1 = <a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>/2.0 + (<a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>/2.0 - r_lugar)*sin(2*i*ang);</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;        i = a_lt-&gt;para;</div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;        x = <a class="code" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a>/2.0 + (<a class="code" href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a>/2.0 - r_lugar)*cos((2*i+1)*ang);</div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;        y = <a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>/2.0 + (<a class="code" href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a>/2.0 - r_lugar)*sin((2*i+1)*ang);</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;        co = <a class="code" href="group__Header.html#gadb4877932ec102678fc7b2e07b5ac653">lcos</a>(x1,y1,x,y);</div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;        si = <a class="code" href="group__Header.html#ga648c3d8c98be97e55642a0a3adc9c82e">lsin</a>(x1,y1,x,y);</div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;        x1 += r_lugar*co;</div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;        y1 += r_lugar*si;</div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;        line(buff, x1, y1, x, y, <a class="code" href="ex12_8c.html#a564a8a1173bd4fb63c4f3a1903143e6a">CORBRANCO</a>);</div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;        textprintf_ex(buff, font, (x+x1)/2, (y+y1)/2, <a class="code" href="ex12_8c.html#ad7dde6e35154225591228222edb21c1b">CORVERDE</a>, <a class="code" href="ex12_8c.html#aaa9af825d3a4f75b40c0403bd37c55bd">CORPRETO</a>, <span class="stringliteral">&quot;%u&quot;</span>, a_lt-&gt;tk);</div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;        x2 = x - (r_lugar / 4) * (si + co);</div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;        y2 = y + (r_lugar / 4) * (co - si);</div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;        x3 = x + (r_lugar / 4) * (si - co);</div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;        y3 = y - (r_lugar / 4) * (si + co);</div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;        triangle(buff, x, y, x2, y2, x3, y3, <a class="code" href="ex12_8c.html#a564a8a1173bd4fb63c4f3a1903143e6a">CORBRANCO</a>);</div>
+<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;        a_lt = a_lt-&gt;prox;</div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;    }</div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;    <span class="comment">/* Salvando Imagem */</span></div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;    save_bitmap(fname, buff, pal);</div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;    destroy_bitmap(buff);</div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;    allegro_exit();</div>
+<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;    <span class="keywordflow">if</span>(!<a class="code" href="ex12_8c.html#a06894677b320bfc02e448e1e62c6ddab">GIF</a>) printf(<span class="stringliteral">&quot;Imagem %s salva com sucesso!\n&quot;</span>, fname);</div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;}</div>
+<div class="ttc" id="structpetri__st_html_a7435770b899472b5d783871fc6ea1c3f"><div class="ttname"><a href="structpetri__st.html#a7435770b899472b5d783871fc6ea1c3f">petri_st::total_l</a></div><div class="ttdeci">unsigned total_l</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00027">listao.h:27</a></div></div>
+<div class="ttc" id="ex12_8c_html_a4425d0e101bb499fafbb34111e9869fb"><div class="ttname"><a href="ex12_8c.html#a4425d0e101bb499fafbb34111e9869fb">LIVRE</a></div><div class="ttdeci">#define LIVRE</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00063">ex12.c:63</a></div></div>
+<div class="ttc" id="structpetri__st_html"><div class="ttname"><a href="structpetri__st.html">petri_st</a></div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00025">listao.h:25</a></div></div>
+<div class="ttc" id="listao_8h_html_ab60e0d0d3b32e0a02f9219569ceee300"><div class="ttname"><a href="listao_8h.html#ab60e0d0d3b32e0a02f9219569ceee300">imprimirFlechaTL</a></div><div class="ttdeci">void imprimirFlechaTL(flecha *cabeca)</div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00314">listao.c:314</a></div></div>
+<div class="ttc" id="listao_8h_html_a988911e061b0af008965c1d9b37d96af"><div class="ttname"><a href="listao_8h.html#a988911e061b0af008965c1d9b37d96af">inserirThread</a></div><div class="ttdeci">void inserirThread(l_thread **cabeca, pthread_t p)</div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00282">listao.c:282</a></div></div>
+<div class="ttc" id="group__Main_html_ga73fc4450c799be5fbd99fdb0af67af4a"><div class="ttname"><a href="group__Main.html#ga73fc4450c799be5fbd99fdb0af67af4a">desenha_rede</a></div><div class="ttdeci">void desenha_rede(petri_t *rede, const char *fname)</div><div class="ttdoc">Desenha uma rede no Allegro e imprime num arquivo de imagem. </div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00456">ex12.c:456</a></div></div>
+<div class="ttc" id="listao_8h_html_ad91f50efed059d8196f27d4e3d429555"><div class="ttname"><a href="listao_8h.html#ad91f50efed059d8196f27d4e3d429555">imprimirLugar</a></div><div class="ttdeci">void imprimirLugar(lugar *cabeca)</div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00336">listao.c:336</a></div></div>
+<div class="ttc" id="ex12_8c_html_af316c33cc298530f245e8b55330e86b5"><div class="ttname"><a href="ex12_8c.html#af316c33cc298530f245e8b55330e86b5">D</a></div><div class="ttdeci">#define D</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00061">ex12.c:61</a></div></div>
+<div class="ttc" id="ex12_8c_html_a840291bc02cba5474a4cb46a9b9566fe"><div class="ttname"><a href="ex12_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a></div><div class="ttdeci">int main(void)</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00108">ex12.c:108</a></div></div>
+<div class="ttc" id="structlugar__st_html_a9d8c9892f5903f2a94e60718884baa98"><div class="ttname"><a href="structlugar__st.html#a9d8c9892f5903f2a94e60718884baa98">lugar_st::isBusy</a></div><div class="ttdeci">int isBusy</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00020">listao.h:20</a></div></div>
+<div class="ttc" id="structpetri__st_html_a856547f2832f74fcc7bd11b229b4dabd"><div class="ttname"><a href="structpetri__st.html#a856547f2832f74fcc7bd11b229b4dabd">petri_st::tl</a></div><div class="ttdeci">flecha * tl</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00031">listao.h:31</a></div></div>
+<div class="ttc" id="structconta__trans__st_html_a54a41f162a51befa671af798241a37c6"><div class="ttname"><a href="structconta__trans__st.html#a54a41f162a51befa671af798241a37c6">conta_trans_st::prox</a></div><div class="ttdeci">struct conta_trans_st * prox</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00052">listao.h:52</a></div></div>
+<div class="ttc" id="ex12_8c_html_a564a8a1173bd4fb63c4f3a1903143e6a"><div class="ttname"><a href="ex12_8c.html#a564a8a1173bd4fb63c4f3a1903143e6a">CORBRANCO</a></div><div class="ttdeci">#define CORBRANCO</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00089">ex12.c:89</a></div></div>
+<div class="ttc" id="structlugar__st_html"><div class="ttname"><a href="structlugar__st.html">lugar_st</a></div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00016">listao.h:16</a></div></div>
+<div class="ttc" id="listao_8h_html_a4efb2cc779dff95e1dd723f2e5e6de06"><div class="ttname"><a href="listao_8h.html#a4efb2cc779dff95e1dd723f2e5e6de06">inserirFlecha</a></div><div class="ttdeci">void inserirFlecha(flecha **cabeca, unsigned xde, unsigned xpara, unsigned xtk)</div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00234">listao.c:234</a></div></div>
+<div class="ttc" id="ex12_8c_html_a18cd8b0506fb45ee9381e245b7b79dc9"><div class="ttname"><a href="ex12_8c.html#a18cd8b0506fb45ee9381e245b7b79dc9">IMG_Y</a></div><div class="ttdeci">#define IMG_Y</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00085">ex12.c:85</a></div></div>
+<div class="ttc" id="ex12_8c_html_a9d7b490fa24d308a9c60bfaeabaafaa4"><div class="ttname"><a href="ex12_8c.html#a9d7b490fa24d308a9c60bfaeabaafaa4">trigger</a></div><div class="ttdeci">unsigned trigger</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00101">ex12.c:101</a></div></div>
+<div class="ttc" id="ex12_8c_html_aaa9af825d3a4f75b40c0403bd37c55bd"><div class="ttname"><a href="ex12_8c.html#aaa9af825d3a4f75b40c0403bd37c55bd">CORPRETO</a></div><div class="ttdeci">#define CORPRETO</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00090">ex12.c:90</a></div></div>
+<div class="ttc" id="group__Main_html_ga369407cd752b7e48268fc24f3a162839"><div class="ttname"><a href="group__Main.html#ga369407cd752b7e48268fc24f3a162839">transicao</a></div><div class="ttdeci">void * transicao(void *arg)</div><div class="ttdoc">Funcao que executa a transicao da rede. </div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00296">ex12.c:296</a></div></div>
+<div class="ttc" id="ex12_8c_html_ad7dde6e35154225591228222edb21c1b"><div class="ttname"><a href="ex12_8c.html#ad7dde6e35154225591228222edb21c1b">CORVERDE</a></div><div class="ttdeci">#define CORVERDE</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00093">ex12.c:93</a></div></div>
+<div class="ttc" id="structpetri__st_html_a046c3eff311a245441d47fdf1405dbd6"><div class="ttname"><a href="structpetri__st.html#a046c3eff311a245441d47fdf1405dbd6">petri_st::total_t</a></div><div class="ttdeci">unsigned total_t</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00027">listao.h:27</a></div></div>
+<div class="ttc" id="ex12_8c_html_a111da81ae5883147168bbb8366377b10"><div class="ttname"><a href="ex12_8c.html#a111da81ae5883147168bbb8366377b10">B</a></div><div class="ttdeci">#define B</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00059">ex12.c:59</a></div></div>
+<div class="ttc" id="structthread__st_html"><div class="ttname"><a href="structthread__st.html">thread_st</a></div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00035">listao.h:35</a></div></div>
+<div class="ttc" id="ex12_8c_html_ab5b92945430bd0cb7a04673282cf70c3"><div class="ttname"><a href="ex12_8c.html#ab5b92945430bd0cb7a04673282cf70c3">ITER</a></div><div class="ttdeci">#define ITER</div><div class="ttdoc">Total de iteracoes. </div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00069">ex12.c:69</a></div></div>
+<div class="ttc" id="ex12_8c_html_a8ef42b7518beda7205e045d76799ea3a"><div class="ttname"><a href="ex12_8c.html#a8ef42b7518beda7205e045d76799ea3a">contador</a></div><div class="ttdeci">conta_trans * contador</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00106">ex12.c:106</a></div></div>
+<div class="ttc" id="structthread__st_html_a63d87e3def93637001505e0f1b92320e"><div class="ttname"><a href="structthread__st.html#a63d87e3def93637001505e0f1b92320e">thread_st::prox</a></div><div class="ttdeci">struct thread_st * prox</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00038">listao.h:38</a></div></div>
+<div class="ttc" id="ex12_8c_html_a1a39641cc834e8d937c095ff99d9b0dc"><div class="ttname"><a href="ex12_8c.html#a1a39641cc834e8d937c095ff99d9b0dc">it_escape</a></div><div class="ttdeci">unsigned it_escape</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00100">ex12.c:100</a></div></div>
+<div class="ttc" id="listao_8h_html"><div class="ttname"><a href="listao_8h.html">listao.h</a></div></div>
+<div class="ttc" id="group__Header_html_gaee2af46b4e7f9af51e4e93b412639c5a"><div class="ttname"><a href="group__Header.html#gaee2af46b4e7f9af51e4e93b412639c5a">buscarLugarPos</a></div><div class="ttdeci">lugar * buscarLugarPos(lugar *cabeca, unsigned x)</div><div class="ttdoc">Busca na lista o lugar Lx. </div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00015">listao.c:15</a></div></div>
+<div class="ttc" id="structlugar__st_html_a0e2b4d5a8f5ab1526571847e9462a254"><div class="ttname"><a href="structlugar__st.html#a0e2b4d5a8f5ab1526571847e9462a254">lugar_st::qtd</a></div><div class="ttdeci">unsigned qtd</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00019">listao.h:19</a></div></div>
+<div class="ttc" id="ex12_8c_html_ac4cf4b2ab929bd23951a8676eeac086b"><div class="ttname"><a href="ex12_8c.html#ac4cf4b2ab929bd23951a8676eeac086b">C</a></div><div class="ttdeci">#define C</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00060">ex12.c:60</a></div></div>
+<div class="ttc" id="structconta__trans__st_html_aed874882a2027e3868cd5031ee0c922d"><div class="ttname"><a href="structconta__trans__st.html#aed874882a2027e3868cd5031ee0c922d">conta_trans_st::pos</a></div><div class="ttdeci">unsigned pos</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00050">listao.h:50</a></div></div>
+<div class="ttc" id="ex12_8c_html_a6b69ec2319c0792041eec4aa53522347"><div class="ttname"><a href="ex12_8c.html#a6b69ec2319c0792041eec4aa53522347">M_LIN</a></div><div class="ttdeci">#define M_LIN</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00088">ex12.c:88</a></div></div>
+<div class="ttc" id="ex12_8c_html_aad43441acd0a9193f197c827a0309e50"><div class="ttname"><a href="ex12_8c.html#aad43441acd0a9193f197c827a0309e50">rede</a></div><div class="ttdeci">petri_t * rede</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00104">ex12.c:104</a></div></div>
+<div class="ttc" id="structconta__trans__st_html_a4bd5af356cf0ea6cdaf27175d06d7d12"><div class="ttname"><a href="structconta__trans__st.html#a4bd5af356cf0ea6cdaf27175d06d7d12">conta_trans_st::x</a></div><div class="ttdeci">unsigned x</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00050">listao.h:50</a></div></div>
+<div class="ttc" id="ex12_8c_html_a52a8efdf2cea302bff179102d93271ab"><div class="ttname"><a href="ex12_8c.html#a52a8efdf2cea302bff179102d93271ab">PROIBIDO</a></div><div class="ttdeci">#define PROIBIDO</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00065">ex12.c:65</a></div></div>
+<div class="ttc" id="structpassa__dados__st_html"><div class="ttname"><a href="structpassa__dados__st.html">passa_dados_st</a></div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00042">listao.h:42</a></div></div>
+<div class="ttc" id="listao_8h_html_ade0d5aa8344e7de9eaae14b0b7e488ac"><div class="ttname"><a href="listao_8h.html#ade0d5aa8344e7de9eaae14b0b7e488ac">inserirDados</a></div><div class="ttdeci">void inserirDados(dados **cabeca, unsigned x)</div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00350">listao.c:350</a></div></div>
+<div class="ttc" id="listao_8h_html_a44238f73c97e99e78bb48a3deacb03d6"><div class="ttname"><a href="listao_8h.html#a44238f73c97e99e78bb48a3deacb03d6">buscarFlechaPara</a></div><div class="ttdeci">flecha * buscarFlechaPara(flecha *cabeca, unsigned x)</div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00153">listao.c:153</a></div></div>
+<div class="ttc" id="structflecha__st_html_a9e39e32e3bfa9e8839668247873ef8f9"><div class="ttname"><a href="structflecha__st.html#a9e39e32e3bfa9e8839668247873ef8f9">flecha_st::tk</a></div><div class="ttdeci">unsigned tk</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00011">listao.h:11</a></div></div>
+<div class="ttc" id="structflecha__st_html_a5223790dbdf3eb9f52abc54d6e959833"><div class="ttname"><a href="structflecha__st.html#a5223790dbdf3eb9f52abc54d6e959833">flecha_st::para</a></div><div class="ttdeci">unsigned para</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00010">listao.h:10</a></div></div>
+<div class="ttc" id="group__Header_html_ga648c3d8c98be97e55642a0a3adc9c82e"><div class="ttname"><a href="group__Header.html#ga648c3d8c98be97e55642a0a3adc9c82e">lsin</a></div><div class="ttdeci">float lsin(float x1, float y1, float x2, float y2)</div><div class="ttdoc">Calcula o seno de um segmento de reta. </div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00394">listao.c:394</a></div></div>
+<div class="ttc" id="structflecha__st_html_abad38d52ef7177586f206eea56a7ed06"><div class="ttname"><a href="structflecha__st.html#abad38d52ef7177586f206eea56a7ed06">flecha_st::prox</a></div><div class="ttdeci">struct flecha_st * prox</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00012">listao.h:12</a></div></div>
+<div class="ttc" id="ex12_8c_html_a42a1818de9b7681ef0a4cf9451e05767"><div class="ttname"><a href="ex12_8c.html#a42a1818de9b7681ef0a4cf9451e05767">IMG_X</a></div><div class="ttdeci">#define IMG_X</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00081">ex12.c:81</a></div></div>
+<div class="ttc" id="ex12_8c_html_abb10170b4e16362fbd158cb136e6274d"><div class="ttname"><a href="ex12_8c.html#abb10170b4e16362fbd158cb136e6274d">OCUPADO</a></div><div class="ttdeci">#define OCUPADO</div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00064">ex12.c:64</a></div></div>
+<div class="ttc" id="structflecha__st_html_a13b187a9cba943c6a87ec339b8c899ae"><div class="ttname"><a href="structflecha__st.html#a13b187a9cba943c6a87ec339b8c899ae">flecha_st::de</a></div><div class="ttdeci">unsigned de</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00009">listao.h:9</a></div></div>
+<div class="ttc" id="listao_8h_html_a7716eeb8f217006abda3bad5e6e4dfbb"><div class="ttname"><a href="listao_8h.html#a7716eeb8f217006abda3bad5e6e4dfbb">buscarFlechaDe</a></div><div class="ttdeci">flecha * buscarFlechaDe(flecha *cabeca, unsigned x)</div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00141">listao.c:141</a></div></div>
+<div class="ttc" id="group__Header_html_gadb4877932ec102678fc7b2e07b5ac653"><div class="ttname"><a href="group__Header.html#gadb4877932ec102678fc7b2e07b5ac653">lcos</a></div><div class="ttdeci">float lcos(float x1, float y1, float x2, float y2)</div><div class="ttdoc">Calcula o cosseno de um segmento de reta. </div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00387">listao.c:387</a></div></div>
+<div class="ttc" id="structpassa__dados__st_html_a5057d2ab77480a830502f7b82ad38992"><div class="ttname"><a href="structpassa__dados__st.html#a5057d2ab77480a830502f7b82ad38992">passa_dados_st::pos</a></div><div class="ttdeci">unsigned pos</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00044">listao.h:44</a></div></div>
+<div class="ttc" id="listao_8h_html_a27a84e1b0d701fe5e8916eecf03cdb5d"><div class="ttname"><a href="listao_8h.html#a27a84e1b0d701fe5e8916eecf03cdb5d">buscarFlechaDeProx</a></div><div class="ttdeci">flecha * buscarFlechaDeProx(flecha *cabeca, unsigned x)</div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00177">listao.c:177</a></div></div>
+<div class="ttc" id="structthread__st_html_a70c2c66840c4aae09be1d5cb031179c8"><div class="ttname"><a href="structthread__st.html#a70c2c66840c4aae09be1d5cb031179c8">thread_st::thr</a></div><div class="ttdeci">pthread_t thr</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00037">listao.h:37</a></div></div>
+<div class="ttc" id="structconta__trans__st_html"><div class="ttname"><a href="structconta__trans__st.html">conta_trans_st</a></div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00048">listao.h:48</a></div></div>
+<div class="ttc" id="structpetri__st_html_a0f32b70f9a86b58b0fadf2d9ca4dcdac"><div class="ttname"><a href="structpetri__st.html#a0f32b70f9a86b58b0fadf2d9ca4dcdac">petri_st::lt</a></div><div class="ttdeci">flecha * lt</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00030">listao.h:30</a></div></div>
+<div class="ttc" id="ex12_8c_html_a06894677b320bfc02e448e1e62c6ddab"><div class="ttname"><a href="ex12_8c.html#a06894677b320bfc02e448e1e62c6ddab">GIF</a></div><div class="ttdeci">#define GIF</div><div class="ttdoc">Ativa modo GIF (Ainda nao implementado) </div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00077">ex12.c:77</a></div></div>
+<div class="ttc" id="ex12_8c_html_ad72dbcf6d0153db1b8d8a58001feed83"><div class="ttname"><a href="ex12_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a></div><div class="ttdeci">#define DEBUG</div><div class="ttdoc">Ativa modo de debug. </div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00073">ex12.c:73</a></div></div>
+<div class="ttc" id="listao_8h_html_ab8236479d38d428287df73ed3ed6c7c8"><div class="ttname"><a href="listao_8h.html#ab8236479d38d428287df73ed3ed6c7c8">buscarFlechaParaProx</a></div><div class="ttdeci">flecha * buscarFlechaParaProx(flecha *cabeca, unsigned x)</div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00191">listao.c:191</a></div></div>
+<div class="ttc" id="listao_8h_html_a9c2e55ae221858951beba2ad4cb6ed2b"><div class="ttname"><a href="listao_8h.html#a9c2e55ae221858951beba2ad4cb6ed2b">inserirLugar</a></div><div class="ttdeci">void inserirLugar(lugar **cabeca, unsigned i, unsigned x, int b)</div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00069">listao.c:69</a></div></div>
+<div class="ttc" id="ex12_8c_html_a955f504eccf76b4eb2489c0adab03121"><div class="ttname"><a href="ex12_8c.html#a955f504eccf76b4eb2489c0adab03121">A</a></div><div class="ttdeci">#define A</div><div class="ttdoc">\ </div><div class="ttdef"><b>Definition:</b> <a href="ex12_8c_source.html#l00058">ex12.c:58</a></div></div>
+<div class="ttc" id="listao_8h_html_a4e04d1f8db3dff6f1710738b67287ae1"><div class="ttname"><a href="listao_8h.html#a4e04d1f8db3dff6f1710738b67287ae1">imprimirFlechaLT</a></div><div class="ttdeci">void imprimirFlechaLT(flecha *cabeca)</div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00303">listao.c:303</a></div></div>
+<div class="ttc" id="structflecha__st_html"><div class="ttname"><a href="structflecha__st.html">flecha_st</a></div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00007">listao.h:7</a></div></div>
+<div class="ttc" id="group__Header_html_gac01181eca3e2a49b238339b8b3dcc6df"><div class="ttname"><a href="group__Header.html#gac01181eca3e2a49b238339b8b3dcc6df">incrementaTrans</a></div><div class="ttdeci">void incrementaTrans(conta_trans **cabeca, unsigned pos)</div><div class="ttdoc">Incrementa 1 num contador inserido numa lista. </div><div class="ttdef"><b>Definition:</b> <a href="listao_8c_source.html#l00401">listao.c:401</a></div></div>
+<div class="ttc" id="structpetri__st_html_af33f73d8c092a54cad15b87453f8d75e"><div class="ttname"><a href="structpetri__st.html#af33f73d8c092a54cad15b87453f8d75e">petri_st::l</a></div><div class="ttdeci">lugar * l</div><div class="ttdef"><b>Definition:</b> <a href="listao_8h_source.html#l00029">listao.h:29</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado em Domingo, 20 de Dezembro de 2015 09:42:37 para Exercicio 12 - Simulador de Rede de Petri por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>
