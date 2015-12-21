@@ -123,6 +123,20 @@ lugar *anteriorLugar(lugar *cabeca, lugar *r);
  *
  */
 void inserirLugar(lugar **cabeca, unsigned i, unsigned x, int b);
+
+/**
+ * \ingroup Header
+ *
+ * \brief remove um lugar na lista.
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da busca na lista.
+ *
+ * \param[in]  A variavel \a r representa o lugar que devera ser removido 
+ *
+ * \retval void a funcao retorna nada.
+ *
+ */
+
 void removerLugar(lugar **cabeca, lugar *r);
 void imprimirLugar(lugar *cabeca);
 
@@ -142,7 +156,35 @@ void imprimirFlechaTL(flecha *cabeca);
 void inserirThread(l_thread **cabeca, pthread_t p);
 void imprimirThread(l_thread *cabeca);
 
+
+/**
+ * \ingroup Header
+ *
+ * \brief Isere elementos na lista dados
+ *
+ * \details Esta funcao insere o valor X dentro da lista do tipo dados.
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da busca na lista.
+ *
+ * \param[in] x Valor a ser inserido.
+ *
+ * \retval void a funcao retorna nada.
+ *
+ */
 void inserirDados(dados **cabeca, unsigned x);
+
+/**
+ * \ingroup Header
+ *
+ * \brief Limpa a lista de dados lista.
+ *
+ * \details Esta funcao limpa igualando os ponteiros a NULL
+ * 
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da busca na lista.
+ *
+ * \retval void a funcao retorna nada.
+ *
+ */
 void limparDados(dados **cabeca);
 
 /**
