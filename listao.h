@@ -131,7 +131,7 @@ void inserirLugar(lugar **cabeca, unsigned i, unsigned x, int b);
  *
  * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da busca na lista.
  *
- * \param[in]  A variavel \a r representa o lugar que devera ser removido 
+ * \param[in] r A variavel \a r representa o lugar que devera ser removido 
  *
  * \retval void a funcao retorna nada.
  *
@@ -151,9 +151,59 @@ flecha *buscarFlechaTkProx(flecha *cabeca, unsigned x);
 flecha *anteriorFlecha(flecha *cabeca, flecha *r);
 void inserirFlecha(flecha **cabeca, unsigned xde, unsigned xpara, unsigned xtk);
 void removerFlecha(flecha **cabeca, flecha *r);
+/**
+ * \ingroup Header
+ *
+ * \brief Imprime uma lista de flechas LT.
+ *
+ * \details Esta funcao se utiliza do ponto que o tipo flecha se comporta como uma lista para imprimir elemento a elemento passando apenas uma unica variavel. Por se tratar de um tipo L->T, ela imprimira todos os elementos da seguinte forma: LX---(Y)--->TZ, sendo X o lugar, Y a quantidade de tokens passados e Z a transicao. 
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \retval void a funcao retorna nada.
+ *
+ */
 void imprimirFlechaLT(flecha *cabeca);
+/**
+ * \ingroup Header
+ *
+ * \brief Imprime uma lista de flechas TL.
+ *
+ * \details Esta funcao se utiliza do ponto que o tipo flecha se comporta como uma lista para imprimir elemento a elemento passando apenas uma unica variavel. Por se tratar de um tipo T->L, ela imprimira todos os elementos da seguinte forma: TX---(Y)--->LZ, sendo X a transicao, Y a quantidade de tokens passados e Z o lugar. 
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \retval void a funcao retorna nada.
+ *
+ */
 void imprimirFlechaTL(flecha *cabeca);
+/**
+ * \ingroup Header
+ *
+ * \brief Insere uma thread na lista.
+ *
+ * \details Esta funcao se utiliza do ponto que o tipo l_thread possui um comportamento de lista e insere um elemento no final da mesma. Caso nao haja elemento nenhum, o "cabeca" da lista passa a ser o proprio elemento inserido. 
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] p A variavel \a b e' a thread a ser inserida na lista.
+ *
+ * \retval void a funcao retorna nada.
+ *
+ */
 void inserirThread(l_thread **cabeca, pthread_t p);
+/**
+ * \ingroup Header
+ *
+ * \brief Imprime os enderecos de uma lista de threads.
+ *
+ * \details Esta funcao se utiliza do ponto que o tipo l_thread possui um comportamento de lista e imprime o endereco de todos os seus elementos. 
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \retval void a funcao retorna nada.
+ *
+ */
 void imprimirThread(l_thread *cabeca);
 
 
