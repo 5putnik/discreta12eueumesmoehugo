@@ -113,10 +113,58 @@ lugar *buscarLugarQtd(lugar *cabeca, unsigned x);
  */
 lugar *buscarLugarPos(lugar *cabeca, unsigned x);
 
+/**
+ * \ingroup Header
+ *
+ * \brief Busca o proximo lugar que corresponda ao criterio 'qtd'.
+ *
+ * \details Busca o proximo flecha que contenha o mesmo elemento 'qtd' igual ao inserido.
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] x A variavel \a x representa o valor 'qtd' do tipo lugar.
+ *
+ * \retval lugar a funcao retorna o elemento achado.
+ *
+ * \retval NULL Caso nao encontre o elemento, a funcao retorna vazio.
+ *
+ */
 lugar *buscarLugarQtdProx(lugar *cabeca, unsigned x);
 
+/**
+ * \ingroup Header
+ *
+ * \brief Busca o proximo lugar que corresponda ao criterio 'pos'.
+ *
+ * \details Busca o proximo lugar que contenha o mesmo elemento 'pos' igual ao inserido.
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] x A variavel \a x representa o valor 'pos' do tipo lugar.
+ *
+ * \retval lugar a funcao retorna o elemento achado.
+ *
+ * \retval NULL Caso nao encontre o elemento, a funcao retorna vazio.
+ *
+ */
 lugar *buscarLugarPosProx(lugar *cabeca, unsigned x);
 
+/**
+ * \ingroup Header
+ *
+ * \brief Busca o lugar anterior a outro lugar numa lista.
+ *
+ * \details Busca o proximo lugar que antecede o inserido em uma dada lista.
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] r A variavel \a r representa o lugar posterior a que se procura.
+ *
+ * \retval lugar a funcao retorna o elemento anterior ao inserido.
+ *
+ * \retval NULL Caso nao encontre o elemento, a funcao retorna vazio.
+ *
+ */
 lugar *anteriorLugar(lugar *cabeca, lugar *r);
 
 /**
@@ -152,6 +200,7 @@ void inserirLugar(lugar **cabeca, unsigned i, unsigned x, int b);
  *
  */
 void removerLugar(lugar **cabeca, lugar *r);
+
 /**
  * \ingroup Header
  *
@@ -166,26 +215,212 @@ void removerLugar(lugar **cabeca, lugar *r);
  */
 void imprimirLugar(lugar *cabeca);
 
+/**
+ * \ingroup Header
+ *
+ * \brief Busca uma flecha que corresponda ao criterio AND.
+ *
+ * \details Busca uma flecha que contenha exatamente os tres elementos iguais aos inseridos (de, tokens e para)
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] xde A variavel \a xde representa o valor 'de' do tipo flecha.
+ *
+ * \param[in] xpara A variavel \a xpara representa o valor 'para' do tipo flecha.
+ *
+ * \param[in] xtk A variavel \a xtk representa o valor 'tk' do tipo flecha.
+ *
+ * \retval flecha a funcao retorna o elemento achado.
+ *
+ * \retval NULL Caso nao encontre o elemento, a funcao retorna vazio.
+ *
+ */
 flecha *buscarFlechaAnd(flecha *cabeca, unsigned xde, unsigned xpara, unsigned xtk);
 
+/**
+ * \ingroup Header
+ *
+ * \brief Busca uma flecha que corresponda ao criterio OR.
+ *
+ * \details Busca uma flecha que contenha pelo menos um dos tres elementos igual aos inseridos (de, tokens e para)
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] xde A variavel \a xde representa o valor 'de' do tipo flecha.
+ *
+ * \param[in] xpara A variavel \a xpara representa o valor 'para' do tipo flecha.
+ *
+ * \param[in] xtk A variavel \a xtk representa o valor 'tk' do tipo flecha.
+ *
+ * \retval flecha a funcao retorna o elemento achado.
+ *
+ * \retval NULL Caso nao encontre o elemento, a funcao retorna vazio.
+ *
+ */
 flecha *buscarFlechaOr(flecha *cabeca, unsigned xde, unsigned xpara, unsigned xtk);
 
+/**
+ * \ingroup Header
+ *
+ * \brief Busca uma flecha que corresponda ao criterio 'de'.
+ *
+ * \details Busca uma flecha que contenha o mesmo elemento 'de' igual ao inserido.
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] x A variavel \a x representa o valor 'de' do tipo flecha.
+ *
+ * \retval flecha a funcao retorna o elemento achado.
+ *
+ * \retval NULL Caso nao encontre o elemento, a funcao retorna vazio.
+ *
+ */
 flecha *buscarFlechaDe(flecha *cabeca, unsigned x);
 
+/**
+ * \ingroup Header
+ *
+ * \brief Busca uma flecha que corresponda ao criterio 'para'.
+ *
+ * \details Busca uma flecha que contenha o mesmo elemento 'para' igual ao inserido.
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] x A variavel \a x representa o valor 'para' do tipo flecha.
+ *
+ * \retval flecha a funcao retorna o elemento achado.
+ *
+ * \retval NULL Caso nao encontre o elemento, a funcao retorna vazio.
+ *
+ */
 flecha *buscarFlechaPara(flecha *cabeca, unsigned x);
 
+/**
+ * \ingroup Header
+ *
+ * \brief Busca uma flecha que corresponda ao criterio 'tk'.
+ *
+ * \details Busca uma flecha que contenha o mesmo elemento 'tk' igual ao inserido.
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] x A variavel \a x representa o valor 'tk' do tipo flecha.
+ *
+ * \retval flecha a funcao retorna o elemento achado.
+ *
+ * \retval NULL Caso nao encontre o elemento, a funcao retorna vazio.
+ *
+ */
 flecha *buscarFlechaTk(flecha *cabeca, unsigned x);
 
+/**
+ * \ingroup Header
+ *
+ * \brief Busca a proxima flecha que corresponda ao criterio 'de'.
+ *
+ * \details Busca a proxima flecha que contenha o mesmo elemento 'de' igual ao inserido.
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] x A variavel \a x representa o valor 'de' do tipo flecha.
+ *
+ * \retval flecha a funcao retorna o elemento achado.
+ *
+ * \retval NULL Caso nao encontre o elemento, a funcao retorna vazio.
+ *
+ */
 flecha *buscarFlechaDeProx(flecha *cabeca, unsigned x);
 
+/**
+ * \ingroup Header
+ *
+ * \brief Busca a proxima flecha que corresponda ao criterio 'para'.
+ *
+ * \details Busca a proxima flecha que contenha o mesmo elemento 'para' igual ao inserido.
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] x A variavel \a x representa o valor 'para' do tipo flecha.
+ *
+ * \retval flecha a funcao retorna o elemento achado.
+ *
+ * \retval NULL Caso nao encontre o elemento, a funcao retorna vazio.
+ *
+ */
 flecha *buscarFlechaParaProx(flecha *cabeca, unsigned x);
 
+/**
+ * \ingroup Header
+ *
+ * \brief Busca a proxima flecha que corresponda ao criterio 'tk'.
+ *
+ * \details Busca a proxima flecha que contenha o mesmo elemento 'tk' igual ao inserido.
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] x A variavel \a x representa o valor 'tk' do tipo flecha.
+ *
+ * \retval flecha a funcao retorna o elemento achado.
+ *
+ * \retval NULL Caso nao encontre o elemento, a funcao retorna vazio.
+ *
+ */
 flecha *buscarFlechaTkProx(flecha *cabeca, unsigned x);
 
+/**
+ * \ingroup Header
+ *
+ * \brief Busca a flecha anterior a outra flecha numa lista.
+ *
+ * \details Busca a proxima flecha que antecede a inserida em uma dada lista.
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] r A variavel \a r representa a flecha posterior a que se procura.
+ *
+ * \retval flecha a funcao retorna o elemento anterior ao inserido.
+ *
+ * \retval NULL Caso nao encontre o elemento, a funcao retorna vazio.
+ *
+ */
 flecha *anteriorFlecha(flecha *cabeca, flecha *r);
 
+/**
+ * \ingroup Header
+ *
+ * \brief Insere um elemento flecha numa lista.
+ *
+ * \details Insere um elemento de flecha numa lista. Caso a lista seja vazia, o primeiro elemento torna-se o inserido.
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] xde A variavel \a xde representa o valor 'de' do tipo flecha.
+ *
+ * \param[in] xpara A variavel \a xpara representa o valor 'para' do tipo flecha.
+ *
+ * \param[in] xtk A variavel \a xtk representa o valor 'tk' do tipo flecha.
+ *
+ * \retval void a funcao retorna nada.
+ *
+ */
 void inserirFlecha(flecha **cabeca, unsigned xde, unsigned xpara, unsigned xtk);
 
+/**
+ * \ingroup Header
+ *
+ * \brief Busca a proxima flecha que corresponda ao criterio 'de'.
+ *
+ * \details Busca a proxima flecha que contenha o mesmo elemento 'de' igual ao inserido.
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \param[in] x A variavel \a x representa o valor 'de' do tipo flecha.
+ *
+ * \retval flecha a funcao retorna o elemento achado.
+ *
+ * \retval NULL Caso nao encontre o elemento, a funcao retorna vazio.
+ *
+ */
 void removerFlecha(flecha **cabeca, flecha *r);
 
 /**
