@@ -3,6 +3,18 @@
 #include <pthread.h>
 #include <math.h>
 
+/**
+ * \file listao.h
+ * \brief Header que contem funcoes auxiliares para o ex12.c 
+ * \author Hugo Albuquerque de Fonsêca <<hugoalbuquerque0@gmail.com>>
+ * \author Otacilio Saraiva Maia Neto <<otacilio.n97@gmail.com>>
+ * \version 2.1
+ * \date 2015-12-22
+ */
+/**
+ * \
+ * @{ */
+
 /** 
  * Lista que descreve as caracteristicas da Flecha 
  */
@@ -100,8 +112,11 @@ lugar *buscarLugarQtd(lugar *cabeca, unsigned x);
  *
  */
 lugar *buscarLugarPos(lugar *cabeca, unsigned x);
+
 lugar *buscarLugarQtdProx(lugar *cabeca, unsigned x);
+
 lugar *buscarLugarPosProx(lugar *cabeca, unsigned x);
+
 lugar *anteriorLugar(lugar *cabeca, lugar *r);
 
 /**
@@ -136,21 +151,43 @@ void inserirLugar(lugar **cabeca, unsigned i, unsigned x, int b);
  * \retval void a funcao retorna nada.
  *
  */
-
 void removerLugar(lugar **cabeca, lugar *r);
+/**
+ * \ingroup Header
+ *
+ * \brief imprime os lugares de uma lista.
+ *
+ * \details A funcao basicamente lista todos os lugares contidos em uma lista e os imprime da seguinte forma: LX(Y), sendo X o lugar e Y a quantidade de tokens. Caso o DEBUG esteja ativo e o lugar estiver ocupado, sera adicionado ao fim tambem a mensagem (OCUPADO).
+ *
+ * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
+ *
+ * \retval void a funcao retorna nada.
+ *
+ */
 void imprimirLugar(lugar *cabeca);
 
 flecha *buscarFlechaAnd(flecha *cabeca, unsigned xde, unsigned xpara, unsigned xtk);
+
 flecha *buscarFlechaOr(flecha *cabeca, unsigned xde, unsigned xpara, unsigned xtk);
+
 flecha *buscarFlechaDe(flecha *cabeca, unsigned x);
+
 flecha *buscarFlechaPara(flecha *cabeca, unsigned x);
+
 flecha *buscarFlechaTk(flecha *cabeca, unsigned x);
+
 flecha *buscarFlechaDeProx(flecha *cabeca, unsigned x);
+
 flecha *buscarFlechaParaProx(flecha *cabeca, unsigned x);
+
 flecha *buscarFlechaTkProx(flecha *cabeca, unsigned x);
+
 flecha *anteriorFlecha(flecha *cabeca, flecha *r);
+
 void inserirFlecha(flecha **cabeca, unsigned xde, unsigned xpara, unsigned xtk);
+
 void removerFlecha(flecha **cabeca, flecha *r);
+
 /**
  * \ingroup Header
  *
@@ -164,6 +201,7 @@ void removerFlecha(flecha **cabeca, flecha *r);
  *
  */
 void imprimirFlechaLT(flecha *cabeca);
+
 /**
  * \ingroup Header
  *
@@ -177,6 +215,7 @@ void imprimirFlechaLT(flecha *cabeca);
  *
  */
 void imprimirFlechaTL(flecha *cabeca);
+
 /**
  * \ingroup Header
  *
@@ -192,6 +231,7 @@ void imprimirFlechaTL(flecha *cabeca);
  *
  */
 void inserirThread(l_thread **cabeca, pthread_t p);
+
 /**
  * \ingroup Header
  *

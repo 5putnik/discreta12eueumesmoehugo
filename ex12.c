@@ -41,7 +41,7 @@
  * \author Hugo Albuquerque de Fonsêca <<hugoalbuquerque0@gmail.com>>
  * \author Otacilio Saraiva Maia Neto <<otacilio.n97@gmail.com>>
  * \version 2.0
- * \date 2015-12-20
+ * \date 2015-12-22
  */
 /**
  * \

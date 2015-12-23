@@ -1,5 +1,17 @@
 #include "listao.h"
 
+/**
+ * \file listao.c
+ * \brief Programa que contem funcoes auxiliares para o ex12.c 
+ * \author Hugo Albuquerque de Fonsêca <<hugoalbuquerque0@gmail.com>>
+ * \author Otacilio Saraiva Maia Neto <<otacilio.n97@gmail.com>>
+ * \version 2.1
+ * \date 2015-12-22
+ */
+/**
+ * \
+ * @{ */
+
 lugar *buscarLugarQtd(lugar *cabeca, unsigned x)
 {
     lugar *pl = cabeca;
