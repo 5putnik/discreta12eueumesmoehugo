@@ -408,17 +408,15 @@ void inserirFlecha(flecha **cabeca, unsigned xde, unsigned xpara, unsigned xtk);
 /**
  * \ingroup Header
  *
- * \brief Busca a proxima flecha que corresponda ao criterio 'de'.
+ * \brief Remove uma flecha de uma lista.
  *
- * \details Busca a proxima flecha que contenha o mesmo elemento 'de' igual ao inserido.
+ * \details Busca a flecha na lista e, se achar, remove-a desta lista.
  *
  * \param[in] cabeca A variavel \a cabeca seria o primeiro elemento da lista.
  *
- * \param[in] x A variavel \a x representa o valor 'de' do tipo flecha.
+ * \param[in] r A variavel \a r representa a flecha a ser removida.
  *
- * \retval flecha a funcao retorna o elemento achado.
- *
- * \retval NULL Caso nao encontre o elemento, a funcao retorna vazio.
+ * \retval void a funcao retorna nada.
  *
  */
 void removerFlecha(flecha **cabeca, flecha *r);
